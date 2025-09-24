@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import './globals.css'
+import '../styles/globals.css'
 
 const siteName = 'aSAFEBOX® — Emprendimiento Seguro'
 const siteUrl = 'https://elapi29.github.io/asafebox-landing'
