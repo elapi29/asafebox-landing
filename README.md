@@ -47,3 +47,4 @@ npm run build
 
 **Secciones futuras**: Casos por vertical (Fintech, Bancos, Real Estate, DeFi), FAQs, Contacto.
 deploy trigger Wed Sep 24 22:46:41 CEST 2025
+deploy Wed Sep 24 23:14:38 CEST 2025
