@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "jsx": "preserve",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {},
+    "isolatedModules": true,
+    "skipLibCheck": true
+  },
+  "include": ["app", "components", "styles", "next-env.d.ts"],
+  "exclude": ["node_modules"]
+}

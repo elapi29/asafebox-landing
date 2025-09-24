@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+
+/* Mejor foco */
+*:focus-visible {
+  outline: 2px solid theme('colors.brand.500');
+  outline-offset: 3px;
+}
