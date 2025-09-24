@@ -5,6 +5,19 @@ export default {
     './app/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
   ],
+  // Evita que Tailwind purgue utilidades usadas dentro del <svg>
+  safelist: [
+    'fill-blue-100',
+    'fill-blue-900',
+    'fill-white',
+    'fill-slate-300',
+    'fill-slate-600',
+    'fill-slate-900',
+    'stroke-slate-300',
+    'text-sm',
+    'text-[14px]',
+    'text-[12px]',
+  ],
   theme: {
     extend: {
       colors: {
