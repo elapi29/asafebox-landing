@@ -46,3 +46,4 @@ npm run build
 **CTA**: "Quiero saber más" → capta email y redirige a `/thanks`.
 
 **Secciones futuras**: Casos por vertical (Fintech, Bancos, Real Estate, DeFi), FAQs, Contacto.
+deploy trigger Wed Sep 24 22:46:41 CEST 2025
