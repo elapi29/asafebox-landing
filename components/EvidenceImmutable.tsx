@@ -7,8 +7,9 @@ export default function EvidenceImmutable() {
         <div>
           <h3 className="text-2xl md:text-3xl font-bold text-slate-900">Evidencia inmutable</h3>
           <p className="mt-3 text-lg md:text-xl text-slate-900">
-            Cada paso (transacción, firma, KYC) queda sellado con logs HMAC y pruebas ZK.
+            Cada paso (transacción, firma, KYC) queda sellado con un Ledger Inmutable y pruebas ZK.
           </p>
+
           <p className="mt-4 text-slate-700 leading-relaxed">
             El encadenamiento inmutable permite detectar cualquier manipulación, incluso meses o años
             más tarde, manteniendo la auditabilidad operativa con impacto mínimo en la latencia.
