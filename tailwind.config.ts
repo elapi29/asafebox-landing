@@ -14,6 +14,7 @@ export default {
     'fill-slate-600',
     'fill-slate-900',
     'stroke-slate-300',
+    'text-base',
     'text-sm',
     'text-[14px]',
     'text-[12px]',
