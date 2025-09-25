@@ -1,12 +1,14 @@
 import Hero from '../components/Hero'
 import Illustration from '../components/Illustration'
 import Features from '../components/Features'
+import BankingShowcase from '../components/BankingShowcase'  // ⬅️ nuevo import
 import Footer from '../components/Footer'
 
 export default function Page() {
   return (
     <main>
       <Hero />
+
       <section className="px-6 py-12">
         <h2 className="text-center text-2xl font-bold">Cómo funciona</h2>
         <p className="mx-auto mt-2 max-w-2xl text-center text-slate-600">
@@ -16,9 +18,15 @@ export default function Page() {
           <Illustration />
         </div>
       </section>
+
       <Features />
+
+      {/* ⬇️ aquí aparecen tus PNG */}
+      <BankingShowcase />
+
       <Footer />
     </main>
   )
 }
+
 
