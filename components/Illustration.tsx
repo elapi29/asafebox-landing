@@ -3,9 +3,9 @@ export default function Illustration() {
     <figure className="mx-auto max-w-4xl">
       <svg viewBox="0 0 1200 260" role="img" aria-labelledby="dsrTitle dsrDesc" className="w-full h-auto">
         <title id="dsrTitle">Flujo aSAFEBOX: integridad y privacidad</title>
-        <desc id="dsrDesc">Hash/Commit, mTLS, HMAC Verify Log, Blind-Reveal y capa post-cuántica</desc>
+        <desc id="dsrDesc">Hash/Commit, mTLS, Verify Log, Blind-Reveal y capa post-cuántica</desc>
 
-        {/* Banda post-cuántica (shield) */}
+        {/* Banda post-cuántica */}
         <rect x="20" y="20" width="1160" height="60" rx="12" className="fill-blue-100" />
         <text x="600" y="58" textAnchor="middle" className="fill-blue-900 text-sm">
           Post-Quantum ready (transporte y firmas)
@@ -14,13 +14,13 @@ export default function Illustration() {
         {/* Línea de flujo */}
         <line x1="80" y1="160" x2="1120" y2="160" className="stroke-slate-300" strokeWidth="4" strokeDasharray="6 8"/>
 
-        {/* Estaciones */}
+        {/* Estaciones con nuevos subtítulos */}
         {[
-          { x:120, title:"Emisor", sub:"Hash + Commit" },
-          { x:360, title:"mTLS", sub:"Autenticación mutua" },
-          { x:600, title:"HMAC", sub:"Verify Log" },
-          { x:840, title:"Blind-Reveal", sub:"Privacidad por diseño" },
-          { x:1080, title:"Receptor", sub:"Entrega verificable" },
+          { x:120,  title:"Emisor",        sub:"Ofuscamiento criptográfico (PQ-ready)" },          // antes: Hash + Commit
+          { x:360,  title:"mTLS",          sub:"Capa de Seguridad de Transporte (PQ-ready)" },     // antes: Autenticación mutua
+          { x:600,  title:"Verify Log",    sub:"Evidencia Ledger inmutable inmediata (off-chain)" },// antes: HMAC / Verify Log
+          { x:840,  title:"Blind-Reveal",  sub:"Identidad cegada: protección máxima del customer" },// antes: Privacidad por diseño
+          { x:1080, title:"Receptor",      sub:"Entrega verificable" },
         ].map((b, i) => (
           <g key={i} transform={`translate(${b.x}, 120)`}>
             <rect x="-70" y="-40" width="140" height="80" rx="14" className="fill-white stroke-slate-300" />
@@ -31,7 +31,7 @@ export default function Illustration() {
         ))}
       </svg>
       <figcaption className="mt-3 text-center text-sm text-slate-500">
-        Evidencia inmutable, transporte autenticado, logs verificables y privacidad con Blind-Reveal.
+        Evidencia inmutable, transporte autenticado y privacidad con Blind-Reveal.
       </figcaption>
     </figure>
   )

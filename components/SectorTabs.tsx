@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 type Card = {
-  icon?: string; // ruta a /public/illustrations o emoji fallback
+  icon?: string;
   title: string;
   subtitle: string;
   href?: string;
@@ -35,8 +35,8 @@ function ArrowIcon() {
   return (
     <svg
       viewBox="0 0 24 24"
-      width="18"
-      height="18"
+      width="20"
+      height="20"
       aria-hidden="true"
       className="text-slate-400 group-hover:translate-x-0.5 transition"
     >
@@ -57,24 +57,29 @@ function CardItem({ card }: { card: Card }) {
   return (
     <a
       href={card.href || "#"}
-      className="group block rounded-2xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md transition"
+      className="group block rounded-2xl border border-slate-200 bg-white p-6 md:p-7 shadow-sm hover:shadow-md transition"
     >
-      <div className="flex items-start gap-4">
-        <div className="h-12 w-12 rounded-xl bg-slate-100 flex items-center justify-center shrink-0 overflow-hidden">
+      <div className="flex items-start gap-5">
+        <div className="h-20 w-20 rounded-2xl bg-slate-100 flex items-center justify-center shrink-0 overflow-hidden">
           {hasIcon ? (
-            <img src={card.icon} alt="" className="h-8 w-8 object-contain" />
+            <img
+              src={card.icon}
+              alt=""
+              className="h-16 w-16 object-contain md:h-18 md:w-18"
+              loading="lazy"
+            />
           ) : (
-            <span aria-hidden>🔒</span>
+            <span aria-hidden className="text-3xl">🔒</span>
           )}
         </div>
         <div className="min-w-0">
           <div className="flex items-center gap-2">
-            <h3 className="text-base font-semibold text-slate-900">
+            <h3 className="text-lg font-semibold text-slate-900">
               {card.title}
             </h3>
             <ArrowIcon />
           </div>
-          <p className="mt-1 text-sm text-slate-600">{card.subtitle}</p>
+          <p className="mt-2 text-base text-slate-600">{card.subtitle}</p>
         </div>
       </div>
     </a>
@@ -90,13 +95,13 @@ export default function SectorTabs() {
       icon: `${base}/metadata.png`,
       title: "Boleto/Escritura con QR",
       subtitle:
-        "El QR encadena el PDF escaneado (hash) a un log inmutable; cualquier alteración se detecta al instante.",
+        "El QR encadena el PDF (hash) a un log inmutable; cualquier alteración se detecta al instante.",
     },
     {
       icon: `${base}/blind-reveal.png`,
       title: "Auditoría en minutos",
       subtitle:
-        "Blind-Reveal para verificar consistencia sin exponer datos: juez o auditor validan con el QR.",
+        "Blind-Reveal: juez/auditor validan consistencia sin ver datos sensibles.",
     },
   ];
 
@@ -105,13 +110,13 @@ export default function SectorTabs() {
       icon: `${base}/banking-integrity-seal.png`,
       title: "Sello de integridad",
       subtitle:
-        "Cada campo clave sella su ‘huella’; cualquier cambio dispara mismatch y alerta antifraude.",
+        "Cada campo crítico deja huella; cualquier cambio dispara mismatch y alerta.",
     },
     {
       icon: `${base}/metadata.png`,
       title: "Cumplimiento automático",
       subtitle:
-        "Bitácora inmutable: evidencia lista para reguladores (CNV, BCRA, PCI-DSS, UIF).",
+        "Bitácora inmutable: evidencia lista para CNV, BCRA, PCI-DSS, UIF.",
     },
   ];
 
@@ -120,20 +125,20 @@ export default function SectorTabs() {
       icon: `${base}/l2-anchoring.png`,
       title: "Verify Log → L2",
       subtitle:
-        "Append-only log con pruebas de inclusión/consistencia; anclaje económico en L2.",
+        "Append-only log con pruebas de inclusión/consistencia y anclaje económico en L2.",
     },
     {
       icon: `${base}/blind-reveal.png`,
       title: "Privacidad (ZK)",
       subtitle:
-        "Validez sin revelar datos de clientes; latencia operativa imperceptible.",
+        "Validez sin exponer datos de clientes; latencia operativa imperceptible.",
     },
   ];
 
   return (
-    <section className="px-6 py-16 mx-auto max-w-6xl">
+    <section className="px-6 py-16 mx-auto max-w-7xl">
       <div className="flex items-center justify-between gap-3 flex-wrap">
-        <h2 className="text-2xl font-bold">Soluciones por industria</h2>
+        <h2 className="text-2xl md:text-3xl font-bold">Soluciones por industria</h2>
         <div className="flex gap-2">
           <TabButton active={tab === "real"} onClick={() => setTab("real")}>
             Inmobiliaria (HUGO)
@@ -147,7 +152,8 @@ export default function SectorTabs() {
         </div>
       </div>
 
-      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {/* Grid más grande: 1 col en mobile, 2 en sm, 2 en lg (cards grandes) */}
+      <div className="mt-10 grid gap-7 sm:grid-cols-2 lg:grid-cols-2">
         {(tab === "real" ? inmobiliaria : tab === "fin" ? fintech : banking).map(
           (c) => (
             <CardItem key={c.title} card={c} />
@@ -155,19 +161,18 @@ export default function SectorTabs() {
         )}
       </div>
 
-      <div className="mt-14 rounded-2xl border border-slate-200 p-6 bg-white">
-        <h3 className="text-xl font-semibold">
+      <div className="mt-14 rounded-2xl border border-slate-200 p-6 md:p-8 bg-white">
+        <h3 className="text-xl md:text-2xl font-semibold">
           ¿Por qué este sistema es seguro y confidencial?
         </h3>
-        <ul className="mt-3 space-y-2 text-slate-700 text-sm leading-relaxed">
+        <ul className="mt-4 space-y-3 text-slate-700 text-base leading-relaxed">
           <li>
-            <strong>Blindaje con pruebas matemáticas:</strong> commit-reveal y
-            sello de integridad con clave impiden manipulación de monto, cuenta,
-            identidad u orden.
+            <strong>Blindaje con pruebas matemáticas:</strong> commit-reveal y sello
+            de integridad con clave impiden manipulación de monto, cuenta, identidad u orden.
           </li>
           <li>
-            <strong>Privacidad total:</strong> Blind-Reveal y ZK permiten probar
-            validez sin exponer el dato a contrapartes ni auditores externos.
+            <strong>Privacidad total:</strong> Blind-Reveal y ZK prueban validez
+            sin exponer el dato a contrapartes ni auditores externos.
           </li>
           <li>
             <strong>Evidencia inmutable:</strong> cada transacción/firmado/KYC/pago
@@ -178,12 +183,13 @@ export default function SectorTabs() {
             cumpliendo UIF, BCRA, CNV, PCI-DSS.
           </li>
           <li>
-            <strong>Puente papel↔digital:</strong> en inmobiliaria, el QR encadena
-            el PDF físico al hash del master; validación en segundos.
+            <strong>Puente papel↔digital:</strong> el QR encadena el PDF físico
+            al hash del master; validación en segundos.
           </li>
         </ul>
       </div>
     </section>
   );
 }
+
 
