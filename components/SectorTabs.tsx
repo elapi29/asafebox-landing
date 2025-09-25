@@ -1,8 +1,6 @@
-// components/SectorTabs.tsx
 "use client";
 
 import { useState } from "react";
-import { ArrowRight } from "lucide-react";
 
 type Card = {
   icon?: string; // ruta a /public/illustrations o emoji fallback
@@ -33,6 +31,27 @@ const TabButton = ({
   </button>
 );
 
+function ArrowIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="18"
+      height="18"
+      aria-hidden="true"
+      className="text-slate-400 group-hover:translate-x-0.5 transition"
+    >
+      <path
+        d="M5 12h12m0 0l-4-4m4 4l-4 4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function CardItem({ card }: { card: Card }) {
   const hasIcon = Boolean(card.icon);
   return (
@@ -43,7 +62,6 @@ function CardItem({ card }: { card: Card }) {
       <div className="flex items-start gap-4">
         <div className="h-12 w-12 rounded-xl bg-slate-100 flex items-center justify-center shrink-0 overflow-hidden">
           {hasIcon ? (
-            // usa img normal para export estático
             <img src={card.icon} alt="" className="h-8 w-8 object-contain" />
           ) : (
             <span aria-hidden>🔒</span>
@@ -54,11 +72,7 @@ function CardItem({ card }: { card: Card }) {
             <h3 className="text-base font-semibold text-slate-900">
               {card.title}
             </h3>
-            <ArrowRight
-              size={18}
-              className="text-slate-400 group-hover:translate-x-0.5 transition"
-              aria-hidden
-            />
+            <ArrowIcon />
           </div>
           <p className="mt-1 text-sm text-slate-600">{card.subtitle}</p>
         </div>
@@ -73,18 +87,16 @@ export default function SectorTabs() {
 
   const inmobiliaria: Card[] = [
     {
-      icon: `${base}/metadata.png`, // si aún no la tenés, podés cambiarla o dejar vacío
+      icon: `${base}/metadata.png`,
       title: "Boleto/Escritura con QR",
       subtitle:
         "El QR encadena el PDF escaneado (hash) a un log inmutable; cualquier alteración se detecta al instante.",
-      href: "#",
     },
     {
       icon: `${base}/blind-reveal.png`,
       title: "Auditoría en minutos",
       subtitle:
         "Blind-Reveal para verificar consistencia sin exponer datos: juez o auditor validan con el QR.",
-      href: "#",
     },
   ];
 
@@ -94,14 +106,12 @@ export default function SectorTabs() {
       title: "Sello de integridad",
       subtitle:
         "Cada campo clave sella su ‘huella’; cualquier cambio dispara mismatch y alerta antifraude.",
-      href: "#",
     },
     {
       icon: `${base}/metadata.png`,
       title: "Cumplimiento automático",
       subtitle:
-        "Bitácora HMAC inmutable: evidencia lista para reguladores (CNV, BCRA, PCI-DSS, UIF).",
-      href: "#",
+        "Bitácora inmutable: evidencia lista para reguladores (CNV, BCRA, PCI-DSS, UIF).",
     },
   ];
 
@@ -111,14 +121,12 @@ export default function SectorTabs() {
       title: "Verify Log → L2",
       subtitle:
         "Append-only log con pruebas de inclusión/consistencia; anclaje económico en L2.",
-      href: "#",
     },
     {
       icon: `${base}/blind-reveal.png`,
       title: "Privacidad (ZK)",
       subtitle:
         "Validez sin revelar datos de clientes; latencia operativa imperceptible.",
-      href: "#",
     },
   ];
 
@@ -139,7 +147,6 @@ export default function SectorTabs() {
         </div>
       </div>
 
-      {/* Cards */}
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {(tab === "real" ? inmobiliaria : tab === "fin" ? fintech : banking).map(
           (c) => (
@@ -148,40 +155,35 @@ export default function SectorTabs() {
         )}
       </div>
 
-      {/* Texto “¿Por qué este sistema es seguro y confidencial?” */}
       <div className="mt-14 rounded-2xl border border-slate-200 p-6 bg-white">
         <h3 className="text-xl font-semibold">
           ¿Por qué este sistema es seguro y confidencial?
         </h3>
         <ul className="mt-3 space-y-2 text-slate-700 text-sm leading-relaxed">
           <li>
-            <strong>Blindaje con pruebas matemáticas:</strong> usamos commit-reveal
-            y sello de integridad con clave (tipo HMAC) para impedir manipulación
-            de monto, cuenta, identidad u orden incluso ante atacantes con acceso
-            parcial al flujo. :contentReference[oaicite:0]{index=0}
+            <strong>Blindaje con pruebas matemáticas:</strong> commit-reveal y
+            sello de integridad con clave impiden manipulación de monto, cuenta,
+            identidad u orden.
           </li>
           <li>
-            <strong>Privacidad total:</strong> con Blind-Reveal y ZK, cada parte
-            prueba validez sin exponer el dato a contrapartes ni auditores
-            externos; es como sellar una jugada y mostrarla después. :contentReference[oaicite:1]{index=1}
+            <strong>Privacidad total:</strong> Blind-Reveal y ZK permiten probar
+            validez sin exponer el dato a contrapartes ni auditores externos.
           </li>
           <li>
             <strong>Evidencia inmutable:</strong> cada transacción/firmado/KYC/pago
-            queda en un log inmutable y auditable; cualquier intento de
-            manipulación se detecta, incluso meses o años después. :contentReference[oaicite:2]{index=2}
+            queda en un log auditable; cualquier manipulación se detecta.
           </li>
           <li>
-            <strong>Auditoría instantánea:</strong> verificamos millones de eventos
-            en minutos cumpliendo UIF, BCRA, CNV, PCI-DSS y normas
-            internacionales. 
+            <strong>Auditoría instantánea:</strong> millones de eventos en minutos
+            cumpliendo UIF, BCRA, CNV, PCI-DSS.
           </li>
           <li>
-            <strong>Puente papel↔digital:</strong> en inmobiliaria, el QR en el
-            boleto/escritura encadena la copia física al hash del PDF master; el
-            juez valida en segundos. :contentReference[oaicite:4]{index=4}
+            <strong>Puente papel↔digital:</strong> en inmobiliaria, el QR encadena
+            el PDF físico al hash del master; validación en segundos.
           </li>
         </ul>
       </div>
     </section>
   );
 }
+
