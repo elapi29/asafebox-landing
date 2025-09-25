@@ -1,7 +1,8 @@
 import Hero from '../components/Hero'
 import Illustration from '../components/Illustration'
 import Features from '../components/Features'
-import CompleteControl from '../components/CompleteControl'   // ⬅️ nuevo
+import EvidenceImmutable from '../components/EvidenceImmutable'      // ⬅️ nuevo
+import PrivacyBlindReveal from '../components/PrivacyBlindReveal'    // ⬅️ nuevo
 import SectorTabs from '../components/SectorTabs'
 import InteropSection from '../components/InteropSection'
 import Footer from '../components/Footer'
@@ -22,8 +23,11 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ⬇️ bloque tipo zksync.io */}
-      <CompleteControl />
+      {/* Bloque 1: Evidencia inmutable (texto izq, ledger der) */}
+      <EvidenceImmutable />
+
+      {/* Bloque 2: Privacidad con Blind-Reveal (texto izq, imagen verde der) */}
+      <PrivacyBlindReveal />
 
       <Features />
       <SectorTabs />
@@ -32,4 +36,5 @@ export default function Page() {
     </main>
   )
 }
+
 
