@@ -1,7 +1,7 @@
 import Hero from '../components/Hero'
 import Illustration from '../components/Illustration'
 import Features from '../components/Features'
-import BankingShowcase from '../components/BankingShowcase'  // ⬅️ nuevo import
+import SectorTabs from '../components/SectorTabs'
 import Footer from '../components/Footer'
 
 export default function Page() {
@@ -21,8 +21,8 @@ export default function Page() {
 
       <Features />
 
-      {/* ⬇️ aquí aparecen tus PNG */}
-      <BankingShowcase />
+      {/* 👇 nueva sección con solapas */}
+      <SectorTabs />
 
       <Footer />
     </main>
