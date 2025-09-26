@@ -1,65 +1,51 @@
 // components/EvidenceImmutable.tsx
 export default function EvidenceImmutable() {
+  const base = (process.env.NEXT_PUBLIC_BASE_PATH || '') + '/illustrations'
+  const img = `${base}/banking-integrity-seal.png` // PNG del “sello” grande
+
   return (
     <section className="mx-auto max-w-6xl px-6 py-16">
       <div className="grid items-center gap-10 md:grid-cols-2">
-        {/* Izquierda: texto grande */}
+        {/* Texto (izquierda) */}
         <div>
-          <h3 className="text-2xl md:text-3xl font-bold text-slate-900">Evidencia inmutable</h3>
-          <p className="mt-3 text-lg md:text-xl text-slate-900">
-            Cada paso (transacción, firma, KYC) queda sellado con un Ledger Inmutable y pruebas ZK.
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
+            Evidencia inmutable
+          </h2>
+          <p className="mt-4 text-lg md:text-xl text-slate-700 leading-relaxed">
+            Cada paso (transacción, firma, KYC) queda sellado con un&nbsp;
+            <strong>Ledger Inmutable</strong> y pruebas ZK. El encadenamiento permite
+            detectar cualquier manipulación incluso meses o años más tarde, manteniendo
+            auditabilidad con impacto mínimo en la operación.
           </p>
 
-          <p className="mt-4 text-slate-700 leading-relaxed">
-            El encadenamiento inmutable permite detectar cualquier manipulación, incluso meses o años
-            más tarde, manteniendo la auditabilidad operativa con impacto mínimo en la latencia.
-          </p>
+          {/* Pills grandes para conceptos clave */}
+          <div className="mt-6 flex flex-wrap gap-3">
+            <span className="rounded-full bg-sky-100 px-4 py-2 text-base md:text-lg font-semibold text-sky-900">
+              Transporte PQ-ready (mTLS)
+            </span>
+            <span className="rounded-full bg-emerald-100 px-4 py-2 text-base md:text-lg font-semibold text-emerald-900">
+              Ledger inmutable (encadenamiento)
+            </span>
+            <span className="rounded-full bg-indigo-100 px-4 py-2 text-base md:text-lg font-semibold text-indigo-900">
+              Control extremo a extremo
+            </span>
+          </div>
         </div>
 
-        {/* Derecha: construcción del Ledger (matriz de huellas) + banda PQ */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-          <svg viewBox="0 0 1200 560" className="w-full h-auto" role="img"
-               aria-label="Capa PQ-ready y construcción del Ledger Inmutable como matriz de huellas ofuscadas">
-
-            {/* Banda PQ (más grande) */}
-            <rect x="20" y="20" width="1160" height="90" rx="18" className="fill-blue-100" />
-            <text x="600" y="78" textAnchor="middle" className="fill-blue-900 text-base">
-              Capa de Seguridad de Transporte Post-Quantum-Ready (mTLS PQ-Ready)
-            </text>
-
-            {/* Título dentro del gráfico */}
-            <text x="600" y="140" textAnchor="middle" className="fill-slate-900 text-sm">
-              Ledger Inmutable (matriz de huellas ofuscadas)
-            </text>
-
-            {/* Matriz de huellas (más grande) */}
-            <g transform="translate(600, 350)">
-              <rect x="-360" y="-160" width="720" height="320" rx="18" className="fill-white stroke-slate-300" />
-              {
-                // 6 filas x 12 columnas; celdas mayores
-                Array.from({ length: 6 }).map((_, r) =>
-                  Array.from({ length: 12 }).map((__, c) => {
-                    const cx = -300 + c * 55
-                    const cy = -120 + r * 50
-                    return (
-                      <g key={`${r}-${c}`} transform={`translate(${cx},${cy})`}>
-                        <rect x="-24" y="-18" width="48" height="36" rx="8" className="fill-white stroke-slate-200" />
-                        <ellipse cx="0" cy="0" rx="14" ry="18" fill="none" className="stroke-slate-500" strokeWidth="2.5"/>
-                        <ellipse cx="0" cy="0" rx="9"  ry="12" fill="none" className="stroke-slate-500" strokeWidth="2.5"/>
-                        <ellipse cx="0" cy="0" rx="4"  ry="6"  fill="none" className="stroke-slate-500" strokeWidth="2.5"/>
-                      </g>
-                    )
-                  })
-                )
-              }
-            </g>
-
-            {/* Caption inferior (GRANDE) */}
-            <text x="600" y="520" textAnchor="middle" className="fill-slate-900 text-base">
-              Control total de integridad y privacidad, extremo a extremo
-            </text>
-          </svg>
-        </div>
+        {/* Imagen (derecha) */}
+        <figure className="order-1 md:order-none">
+          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+            <img
+              src={img}
+              alt="Sello de Integridad Encadenado"
+              className="w-full h-auto"
+              loading="lazy"
+            />
+          </div>
+          <figcaption className="mt-4 text-center text-base md:text-lg text-slate-600">
+            Un “sello” criptográfico por evento; los sellos se encadenan en un libro de evidencias.
+          </figcaption>
+        </figure>
       </div>
     </section>
   )
