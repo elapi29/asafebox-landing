@@ -39,30 +39,29 @@ export default function InteropSection() {
               eliminando overhead de integración mientras mantiene verificabilidad on-chain.
             </p>
 
-            {/* CTA */}
-            <div className="mt-8">
-              <a
-                href="https://docs.zksync.io/zk-stack/zk-chains#how-interop-works"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative inline-flex items-center gap-2 rounded-full px-5 py-3
-                           text-md font-semibold text-white bg-brand-900 hover:bg-brand-800
-                           transition focus-visible:outline-2 focus-visible:outline-offset-2
-                           before:absolute before:inset-px before:rounded-[999px]
-                           before:border before:border-white/10"
-              >
-                <span>Learn how it works</span>
-                <svg
-                  width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  className="transition group-hover:translate-x-0.5"
-                  aria-hidden="true"
-                >
-                  <path d="M7 17L17 7M17 7H7M17 7V17"
+            {/* CTA sin link */}
+                <div className="mt-8">
+                    <button
+                        type="button"
+                        className="group relative inline-flex items-center gap-2 rounded-full px-5 py-3
+                        text-md font-semibold text-white bg-brand-900 hover:bg-brand-800
+                        transition focus-visible:outline-2 focus-visible:outline-offset-2
+                        before:absolute before:inset-px before:rounded-[999px]
+                        before:border before:border-white/10"
+                        aria-label="Learn how it works"
+                     >
+                      <span>Learn how it works</span>
+                      <svg
+                      width="24" height="24" viewBox="0 0 24 24" aria-hidden
+                      className="transition group-hover:translate-x-0.5"
+                         >
+                      <path d="M7 17L17 7M17 7H7M17 7V17"
                         stroke="currentColor" strokeWidth="1.5"
                         strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </a>
-            </div>
+                      </svg>
+                 </button>
+                </div>
+
           </div>
         </div>
       </div>
