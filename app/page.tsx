@@ -1,6 +1,10 @@
 // app/page.tsx
-import { redirect } from 'next/navigation'
+'use client'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function Root() {
-  redirect('/es') // idioma por defecto
+  const router = useRouter()
+  useEffect(() => { router.replace('/es') }, [router])
+  return null
 }
