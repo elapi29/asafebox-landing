@@ -1,60 +1,46 @@
+// components/EmailCapture.tsx
 'use client'
+
 import { useState } from 'react'
 
-const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT
+type Props = {
+  placeholder: string
+  cta: string
+  successPath?: string
+}
 
-export default function EmailCapture() {
+export default function EmailCapture({ placeholder, cta, successPath = '/thanks' }: Props) {
   const [email, setEmail] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const action = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || ''
 
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError(null)
-
-    const emailOk = /^\S+@\S+\.\S+$/.test(email)
-    if (!emailOk) { setError('Ingresá un email válido.'); return }
-    if (!FORMSPREE_ENDPOINT) { setError('Endpoint no configurado.'); return }
-
-    setLoading(true)
-    try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, _gotcha: '' }) // honeypot
-      })
-      if (res.ok) {
-        window.location.href = (process.env.NEXT_PUBLIC_BASE_PATH || '') + '/thanks/'
-      } else {
-        setError('No pudimos registrar tu email. Probá de nuevo en un momento.')
-      }
-    } catch (err) {
-      setError('Error de red. Revisá tu conexión.')
-    } finally {
-      setLoading(false)
-    }
-  }
+  // Para GitHub Pages con basePath
+  const base = process.env.NEXT_PUBLIC_BASE_PATH || ''
+  const nextUrl = `${base}${successPath}`
 
   return (
-    <form onSubmit={onSubmit} className="flex w-full max-w-md gap-2">
-      <label className="sr-only" htmlFor="email">Email</label>
+    <form
+      action={action}
+      method="POST"
+      className="mx-auto flex w-full max-w-md items-center gap-2 rounded-xl border border-slate-200 bg-white p-2 shadow-sm"
+    >
+      <input type="hidden" name="_next" value={nextUrl} />
       <input
-        id="email"
         type="email"
+        name="email"
+        required
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="tu@email.com"
-        autoComplete="email"
-        required
-        className="flex-1 rounded-xl border border-slate-300 bg-white/90 px-4 py-3 text-base shadow-sm focus:border-brand-500"
+        placeholder={placeholder}
+        className="w-full rounded-lg border-0 px-3 py-2 text-base outline-none placeholder:text-slate-400 focus:ring-2 focus:ring-brand-500"
+        aria-label="Email"
       />
       <button
         type="submit"
-        disabled={loading}
-        className="rounded-xl bg-brand-500 px-5 py-3 text-white shadow hover:bg-brand-600 focus-visible:outline-brand-500 disabled:opacity-60"
-        aria-busy={loading}
-      >{loading ? 'Enviando…' : 'Quiero saber más'}</button>
-      {error && <p className="sr-only" role="alert">{error}</p>}
+        className="whitespace-nowrap rounded-lg bg-brand-900 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-800 focus-visible:outline-2 focus-visible:outline-offset-2"
+      >
+        {cta}
+      </button>
     </form>
   )
 }
+
