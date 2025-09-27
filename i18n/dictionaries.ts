@@ -40,7 +40,7 @@ export type Dict = {
   }
   footer: { rights: string; madeWith: string }
 
-  // 💎 NUEVO: bloque joyería
+  // 💎 Joyería (incluye diagrama localizado)
   jewelry: {
     title: string
     subtitle: string
@@ -54,6 +54,24 @@ export type Dict = {
     qrLabel: string
     qrUrl: string
     diagramCaption: string
+    diagram: {
+      mineTitle: string
+      mineNote: string
+      refineryTitle: string
+      refineryNote: string
+      manufTitle: string
+      manufNote: string
+      wholesaleTitle: string
+      wholesaleNote: string
+      posTitle: string
+      posNote: string
+      lock1: string
+      lock2: string
+      lock3: string
+      lock4: string
+      lock5: string
+      verifyPosLabel: string
+    }
   }
 }
 
@@ -144,6 +162,24 @@ const es: Dict = {
     qrUrl: 'https://elapi29.github.io/asafebox-landing/verify/example?code=DEMO-QR-001',
     diagramCaption:
       'Cadena de valor con eventos encadenados y verificación rápida en el punto de venta (sin exponer datos sensibles).',
+    diagram: {
+      mineTitle: 'Pozo / Mina',
+      mineNote: 'Lote, fecha, responsable',
+      refineryTitle: 'Refinería',
+      refineryNote: 'Ensayo de pureza / lote',
+      manufTitle: 'Fabricación / Corte',
+      manufNote: 'Asignación a pieza/serie',
+      wholesaleTitle: 'Mayorista / Logística',
+      wholesaleNote: 'Transferencia de custodia',
+      posTitle: 'Joyería (POS)',
+      posNote: 'Boleta + certificado + pago',
+      lock1: 'Evento sellado',
+      lock2: 'Encadenado',
+      lock3: 'Íntegro',
+      lock4: 'Transferible',
+      lock5: 'Verificable en segundos (QR)',
+      verifyPosLabel: 'verify_log • 05 (POS)',
+    },
   },
 }
 
@@ -226,6 +262,24 @@ const en: Dict = {
     qrUrl: 'https://elapi29.github.io/asafebox-landing/verify/example?code=DEMO-QR-001',
     diagramCaption:
       'Value chain with chained events and fast verification at the point of sale (no sensitive data exposed).',
+    diagram: {
+      mineTitle: 'Mine',
+      mineNote: 'Lot, date, operator',
+      refineryTitle: 'Refinery',
+      refineryNote: 'Assay / lot',
+      manufTitle: 'Manufacturing / Cutting',
+      manufNote: 'Assigned to piece/series',
+      wholesaleTitle: 'Wholesale / Logistics',
+      wholesaleNote: 'Custody transfer',
+      posTitle: 'Jewelry (POS)',
+      posNote: 'Receipt + certificate + payment',
+      lock1: 'Event sealed',
+      lock2: 'Chained',
+      lock3: 'Tamper-evident',
+      lock4: 'Transferable',
+      lock5: 'QR verification in seconds',
+      verifyPosLabel: 'verify_log • 05 (POS)',
+    },
   },
 }
 
@@ -312,6 +366,24 @@ const de: Dict = {
     qrUrl: 'https://elapi29.github.io/asafebox-landing/verify/example?code=DEMO-QR-001',
     diagramCaption:
       'Wertschöpfungskette mit verketteten Ereignissen und schneller Prüfung am POS (ohne sensible Daten offenzulegen).',
+    diagram: {
+      mineTitle: 'Mine',
+      mineNote: 'Los, Datum, Verantwortliche/r',
+      refineryTitle: 'Raffinerie',
+      refineryNote: 'Analyse / Los',
+      manufTitle: 'Fertigung / Schliff',
+      manufNote: 'Zuordnung zu Stück/Serie',
+      wholesaleTitle: 'Großhandel / Logistik',
+      wholesaleNote: 'Übergabe der Verwahrung',
+      posTitle: 'Juwelier (POS)',
+      posNote: 'Beleg + Zertifikat + Zahlung',
+      lock1: 'Ereignis versiegelt',
+      lock2: 'Verkettet',
+      lock3: 'Unverfälschbar',
+      lock4: 'Übertragbar',
+      lock5: 'QR-Prüfung in Sekunden',
+      verifyPosLabel: 'verify_log • 05 (POS)',
+    },
   },
 }
 
@@ -325,5 +397,6 @@ export async function getDictionary(locale: Locale): Promise<Dict> {
       return es
   }
 }
+
 
 
