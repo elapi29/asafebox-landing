@@ -11,6 +11,12 @@ import SectorTabs from '../../components/SectorTabs'
 import InteropSection from '../../components/InteropSection'
 import Footer from '../../components/Footer'
 
+// ✅ Para static export: enumeramos los locales a prerender
+export const dynamicParams = false
+export function generateStaticParams() {
+  return [{ locale: 'es' }, { locale: 'en' }, { locale: 'de' }]
+}
+
 export default function Page({ params }: { params: { locale: Locale } }) {
   const t = getDict(params.locale)
 
