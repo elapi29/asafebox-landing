@@ -5,8 +5,6 @@ import { useRouter } from 'next/navigation'
 
 export default function Root() {
   const router = useRouter()
-  useEffect(() => {
-    router.replace('/es') // idioma por defecto
-  }, [router])
+  useEffect(() => { router.replace('/es') }, [router])
   return null
 }
