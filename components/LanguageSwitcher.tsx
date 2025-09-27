@@ -5,6 +5,7 @@ type Locale = 'es' | 'en' | 'de'
 
 export default function LanguageSwitcher({ locale }: { locale: Locale }) {
   const locales: Locale[] = ['es', 'en', 'de']
+  const base = (process.env.NEXT_PUBLIC_BASE_PATH || '') // ej: '/asafebox-landing'
 
   return (
     <nav
@@ -16,7 +17,7 @@ export default function LanguageSwitcher({ locale }: { locale: Locale }) {
         return (
           <a
             key={l}
-            href={`/${l}`}
+            href={`${base}/${l}`}
             aria-current={active ? 'page' : undefined}
             className={[
               'inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium transition',
