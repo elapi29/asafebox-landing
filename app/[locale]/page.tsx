@@ -1,17 +1,16 @@
 // app/[locale]/page.tsx
-import { Locale, getDictionary } from '../../i18n/dictionaries'
+import { getDictionary, Locale } from '../../i18n/dictionaries'
+import LanguageSwitcher from '../../components/LanguageSwitcher'
 import Hero from '../../components/Hero'
+import EmailCapture from '../../components/EmailCapture'
 import Illustration from '../../components/Illustration'
 import EvidenceImmutable from '../../components/EvidenceImmutable'
 import PrivacyBlindReveal from '../../components/PrivacyBlindReveal'
+import Features from '../../components/Features'
 import SectorTabs from '../../components/SectorTabs'
-import InteropSection from '../../components/InteropSection'
 import Footer from '../../components/Footer'
-import LanguageSwitcher from '../../components/LanguageSwitcher'
 
-export const dynamic = 'error' // asegurar SSG
-
-export default async function LocalePage({ params }: { params: { locale: Locale } }) {
+export default async function Page({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale)
 
   return (
@@ -28,19 +27,47 @@ export default async function LocalePage({ params }: { params: { locale: Locale 
 
       <section className="px-6 py-12">
         <h2 className="text-center text-2xl font-bold">{dict.howItWorks.title}</h2>
-        <p className="mx-auto mt-2 max-w-2xl text-center text-slate-600">
-          {dict.howItWorks.subtitle}
-        </p>
+        <p className="mx-auto mt-2 max-w-2xl text-center text-slate-600">{dict.howItWorks.subtitle}</p>
         <div className="mt-8">
-          <Illustration />
+          <Illustration
+            transportLabel={dict.illustration.transport}
+            sender={dict.illustration.sender}
+            ledger={dict.illustration.ledger}
+            blindId={dict.illustration.blindId}
+            receiver={dict.illustration.receiver}
+            caption={dict.illustration.caption}
+          />
         </div>
       </section>
 
-      <EvidenceImmutable />
-      <PrivacyBlindReveal />
+      <EvidenceImmutable
+        title={dict.evidence.title}
+        body={dict.evidence.body}
+        bullets={dict.evidence.bullets}
+        sealTitle={dict.evidence.sealTitle}
+        sealBody={dict.evidence.sealBody}
+      />
 
-      <SectorTabs />
-      <InteropSection />
+      <PrivacyBlindReveal title={dict.privacy.title} body={dict.privacy.body} cta={dict.privacy.cta} />
+
+      <Features
+        immutableEvidence={dict.features.immutableEvidence}
+        privacyBR={dict.features.privacyBR}
+        auditReady={dict.features.auditReady}
+        pqcReady={dict.features.pqcReady}
+      />
+
+      <SectorTabs
+        title={dict.sectors.title}
+        realEstate={dict.sectors.realEstate}
+        fintech={dict.sectors.fintech}
+        banking={dict.sectors.banking}
+        realEstateCardTitle={dict.sectors.realEstateCardTitle}
+        realEstateCardBody={dict.sectors.realEstateCardBody}
+        auditMinutesTitle={dict.sectors.auditMinutesTitle}
+        auditMinutesBody={dict.sectors.auditMinutesBody}
+      />
+
       <Footer />
     </main>
   )

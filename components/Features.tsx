@@ -1,29 +1,19 @@
-export default function Features() {
-  const features = [
-    {
-      title: 'Evidencia inmutable',
-      desc: 'Cada paso (transacción, firma, KYC) queda sellado con logs HMAC y pruebas ZK.'
-    },
-    {
-      title: 'Privacidad con Blind-Reveal',
-      desc: 'Demostramos validez sin exponer datos sensibles a contrapartes ni auditores.'
-    },
-    {
-      title: 'Listo para auditorías',
-      desc: 'Auditoría masiva en minutos; cumplimiento para UIF, BCRA, CNV, PCI-DSS.'
-    },
-    {
-      title: 'PQC-ready',
-      desc: 'Autenticación y firma compatibles con la década 2030 (post-cuántico).'
-    }
-  ]
+// components/Features.tsx
+type Props = {
+  immutableEvidence: string
+  privacyBR: string
+  auditReady: string
+  pqcReady: string
+}
+
+export default function Features({ immutableEvidence, privacyBR, auditReady, pqcReady }: Props) {
+  const items = [immutableEvidence, privacyBR, auditReady, pqcReady]
   return (
-    <section className="mx-auto max-w-5xl px-6 py-12">
-      <div className="grid gap-6 sm:grid-cols-2">
-        {features.map((f) => (
-          <div key={f.title} className="rounded-2xl border border-slate-200 p-6 shadow-sm">
-            <h3 className="text-lg font-semibold">{f.title}</h3>
-            <p className="mt-2 text-slate-600">{f.desc}</p>
+    <section className="mx-auto max-w-6xl px-6 py-12">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {items.map((t) => (
+          <div key={t} className="rounded-xl border border-slate-200 p-4 shadow-sm">
+            <p className="font-medium text-slate-900">{t}</p>
           </div>
         ))}
       </div>
