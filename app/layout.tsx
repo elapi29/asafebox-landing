@@ -1,26 +1,30 @@
-// app/[locale]/layout.tsx
-import type { ReactNode } from 'react'
-import { getDict } from '../../i18n'
-import type { Locale } from '../../i18n/dictionaries'
+// app/layout.tsx
+import type { Metadata } from 'next'
+import '../styles/globals.css'
 
-// ✅ No redefinimos <html>/<body>. Deja que el layout raíz muestre el header con el switcher.
-export const dynamicParams = false
-export function generateStaticParams() {
-  return [{ locale: 'es' }, { locale: 'en' }, { locale: 'de' }]
+const siteName = 'aSAFEBOX® — Emprendimiento Seguro'
+const siteUrl = 'https://elapi29.github.io/asafebox-landing'
+const description =
+  'Capa de integridad digital para transacciones y contratos: evidencia inmutable, privacidad con Blind-Reveal y auditoría en minutos.'
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: siteName,
+    template: '%s — aSAFEBOX®',
+  },
+  description,
+  openGraph: { type: 'website', url: siteUrl, siteName, title: siteName, description, images: ['/og.png'] },
+  twitter: { card: 'summary_large_image', title: siteName, description, images: ['/og.png'] },
+  robots: { index: true, follow: true },
+  alternates: { canonical: '/' },
 }
 
-export default function LocaleLayout({
-  children,
-  params,
-}: {
-  children: ReactNode
-  params: { locale: Locale }
-}) {
-  // Si necesitás el dict a nivel layout (p.ej. para <Footer /> localizable), lo cargás acá
-  const _t = getDict(params.locale)
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <section data-locale={params.locale}>
-      {children}
-    </section>
+    <html lang="es">
+      <body className="min-h-screen bg-white text-slate-900 antialiased">{children}</body>
+    </html>
   )
 }
+
