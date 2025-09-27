@@ -2,13 +2,13 @@
 import { getDictionary, Locale } from '../../i18n/dictionaries'
 import LanguageSwitcher from '../../components/LanguageSwitcher'
 import Hero from '../../components/Hero'
-import EmailCapture from '../../components/EmailCapture'
 import Illustration from '../../components/Illustration'
 import EvidenceImmutable from '../../components/EvidenceImmutable'
 import PrivacyBlindReveal from '../../components/PrivacyBlindReveal'
 import Features from '../../components/Features'
 import SectorTabs from '../../components/SectorTabs'
 import Footer from '../../components/Footer'
+import JewelrySection from '../../components/JewelrySection'
 
 export default async function Page({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale)
@@ -48,7 +48,11 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         sealBody={dict.evidence.sealBody}
       />
 
-      <PrivacyBlindReveal title={dict.privacy.title} body={dict.privacy.body} cta={dict.privacy.cta} />
+      <PrivacyBlindReveal
+        title={dict.privacy.title}
+        body={dict.privacy.body}
+        cta={dict.privacy.cta}
+      />
 
       <Features
         immutableEvidence={dict.features.immutableEvidence}
@@ -66,6 +70,22 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         realEstateCardBody={dict.sectors.realEstateCardBody}
         auditMinutesTitle={dict.sectors.auditMinutesTitle}
         auditMinutesBody={dict.sectors.auditMinutesBody}
+      />
+
+      {/* 💎 Sección Joyería */}
+      <JewelrySection
+        title={dict.jewelry.title}
+        subtitle={dict.jewelry.subtitle}
+        ctaDemo={dict.jewelry.ctaDemo}
+        ctaExample={dict.jewelry.ctaExample}
+        benefits={dict.jewelry.benefits}
+        howToTitle={dict.jewelry.howToTitle}
+        howToSteps={dict.jewelry.howToSteps}
+        originBlock={dict.jewelry.originBlock}
+        kpis={dict.jewelry.kpis}
+        qrLabel={dict.jewelry.qrLabel}
+        qrUrl={dict.jewelry.qrUrl}
+        diagramCaption={dict.jewelry.diagramCaption}
       />
 
       <Footer />
