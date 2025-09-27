@@ -5,6 +5,11 @@ import { useRouter } from 'next/navigation'
 
 export default function Root() {
   const router = useRouter()
-  useEffect(() => { router.replace('/es') }, [router])
+  const base = process.env.NEXT_PUBLIC_BASE_PATH || '' // ej: "/asafebox-landing"
+
+  useEffect(() => {
+    router.replace(`${base}/es`)
+  }, [router, base])
+
   return null
 }
