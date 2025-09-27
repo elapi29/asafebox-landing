@@ -18,6 +18,13 @@ export default {
     'text-sm',
     'text-[14px]',
     'text-[12px]',
+    'text-lg',
+    'text-xl',
+    'text-2xl',
+    'text-3xl',
+    'text-4xl',
+    'font-bold',
+    'font-extrabold'
   ],
   theme: {
     extend: {
