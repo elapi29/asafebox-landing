@@ -14,16 +14,14 @@ export default async function RealEstatePage({
     <main>
       <LanguageSwitcher locale={params.locale} />
 
-      <section className="px-6 py-12">
+      <section className="mx-auto max-w-5xl px-6 py-12 text-slate-900">
         <h1 className="text-3xl font-bold">{dict.sectors.realEstate}</h1>
-        <div className="mt-6 rounded-xl border border-slate-200 p-5">
-          <h3 className="text-xl font-semibold">{dict.sectors.realEstateCardTitle}</h3>
+        <div className="mt-4 rounded-xl border border-slate-200 p-5">
+          <h2 className="text-xl font-semibold">{dict.sectors.realEstateCardTitle}</h2>
           <p className="mt-2 text-slate-600">{dict.sectors.realEstateCardBody}</p>
-        </div>
-
-        <div className="mt-6 rounded-xl bg-slate-50 p-5">
-          <h3 className="text-lg font-semibold">{dict.sectors.auditMinutesTitle}</h3>
-          <p className="mt-1 text-slate-600">{dict.sectors.auditMinutesBody}</p>
+          <div className="mt-4 text-slate-600">
+            <strong>{dict.sectors.auditMinutesTitle}:</strong> {dict.sectors.auditMinutesBody}
+          </div>
         </div>
       </section>
 
