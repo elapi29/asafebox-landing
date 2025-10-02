@@ -2,6 +2,7 @@
 import type { Metadata } from 'next'
 import '../../styles/globals.css'
 import { Locale, getDictionary } from '../../i18n/dictionaries'
+import TopBar from '../../components/TopBar'
 
 export async function generateStaticParams() {
   return [{ locale: 'es' }, { locale: 'en' }, { locale: 'de' }]
@@ -31,7 +32,8 @@ export default function LocaleLayout({
   return (
     <html lang={params.locale}>
       <body className="min-h-screen bg-white text-slate-900 antialiased">
-        {children}
+        <TopBar />
+        <div className="pt-16">{children}</div>
       </body>
     </html>
   )

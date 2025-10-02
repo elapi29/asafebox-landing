@@ -1,6 +1,7 @@
 // app/layout.tsx
 import type { Metadata } from 'next'
 import '../styles/globals.css'
+import TopBar from '../components/TopBar'
 
 const siteName = 'aSAFEBOX® — Emprendimiento Seguro'
 const siteUrl = 'https://elapi29.github.io/asafebox-landing'
@@ -23,7 +24,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
-      <body className="min-h-screen bg-white text-slate-900 antialiased">{children}</body>
+      <body className="min-h-screen bg-white text-slate-900 antialiased">
+        <TopBar />
+        <div className="pt-16">{children}</div>
+      </body>
     </html>
   )
 }
