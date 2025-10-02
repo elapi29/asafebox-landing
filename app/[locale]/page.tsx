@@ -25,6 +25,7 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         disclaimer={dict.hero.disclaimer}
       />
 
+      {/* Cómo funciona */}
       <section className="px-6 py-12">
         <h2 className="text-center text-2xl font-bold">{dict.howItWorks.title}</h2>
         <p className="mx-auto mt-2 max-w-2xl text-center text-slate-600">{dict.howItWorks.subtitle}</p>
@@ -40,6 +41,7 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         </div>
       </section>
 
+      {/* Evidencia inmutable */}
       <EvidenceImmutable
         title={dict.evidence.title}
         body={dict.evidence.body}
@@ -48,12 +50,10 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         sealBody={dict.evidence.sealBody}
       />
 
-      <PrivacyBlindReveal
-        title={dict.privacy.title}
-        body={dict.privacy.body}
-        cta={dict.privacy.cta}
-      />
+      {/* Privacidad */}
+      <PrivacyBlindReveal title={dict.privacy.title} body={dict.privacy.body} cta={dict.privacy.cta} />
 
+      {/* Features */}
       <Features
         immutableEvidence={dict.features.immutableEvidence}
         privacyBR={dict.features.privacyBR}
@@ -61,18 +61,36 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         pqcReady={dict.features.pqcReady}
       />
 
+      {/* Sectores */}
+      {/* Sectores → 4 botones con href por idioma */}
       <SectorTabs
         title={dict.sectors.title}
-        realEstate={dict.sectors.realEstate}
-        fintech={dict.sectors.fintech}
-        banking={dict.sectors.banking}
-        realEstateCardTitle={dict.sectors.realEstateCardTitle}
-        realEstateCardBody={dict.sectors.realEstateCardBody}
-        auditMinutesTitle={dict.sectors.auditMinutesTitle}
-        auditMinutesBody={dict.sectors.auditMinutesBody}
+        locale={params.locale}
+        items={[
+          {
+            title: dict.sectors.realEstate,
+            body: dict.sectors.realEstateCardBody,
+            href: '/industries/real-estate',
+          },
+          {
+            title: dict.sectors.banking,
+            body: dict.sectors.bankingCardBody,
+            href: '/industries/banking',
+          },
+          {
+            title: dict.sectors.fintech,
+            body: dict.sectors.fintechCardBody,
+            href: '/industries/fintech',
+          },
+          {
+            title: dict.sectors.jewelry,
+            body: dict.sectors.jewelryCardBody,
+            href: '/industries/jewelry',
+          },
+        ]}
       />
 
-      {/* 💎 Sección Joyería */}
+      {/* 💎 Sección Joyería (preview en home) */}
       <JewelrySection
         title={dict.jewelry.title}
         subtitle={dict.jewelry.subtitle}
@@ -86,6 +104,7 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         qrLabel={dict.jewelry.qrLabel}
         qrUrl={dict.jewelry.qrUrl}
         diagramCaption={dict.jewelry.diagramCaption}
+        diagram={dict.jewelry.diagram} // 👈 faltaba este prop
       />
 
       <Footer />

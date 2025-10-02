@@ -28,19 +28,25 @@ export type Dict = {
   }
   privacy: { title: string; body: string; cta: string }
   features: { immutableEvidence: string; privacyBR: string; auditReady: string; pqcReady: string }
+
   sectors: {
     title: string
     realEstate: string
     fintech: string
     banking: string
-    realEstateCardTitle: string
+    jewelry: string
+    // cuerpos (línea descriptiva por card)
     realEstateCardBody: string
-    auditMinutesTitle: string
-    auditMinutesBody: string
+    bankingCardBody: string
+    fintechCardBody: string
+    jewelryCardBody: string
+    // neutro multi-industria (por si quieres usarlo en otra card/sección)
+    neutralTitle: string
+    neutralBody: string
   }
+
   footer: { rights: string; madeWith: string }
 
-  // 💎 Joyería (incluye diagrama localizado)
   jewelry: {
     title: string
     subtitle: string
@@ -89,7 +95,10 @@ const es: Dict = {
     cta: 'Quiero saber más',
     disclaimer: 'Sin spam. Te enviaremos solo novedades clave.',
   },
-  howItWorks: { title: 'Cómo funciona', subtitle: 'Del encadenamiento inmutable a la identidad cegada, bajo transporte PQ-ready.' },
+  howItWorks: {
+    title: 'Cómo funciona',
+    subtitle: 'Del encadenamiento inmutable a la identidad cegada, bajo transporte PQ-ready.',
+  },
   illustration: {
     transport: 'Capa de Seguridad de Transporte Post-Quantum-Ready',
     sender: 'Emisor',
@@ -118,16 +127,26 @@ const es: Dict = {
     auditReady: 'Listo para auditorías',
     pqcReady: 'PQC-ready',
   },
+
   sectors: {
     title: 'Soluciones por industria',
     realEstate: 'Inmobiliaria (HUGO)',
     fintech: 'Fintech',
     banking: 'Banking',
-    realEstateCardTitle: 'Boleto/Escritura con QR',
-    realEstateCardBody: 'El QR encadena el PDF (hash) a un log inmutable; cualquier alteración se detecta al instante.',
-    auditMinutesTitle: 'Auditoría en minutos',
-    auditMinutesBody: 'Blind-Reveal: juez/auditor validan consistencia sin ver datos sensibles.',
+    jewelry: 'Joyería',
+    realEstateCardBody:
+      'Documentos con QR verificable; el PDF queda encadenado a un log inmutable.',
+    bankingCardBody:
+      'Integridad transaccional y evidencia de cumplimiento, sin exponer PII.',
+    fintechCardBody:
+      'Onboarding/KYC sellados y verificables en minutos, con auditoría masiva.',
+    jewelryCardBody:
+      'Autenticidad, privacidad y evidencia en el punto de venta.',
+    neutralTitle: 'Verificación rápida y privada',
+    neutralBody:
+      'Evidencia verificable en segundos, sin exponer datos sensibles. Multi-industria.',
   },
+
   footer: {
     rights: '© 2025 aSAFEBOX® · Jacob Integrity Lab',
     madeWith: 'Hecho con Next.js + Tailwind. Cumplimos buenas prácticas de accesibilidad y SEO.',
@@ -135,7 +154,8 @@ const es: Dict = {
 
   jewelry: {
     title: 'Autenticidad y privacidad en cada compra de joya',
-    subtitle: 'Tu boleta, certificado y pago quedan sellados y verificables en segundos — sin exponer datos sensibles.',
+    subtitle:
+      'Tu boleta, certificado y pago quedan sellados y verificables en segundos — sin exponer datos sensibles.',
     ctaDemo: 'Solicitar demo',
     ctaExample: 'Ver ejemplo con QR',
     benefits: [
@@ -197,7 +217,10 @@ const en: Dict = {
     cta: 'Keep me posted',
     disclaimer: 'No spam. Only key updates.',
   },
-  howItWorks: { title: 'How it works', subtitle: 'From an immutable chain to a blinded identity, all under a PQ-ready transport.' },
+  howItWorks: {
+    title: 'How it works',
+    subtitle: 'From an immutable chain to a blinded identity, all under a PQ-ready transport.',
+  },
   illustration: {
     transport: 'Post-Quantum-Ready Transport Security',
     sender: 'Sender',
@@ -221,21 +244,32 @@ const en: Dict = {
     cta: 'Learn how it works',
   },
   features: { immutableEvidence: 'Immutable evidence', privacyBR: 'Privacy with Blind-Reveal', auditReady: 'Audit-ready', pqcReady: 'PQC-ready' },
+
   sectors: {
     title: 'Solutions by industry',
     realEstate: 'Real Estate (HUGO)',
     fintech: 'Fintech',
     banking: 'Banking',
-    realEstateCardTitle: 'Deed/Ticket with QR',
-    realEstateCardBody: 'The QR binds the PDF (hash) to an immutable log; any change is detected instantly.',
-    auditMinutesTitle: 'Audits in minutes',
-    auditMinutesBody: 'Blind-Reveal: judge/auditor validate consistency without seeing sensitive data.',
+    jewelry: 'Jewelry',
+    realEstateCardBody:
+      'QR-verifiable documents; the PDF is bound to an immutable log.',
+    bankingCardBody:
+      'Transactional integrity and compliance evidence without exposing PII.',
+    fintechCardBody:
+      'Onboarding/KYC sealed and verifiable in minutes, with at-scale audits.',
+    jewelryCardBody:
+      'Authenticity, privacy and evidence at the point of sale.',
+    neutralTitle: 'Fast, private verification',
+    neutralBody:
+      'Tamper-proof evidence in seconds without exposing sensitive data. Multi-industry.',
   },
+
   footer: { rights: '© 2025 aSAFEBOX® · Jacob Integrity Lab', madeWith: 'Built with Next.js + Tailwind. Accessible and SEO-friendly.' },
 
   jewelry: {
     title: 'Authenticity and privacy in every jewelry purchase',
-    subtitle: 'Your receipt, certificate and payment are sealed and verifiable in seconds — without exposing sensitive data.',
+    subtitle:
+      'Your receipt, certificate and payment are sealed and verifiable in seconds — without exposing sensitive data.',
     ctaDemo: 'Request a demo',
     ctaExample: 'See QR example',
     benefits: [
@@ -297,7 +331,11 @@ const de: Dict = {
     cta: 'Ich möchte Updates',
     disclaimer: 'Kein Spam. Nur wichtige Neuigkeiten.',
   },
-  howItWorks: { title: 'So funktioniert es', subtitle: 'Von einer unveränderlichen Kette bis zur geblendeten Identität – alles über einen PQ-fähigen Transport.' },
+  howItWorks: {
+    title: 'So funktioniert es',
+    subtitle:
+      'Von einer unveränderlichen Kette bis zur geblendeten Identität – alles über einen PQ-fähigen Transport.',
+  },
   illustration: {
     transport: 'Post-Quantum-fähige Transportsicherheit',
     sender: 'Sender',
@@ -321,16 +359,26 @@ const de: Dict = {
     cta: 'So funktioniert es',
   },
   features: { immutableEvidence: 'Unveränderliche Evidenz', privacyBR: 'Privatsphäre mit Blind-Reveal', auditReady: 'Audit-bereit', pqcReady: 'PQC-bereit' },
+
   sectors: {
     title: 'Lösungen nach Branchen',
     realEstate: 'Immobilien (HUGO)',
     fintech: 'Fintech',
     banking: 'Banking',
-    realEstateCardTitle: 'Urkunde/Ticket mit QR',
-    realEstateCardBody: 'Der QR verknüpft das PDF (Hash) mit einem unveränderlichen Log; jede Änderung wird sofort erkannt.',
-    auditMinutesTitle: 'Audit in Minuten',
-    auditMinutesBody: 'Blind-Reveal: Richter/Prüfer validieren Konsistenz ohne Einsicht in sensible Daten.',
+    jewelry: 'Schmuck',
+    realEstateCardBody:
+      'QR-prüfbare Dokumente; das PDF ist mit einem unveränderlichen Log verknüpft.',
+    bankingCardBody:
+      'Transaktionsintegrität und Compliance-Nachweise, ohne PII offenzulegen.',
+    fintechCardBody:
+      'Onboarding/KYC versiegelt und in Minuten prüfbar – Audits im großen Maßstab.',
+    jewelryCardBody:
+      'Authentizität, Privatsphäre und Evidenz am Point of Sale.',
+    neutralTitle: 'Schnelle, private Verifizierung',
+    neutralBody:
+      'Nachweise in Sekunden, ohne sensible Daten offenzulegen. Branchenübergreifend.',
   },
+
   footer: {
     rights: '© 2025 aSAFEBOX® · Jacob Integrity Lab',
     madeWith: 'Erstellt mit Next.js + Tailwind. Barrierefrei und SEO-freundlich.',
@@ -386,6 +434,9 @@ const de: Dict = {
     },
   },
 }
+
+export type DictType = typeof es
+export type { Locale as Lang }
 
 export async function getDictionary(locale: Locale): Promise<Dict> {
   switch (locale) {
