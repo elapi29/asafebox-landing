@@ -1,7 +1,7 @@
 // app/[locale]/industries/banking/page.tsx
-import { getDictionary, Locale } from '../../../../../i18n/dictionaries'
-import LanguageSwitcher from '../../../../../components/LanguageSwitcher'
-import Footer from '../../../../../components/Footer'
+import { getDictionary, Locale } from '../../../../i18n/dictionaries'
+import LanguageSwitcher from '../../../../components/LanguageSwitcher'
+import Footer from '../../../../components/Footer'
 
 export default async function BankingPage({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale)
@@ -16,8 +16,6 @@ export default async function BankingPage({ params }: { params: { locale: Locale
         <div className="mt-4 rounded-xl border border-slate-200 p-5">
           <h2 className="text-xl font-semibold">{dict.sectors.neutralTitle}</h2>
           <p className="mt-2 text-slate-600">{dict.sectors.neutralBody}</p>
-
-          {/* detalle específico de Banking */}
           <p className="mt-4 text-slate-700">{dict.sectors.bankingCardBody}</p>
         </div>
       </section>
