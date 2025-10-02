@@ -1,27 +1,24 @@
 // app/[locale]/industries/real-estate/page.tsx
-import { getDictionary, Locale } from '../../../../i18n/dictionaries'
-import LanguageSwitcher from '../../../../components/LanguageSwitcher'
-import Footer from '../../../../components/Footer'
+import { getDictionary, Locale } from '../../../../../i18n/dictionaries'
+import LanguageSwitcher from '../../../../../components/LanguageSwitcher'
+import Footer from '../../../../../components/Footer'
 
-export default async function RealEstatePage({
-  params,
-}: {
-  params: { locale: Locale }
-}) {
+export default async function RealEstatePage({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale)
 
   return (
     <main>
       <LanguageSwitcher locale={params.locale} />
 
-      <section className="mx-auto max-w-5xl px-6 py-12 text-slate-900">
+      <section className="px-6 py-10">
         <h1 className="text-3xl font-bold">{dict.sectors.realEstate}</h1>
+
         <div className="mt-4 rounded-xl border border-slate-200 p-5">
-          <h2 className="text-xl font-semibold">{dict.sectors.realEstateCardTitle}</h2>
-          <p className="mt-2 text-slate-600">{dict.sectors.realEstateCardBody}</p>
-          <div className="mt-4 text-slate-600">
-            <strong>{dict.sectors.auditMinutesTitle}:</strong> {dict.sectors.auditMinutesBody}
-          </div>
+          <h2 className="text-xl font-semibold">{dict.sectors.neutralTitle}</h2>
+          <p className="mt-2 text-slate-600">{dict.sectors.neutralBody}</p>
+
+          {/* detalle específico de Real Estate */}
+          <p className="mt-4 text-slate-700">{dict.sectors.realEstateCardBody}</p>
         </div>
       </section>
 
