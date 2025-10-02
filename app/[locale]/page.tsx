@@ -65,29 +65,17 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
       {/* Sectores → 4 botones con href por idioma */}
       <SectorTabs
         title={dict.sectors.title}
+        realEstate={dict.sectors.realEstate}
+        fintech={dict.sectors.fintech}
+        banking={dict.sectors.banking}
+        jewelry={dict.sectors.jewelry}
+        realEstateCardBody={dict.sectors.realEstateCardBody}
+        bankingCardBody={dict.sectors.bankingCardBody}
+        fintechCardBody={dict.sectors.fintechCardBody}
+        jewelryCardBody={dict.sectors.jewelryCardBody}
+        neutralTitle={dict.sectors.neutralTitle}
+        neutralBody={dict.sectors.neutralBody}
         locale={params.locale}
-        items={[
-          {
-            title: dict.sectors.realEstate,
-            body: dict.sectors.realEstateCardBody,
-            href: '/industries/real-estate',
-          },
-          {
-            title: dict.sectors.banking,
-            body: dict.sectors.bankingCardBody,
-            href: '/industries/banking',
-          },
-          {
-            title: dict.sectors.fintech,
-            body: dict.sectors.fintechCardBody,
-            href: '/industries/fintech',
-          },
-          {
-            title: dict.sectors.jewelry,
-            body: dict.sectors.jewelryCardBody,
-            href: '/industries/jewelry',
-          },
-        ]}
       />
 
       {/* 💎 Sección Joyería (preview en home) */}

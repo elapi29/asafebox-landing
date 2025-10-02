@@ -411,7 +411,7 @@ const de: Dict = {
       { value: 'Minuten', label: 'für Versicherungs- & Compliance-Audits' },
     ],
     qrLabel: 'Beispiel-Verifizierung',
-    qrUrl: 'https://elapi29.github.io/asafebox-landing/verify/example?code=DEMO-QR-001',
+    qrUrl: '/verify/example?code=DEMO-QR-001',
     diagramCaption:
       'Wertschöpfungskette mit verketteten Ereignissen und schneller Prüfung am POS (ohne sensible Daten offenzulegen).',
     diagram: {
