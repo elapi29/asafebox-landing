@@ -1,56 +1,45 @@
 // components/PrivacyBlindReveal.tsx
+'use client'
+
 import Image from 'next/image'
 
 type Props = {
   title: string
   body: string
   cta: string
-  // Si querés, podés permitir override del src/alt:
-  imgSrc?: string
-  imgAlt?: string
-  ctaHref?: string
 }
 
-export default function PrivacyBlindReveal({
-  title,
-  body,
-  cta,
-  imgSrc = '/illustrations/blind-reveal.png',
-  imgAlt = 'Blind-Reveal',
-  ctaHref = '#how-it-works',
-}: Props) {
+export default function PrivacyBlindReveal({ title, body, cta }: Props) {
   return (
-    <section id="privacy" className="px-6 py-16">
-      <div className="mx-auto grid max-w-6xl items-start gap-10 md:grid-cols-2">
-        {/* Imagen: usa next/image para respetar basePath en GitHub Pages */}
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
-          <Image
-            src={imgSrc}
-            alt={imgAlt}
-            fill
-            priority
-            className="object-cover object-top" // 👈 contenido alineado arriba
-            sizes="(min-width: 1024px) 560px, 100vw"
-          />
+    <section className="mx-auto max-w-6xl px-6 py-12">
+      <div className="grid items-start gap-8 md:grid-cols-2">
+        {/* IMAGEN: alineada al top y con basePath correcto gracias a next/image */}
+        <div className="rounded-2xl border border-slate-200 bg-slate-50 p-2 md:p-3">
+          <div className="relative aspect-[16/11] w-full overflow-hidden rounded-xl">
+            <Image
+              src="/illustrations/blind-reveal.png"
+              alt="Blind-Reveal"
+              fill
+              sizes="(min-width: 768px) 48vw, 90vw"
+              className="object-contain object-top"
+              priority
+            />
+          </div>
         </div>
 
-        {/* Texto */}
-        <div className="mx-auto w-full max-w-xl">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900">
+        {/* TEXTO */}
+        <div className="pt-0 md:pt-1">
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
             {title}
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-slate-600">
-            {body}
-          </p>
+          <p className="mt-4 text-lg leading-7 text-slate-600">{body}</p>
 
-          <div className="mt-6">
-            <a
-              href={ctaHref}
-              className="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-5 py-3 text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            >
-              {cta}
-            </a>
-          </div>
+          <a
+            href="#how-it-works"
+            className="mt-6 inline-block rounded-xl bg-indigo-600 px-5 py-3 text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+          >
+            {cta}
+          </a>
         </div>
       </div>
     </section>

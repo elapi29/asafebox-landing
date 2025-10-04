@@ -1,18 +1,13 @@
-// app/[locale]/layout.tsx
-import type { Metadata } from 'next'
 import '../../styles/globals.css'
-import { Locale, getDictionary } from '../../i18n/dictionaries'
 import TopBar from '../../components/TopBar'
+import type { Metadata } from 'next'
+import { Locale, getDictionary } from '../../i18n/dictionaries'
 
 export async function generateStaticParams() {
   return [{ locale: 'es' }, { locale: 'en' }, { locale: 'de' }]
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { locale: Locale }
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
   const dict = await getDictionary(params.locale)
   return {
     title: dict.meta.siteName,
@@ -33,8 +28,9 @@ export default function LocaleLayout({
     <html lang={params.locale}>
       <body className="min-h-screen bg-white text-slate-900 antialiased">
         <TopBar />
-        <div className="pt-16">{children}</div>
+        <div className="pt-20">{children}</div>
       </body>
     </html>
   )
 }
+
