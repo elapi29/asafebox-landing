@@ -1,3 +1,4 @@
+// components/Footer.tsx
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -15,8 +16,11 @@ export default function Footer() {
             priority
           />
         </Link>
-        <p className="text-xs text-neutral-500">© {new Date().getFullYear()} AsafeBox</p>
+        <p className="text-xs text-neutral-500">
+          © {new Date().getFullYear()} AsafeBox
+        </p>
       </div>
     </footer>
   );
 }
+
