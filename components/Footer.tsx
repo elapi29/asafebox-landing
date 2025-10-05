@@ -1,8 +1,26 @@
+// components/Footer.tsx
+import Image from 'next/image';
+import Link from 'next/link';
+
 export default function Footer() {
   return (
-    <footer className="border-t border-slate-200 py-10 text-center text-sm text-slate-500">
-      <p>© {new Date().getFullYear()} aSAFEBOX® · Jacob Integrity Lab</p>
-      <p className="mt-1">Hecho con Next.js + Tailwind. Cumplimos buenas prácticas de accesibilidad y SEO.</p>
+    <footer className="mt-20 border-t">
+      <div className="mx-auto max-w-6xl px-4 py-8 flex items-center justify-between">
+        <Link href="/">
+          <Image
+            src="/brand/asafebox-wordmark.png"
+            alt="AsafeBox"
+            width={160}
+            height={28}
+            className="h-6 w-auto"
+            priority
+          />
+        </Link>
+        <p className="text-xs text-neutral-500">
+          © {new Date().getFullYear()} AsafeBox
+        </p>
+      </div>
     </footer>
-  )
+  );
 }
+
