@@ -1,4 +1,3 @@
-// components/PrivacyBlindReveal.tsx
 import Image from 'next/image';
 
 export default function PrivacyBlindReveal() {
