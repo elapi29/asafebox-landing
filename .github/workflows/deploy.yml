@@ -1,4 +1,3 @@
-# .github/workflows/deploy.yml
 name: Build and Deploy to GitHub Pages
 
 on:
@@ -26,14 +25,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+          # ⬇️ quitamos el cache porque no hay lockfile
+          # cache: npm
 
-      # Usamos npm install (no npm ci) porque no tenés package-lock.json
       - name: Install deps
-        run: npm install
+        run: npm install --no-audit --no-fund
 
       - name: Build
-        # Forzamos el BASE_PATH también como respaldo (además del isCI en next.config.mjs)
         env:
           NEXT_PUBLIC_BASE_PATH: /asafebox-landing
         run: npm run build
