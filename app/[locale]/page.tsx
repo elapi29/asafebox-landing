@@ -91,7 +91,7 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
       />
 
       {/* 💎 Sección Joyería (preview en home) */}
-      <JewelrySection
+      {/*<JewelrySection
         title={dict.jewelry.title}
         subtitle={dict.jewelry.subtitle}
         ctaDemo={dict.jewelry.ctaDemo}
@@ -105,7 +105,7 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         qrUrl={dict.jewelry.qrUrl}
         diagramCaption={dict.jewelry.diagramCaption}
         diagram={dict.jewelry.diagram}
-      />
+      />*/}
 
       <Footer />
     </main>
