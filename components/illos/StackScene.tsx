@@ -1,16 +1,59 @@
 // components/illos/StackScene.tsx
+// Pequeña escena de “stack inmutable” con un ícono (WalletIcon) y tiles
 import Tile from './Tile';
 import { WalletIcon } from './Icons';
-export default function StackScene({ className = '' }) {
+
+type Props = { className?: string };
+
+export default function StackScene({ className = '' }: Props) {
   return (
-    <svg viewBox="0 0 680 420" className={className} role="img" aria-label="Immutable stack">
-      <g transform="translate(340,210)">
-        <Tile x={-130} y={-70} label="Wallet" icon={<WalletIcon/>} />
-        <Tile x={130}  y={-70} label="Payments" icon={<WalletIcon/>} />
-        <Tile x={0}    y={70}  label="Ops" icon={<WalletIcon/>} />
-        {/* base y capas apiladas */}
-        <rect x="-250" y="120" width="500" height="120" rx="16"
-          fill="#E9F1FF" stroke="#0B3BDA" strokeWidth="2"/>
+    <svg
+      viewBox="0 0 680 420"
+      className={className}
+      role="img"
+      aria-label="Immutable stack"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="6" result="blur" />
+          <feOffset dx="0" dy="4" result="offset" />
+          <feComponentTransfer>
+            <feFuncA type="linear" slope="0.18" />
+          </feComponentTransfer>
+          <feMerge>
+            <feMergeNode in="offset" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      {/* Fondo suave */}
+      <rect x="0" y="0" width="680" height="420" rx="24" fill="#ffffff" />
+
+      {/* Header pill con ícono */}
+      <g transform="translate(34, 30)">
+        <rect width="180" height="40" rx="20" fill="#eef2ff" stroke="#6366f1" />
+        <foreignObject x="10" y="6" width="28" height="28">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;align-items:center;justify-content:center;width:28px;height:28px">
+            <!-- El ícono se dibuja afuera porque foreignObject no interpreta React components -->
+          </div>
+        </foreignObject>
+        {/* Ícono directamente en SVG para compatibilidad */}
+        <g transform="translate(14, 10)" fill="#3730a3" stroke="#3730a3">
+          <WalletIcon className="" title="Wallet" />
+        </g>
+        <text x="54" y="26" fontFamily="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
+              fontSize="14" fontWeight="600" fill="#3730a3">
+          Immutable Stack
+        </text>
+      </g>
+
+      {/* Tiles apilados */}
+      <g filter="url(#soft)">
+        <Tile x={60}  y={100} w={560} h={70} title="Transport Security (PQ mTLS)" note="Authenticated channel" />
+        <Tile x={60}  y={190} w={560} h={70} title="Verify Log (append-only)" note="Chained integrity seals" />
+        <Tile x={60}  y={280} w={560} h={70} title="Blind-Reveal (ZK proofs)" note="Validity without exposing data" />
       </g>
     </svg>
   );
