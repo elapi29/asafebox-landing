@@ -8,8 +8,6 @@ import PrivacyBlindReveal from '../../components/PrivacyBlindReveal'
 import Features from '../../components/Features'
 import SectorTabs from '../../components/SectorTabs'
 import Footer from '../../components/Footer'
-import JewelrySection from '../../components/JewelrySection'
-import BankingShowcase from '../../components/BankingShowcase'
 
 export default async function Page({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale)
@@ -62,11 +60,7 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         pqcReady={dict.features.pqcReady}
       />
 
-      {/* Banking showcase (preview) */}
-      <BankingShowcase />
-
-      {/* Sectores */}
-      {/* Sectores → 4 botones con href por idioma */}
+      {/* Sectores → cards; el de “Jewelry” lleva a /[locale]/industries/jewelry */}
       <SectorTabs
         title={dict.sectors.title}
         realEstate={dict.sectors.realEstate}
@@ -80,23 +74,6 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         neutralTitle={dict.sectors.neutralTitle}
         neutralBody={dict.sectors.neutralBody}
         locale={params.locale}
-      />
-
-      {/* 💎 Sección Joyería (preview en home) */}
-      <JewelrySection
-        title={dict.jewelry.title}
-        subtitle={dict.jewelry.subtitle}
-        ctaDemo={dict.jewelry.ctaDemo}
-        ctaExample={dict.jewelry.ctaExample}
-        benefits={dict.jewelry.benefits}
-        howToTitle={dict.jewelry.howToTitle}
-        howToSteps={dict.jewelry.howToSteps}
-        originBlock={dict.jewelry.originBlock}
-        kpis={dict.jewelry.kpis}
-        qrLabel={dict.jewelry.qrLabel}
-        qrUrl={dict.jewelry.qrUrl}
-        diagramCaption={dict.jewelry.diagramCaption}
-        diagram={dict.jewelry.diagram} // 👈 faltaba este prop
       />
 
       <Footer />
