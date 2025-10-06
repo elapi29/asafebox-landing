@@ -13,10 +13,10 @@ export default async function JewelryIndustryPage({
 
   // Features (chips) a partir del diccionario i18n
   const chips = [
-    { label: dict.features.immutableEvidence, desc: '' },
-    { label: dict.features.privacyBR,         desc: '' },
-    { label: dict.features.auditReady,        desc: '' },
-    { label: dict.features.pqcReady,          desc: '' },
+    dict.features.immutableEvidence,
+    dict.features.privacyBR,
+    dict.features.auditReady,
+    dict.features.pqcReady,
   ]
 
   // Anchors “pluggables” (solo textos; los href podrían mapear a secciones)
