@@ -80,4 +80,3 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
     </main>
   )
 }
-

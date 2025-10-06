@@ -1,27 +1,29 @@
 // app/[locale]/industries/banking/page.tsx
-import { getDictionary, Locale } from '../../../../i18n/dictionaries'
-import LanguageSwitcher from '../../../../components/LanguageSwitcher'
-import Footer from '../../../../components/Footer'
+import DSRShowcase from '../../../../components/DSRShowcase'
+import BankingShowcase from '../../../../components/BankingShowcase'
 
-export default async function BankingPage({ params }: { params: { locale: Locale } }) {
-  const dict = await getDictionary(params.locale)
+export const metadata = {
+  title: 'Banking — aSAFEBOX®',
+  description: 'Integrity, privacy and audit-readiness for financial operations.',
+}
 
+export default function BankingPage() {
   return (
-    <main>
-      <LanguageSwitcher locale={params.locale} />
+    <main className="min-h-[60vh]">
+      <header className="mx-auto max-w-6xl px-6 pt-10">
+        <h1 className="text-3xl font-bold">Banking: integrity, privacy and audit</h1>
+        <p className="mt-2 text-slate-600">
+          Evidence for each step (transactions, signatures, onboarding/KYC) with PQ-ready transport.
+        </p>
+      </header>
 
-      <section className="px-6 py-10">
-        <h1 className="text-3xl font-bold">{dict.sectors.banking}</h1>
+      {/* Escena tipo zksync (DSR) */}
+      <DSRShowcase />
 
-        <div className="mt-4 rounded-xl border border-slate-200 p-5">
-          <h2 className="text-xl font-semibold">{dict.sectors.neutralTitle}</h2>
-          <p className="mt-2 text-slate-600">{dict.sectors.neutralBody}</p>
-          <p className="mt-4 text-slate-700">{dict.sectors.bankingCardBody}</p>
-        </div>
-      </section>
-
-      <Footer />
+      {/* Cards/galería bancaria (tus 4 conceptos resumidos) */}
+      <BankingShowcase />
     </main>
   )
 }
+
 
