@@ -9,6 +9,7 @@ import Features from '../../components/Features'
 import SectorTabs from '../../components/SectorTabs'
 import Footer from '../../components/Footer'
 import JewelrySection from '../../components/JewelrySection'
+import BankingShowcase from '../../components/BankingShowcase'
 
 export default async function Page({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale)
@@ -60,6 +61,9 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         auditReady={dict.features.auditReady}
         pqcReady={dict.features.pqcReady}
       />
+
+      {/* Banking showcase (preview) */}
+      <BankingShowcase />
 
       {/* Sectores */}
       {/* Sectores → 4 botones con href por idioma */}

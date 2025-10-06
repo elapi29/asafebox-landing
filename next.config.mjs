@@ -9,6 +9,9 @@ const nextConfig = {
   basePath: isCI ? `/${repo}` : '',
   assetPrefix: isCI ? `/${repo}/` : '',
   trailingSlash: true,
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isCI ? `/${repo}` : '',
+  },
 };
 
 export default nextConfig;
