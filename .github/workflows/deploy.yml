@@ -26,8 +26,8 @@ jobs:
           node-version: 20
           cache: npm
 
-      - name: Install deps
-        run: npm ci
+      - name: Install deps (no lockfile)
+        run: npm install --no-audit --no-fund
 
       - name: Build (static export via next.config.mjs)
         run: npm run build
