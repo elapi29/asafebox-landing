@@ -8,8 +8,10 @@ import PrivacyBlindReveal from '../../components/PrivacyBlindReveal'
 import Features from '../../components/Features'
 import SectorTabs from '../../components/SectorTabs'
 import Footer from '../../components/Footer'
-import JewelrySection from '../../components/JewelrySection'
-import FeatureChips from '../../components/FeatureChips' // 👈 faltaba este import
+// import JewelrySection from '../../components/JewelrySection' // (silenciado por ahora)
+import FeatureChips from '../../components/FeatureChips'
+import GatewayLegend from '../../components/GatewayLegend'
+import SystemLegend from '../../components/SystemLegend'
 
 export default async function Page({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale)
@@ -64,9 +66,13 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
       />
 
       {/* Privacidad */}
-      <PrivacyBlindReveal title={dict.privacy.title} body={dict.privacy.body} cta={dict.privacy.cta} />
+      <PrivacyBlindReveal
+        title={dict.privacy.title}
+        body={dict.privacy.body}
+        cta={dict.privacy.cta}
+      />
 
-      {/* Features (bloques simples, pueden quedar como refuerzo visual) */}
+      {/* Features (bloques simples, refuerzo visual) */}
       <Features
         immutableEvidence={dict.features.immutableEvidence}
         privacyBR={dict.features.privacyBR}
@@ -90,22 +96,20 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         locale={params.locale}
       />
 
-      {/* 💎 Sección Joyería (preview en home) */}
-      {/*<JewelrySection
-        title={dict.jewelry.title}
-        subtitle={dict.jewelry.subtitle}
-        ctaDemo={dict.jewelry.ctaDemo}
-        ctaExample={dict.jewelry.ctaExample}
-        benefits={dict.jewelry.benefits}
-        howToTitle={dict.jewelry.howToTitle}
-        howToSteps={dict.jewelry.howToSteps}
-        originBlock={dict.jewelry.originBlock}
-        kpis={dict.jewelry.kpis}
-        qrLabel={dict.jewelry.qrLabel}
-        qrUrl={dict.jewelry.qrUrl}
-        diagramCaption={dict.jewelry.diagramCaption}
-        diagram={dict.jewelry.diagram}
-      />*/}
+      {/* Leyendas (Gateway 4xx + Sistema) */}
+      <section className="mx-auto max-w-6xl px-6 py-12">
+        <h3 className="text-xl font-bold">Gateway-Verify — códigos y acciones</h3>
+        <p className="mb-4 text-slate-600">Semántica de respuestas y efectos (freeze / log).</p>
+        <GatewayLegend />
+
+        <h3 className="mt-10 text-xl font-bold">Lógica del sistema (pasillo)</h3>
+        <p className="mb-4 text-slate-600">Bloques y responsabilidades.</p>
+        <SystemLegend />
+      </section>
+
+      {/* 💎 Sección Joyería (preview en home) — silenciada
+      <JewelrySection ... />
+      */}
 
       <Footer />
     </main>

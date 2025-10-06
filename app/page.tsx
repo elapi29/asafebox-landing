@@ -25,6 +25,16 @@ export default function RootRedirect() {
           </Link>
         </p>
       </div>
+      <section className="mx-auto max-w-6xl px-6 py-12">
+      <FeatureChips
+         items={[
+         dict.features.immutableEvidence,
+         dict.features.privacyBR,
+         dict.features.auditReady,
+          dict.features.pqcReady,
+        ]}
+      />
+</section>
     </main>
   );
 }
