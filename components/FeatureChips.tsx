@@ -1,16 +1,23 @@
 // components/FeatureChips.tsx
-type Props = { items: string[] }
+export default function FeatureChips({
+  items,
+  compact = false,
+}: { items: string[]; compact?: boolean }) {
+  const unique = Array.from(new Set(items)).filter(Boolean)
 
-export default function FeatureChips({ items }: Props) {
   return (
-    <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {items.map((t) => (
-        <div
+    <div className="flex flex-wrap gap-2">
+      {unique.map((t) => (
+        <span
           key={t}
-          className="rounded-2xl border border-slate-200 bg-white p-4 shadow-soft"
+          className={[
+            'inline-flex items-center rounded-full border border-slate-200 bg-white',
+            compact ? 'px-3 py-1 text-xs' : 'px-4 py-1.5 text-sm',
+            'shadow-sm',
+          ].join(' ')}
         >
-          <p className="font-medium text-slate-900">{t}</p>
-        </div>
+          {t}
+        </span>
       ))}
     </div>
   )

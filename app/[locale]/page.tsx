@@ -24,6 +24,16 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         disclaimer={dict.hero.disclaimer}
       />
 
+      <section className="mx-auto max-w-6xl px-6 py-12">
+        <FeatureChips
+          items={[
+            dict.features.immutableEvidence,
+            dict.features.privacyBR,
+            dict.features.auditReady,
+            dict.features.pqcReady,
+          ]}
+        />
+</section>
       {/* Cómo funciona */}
       <section className="px-6 py-12">
         <h2 className="text-center text-2xl font-bold">{dict.howItWorks.title}</h2>
