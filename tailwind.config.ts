@@ -1,3 +1,4 @@
+// tailwind.config.ts
 import type { Config } from 'tailwindcss'
 
 export default {
@@ -28,6 +29,13 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'radial-dots': 'radial-gradient(circle at 1px 1px, rgba(0,0,0,.08) 1px, transparent 1px)',
+        'brand-gradient': 'linear-gradient(90deg, #2f7fff 0%, #a855f7 100%)',
+      },
+      backgroundSize: {
+        'dots': '24px 24px',
+      },
       colors: {
         brand: {
           50: '#f1f7ff',
@@ -40,8 +48,14 @@ export default {
           700: '#174fb3',
           800: '#153f8f',
           900: '#122f6b'
-        }
-      }
+        },
+        // tinta para títulos/negros agradables
+        ink: { 900: '#0f172a', 700: '#334155' }
+      },
+      boxShadow: {
+        soft: '0 6px 24px rgba(2,6,23,.06)',
+      },
+      backdropBlur: { xs: '2px' },
     }
   },
   plugins: []
