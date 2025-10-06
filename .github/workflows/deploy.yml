@@ -1,9 +1,9 @@
 # .github/workflows/deploy.yml
-name: Build and Deploy to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
   workflow_dispatch:
 
 permissions:
@@ -24,16 +24,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          # OJO: sin cache porque no hay package-lock.json/yarn.lock en el repo
+          cache: 'npm'
 
-      - name: Install deps (sin lockfile)
+      # No usamos npm ci porque no hay lockfile; instalamos normal
+      - name: Install deps (no lockfile)
         run: npm install --no-audit --no-fund
 
-      - name: Build (Next output: export)
+      # Con output: 'export' en next.config.mjs, el build genera ./out
+      - name: Build (Next static export)
         run: npm run build
-
-      - name: Verificar carpeta de salida
-        run: ls -la && test -d out && ls -la out
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -42,10 +41,10 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
     environment:
       name: github-pages
+    runs-on: ubuntu-latest
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy to Pages
         uses: actions/deploy-pages@v4
 
