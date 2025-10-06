@@ -24,13 +24,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+          # OJO: sin cache porque no hay package-lock.json/yarn.lock en el repo
 
-      - name: Install deps (no lockfile)
+      - name: Install deps (sin lockfile)
         run: npm install --no-audit --no-fund
 
-      - name: Build (static export via next.config.mjs)
+      - name: Build (Next output: export)
         run: npm run build
+
+      - name: Verificar carpeta de salida
+        run: ls -la && test -d out && ls -la out
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -45,3 +48,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
+
