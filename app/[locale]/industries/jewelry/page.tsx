@@ -21,10 +21,10 @@ export default async function JewelryIndustryPage({
 
   // Anchors “pluggables” (solo textos; los href podrían mapear a secciones)
   const anchors = [
-    { label: dict.features.immutableEvidence, href: '#immutable' },
-    { label: dict.features.privacyBR,         href: '#privacy' },
-    { label: dict.features.auditReady,        href: '#audit' },
-    { label: dict.features.pqcReady,          href: '#pqc' },
+    { key: 'immutable', label: dict.features.immutableEvidence, href: '#immutable' },
+    { key: 'privacy',   label: dict.features.privacyBR,         href: '#privacy' },
+    { key: 'audit',     label: dict.features.auditReady,        href: '#audit' },
+    { key: 'pqc',       label: dict.features.pqcReady,          href: '#pqc' },
   ]
 
   return (
