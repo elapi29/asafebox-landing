@@ -1,48 +1,56 @@
 // components/illos/BlindRevealIllo.tsx
-export default function BlindRevealIllo({ className = '' }: { className?: string }) {
+// Ilustración neutral: dos columnas con “dato” oculto y verificación ZK
+export default function BlindRevealIllo(
+  { className = '' }: { className?: string } = {}
+) {
   return (
     <svg
-      viewBox="0 0 560 320"
+      viewBox="0 0 640 360"
       role="img"
-      aria-labelledby="brTitle brDesc"
-      className={className + ' w-full h-auto'}
+      aria-label="Blind-Reveal / Zero-Knowledge verification"
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <title id="brTitle">Blind-Reveal</title>
-      <desc id="brDesc">Datos ofuscados con una ventana que revela sólo lo necesario.</desc>
+      <defs>
+        <linearGradient id="gZK" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#2f7fff" />
+          <stop offset="1" stopColor="#a855f7" />
+        </linearGradient>
+        <marker id="arrowBR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
+        </marker>
+      </defs>
 
-      {/* Tarjeta */}
-      <rect x="16" y="16" width="528" height="288" rx="16" fill="#ffffff" stroke="#e2e8f0" />
+      {/* base card */}
+      <rect x="24" y="24" width="592" height="312" rx="16" fill="#fff" stroke="#e2e8f0" />
 
-      {/* Líneas ofuscadas */}
-      {Array.from({ length: 6 }).map((_, i) => (
-        <rect
-          key={i}
-          x="48"
-          y={60 + i * 28}
-          width={360}
-          height="14"
-          rx="7"
-          fill="#cbd5e1"
-          opacity="0.8"
-        />
-      ))}
-
-      {/* Ventana de “reveal” */}
-      <g transform="translate(430, 104)">
-        <rect x="-58" y="-28" width="116" height="56" rx="10" fill="#ecfeff" stroke="#06b6d4" />
-        <text x="0" y="5" textAnchor="middle" fill="#0e7490" fontWeight="700" fontSize="13">
-          ✓ válido
-        </text>
+      {/* Panel izquierdo (dato oculto) */}
+      <g transform="translate(130, 110)">
+        <rect x="-90" y="-60" width="180" height="120" rx="12" fill="#f8fafc" stroke="#cbd5e1" />
+        {/* “dato” tapado por banda */}
+        <rect x="-60" y="-12" width="120" height="24" rx="6" fill="#0f172a" opacity="0.85" />
+        <rect x="-72" y="30" width="144" height="10" rx="5" fill="#e2e8f0" />
+        <rect x="-72" y="-40" width="144" height="10" rx="5" fill="#e2e8f0" />
       </g>
 
-      {/* Candado */}
-      <g transform="translate(100, 228)">
-        <rect x="-26" y="-10" width="160" height="40" rx="10" fill="#e5e7eb" />
-        <g transform="translate(-2, 10)">
-          <rect x="0" y="-18" width="36" height="28" rx="6" fill="#ffffff" stroke="#94a3b8" />
-          <path d="M6,-18 a12,12 0 0 1 24,0" fill="none" stroke="#94a3b8" strokeWidth="3" />
-        </g>
-        <text x="40" y="14" fill="#334155" fontWeight="600">Privacy by Design</text>
+      {/* Panel derecho (verificación) */}
+      <g transform="translate(510, 110)">
+        <rect x="-90" y="-60" width="180" height="120" rx="12" fill="#f8fafc" stroke="#cbd5e1" />
+        {/* “prueba” */}
+        <circle cx="0" cy="0" r="22" fill="url(#gZK)" />
+        <rect x="-72" y="30" width="144" height="10" rx="5" fill="#e2e8f0" />
+        <rect x="-72" y="-40" width="144" height="10" rx="5" fill="#e2e8f0" />
+      </g>
+
+      {/* flecha/relación */}
+      <line x1="220" y1="110" x2="420" y2="110" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#arrowBR)" />
+      <rect x="280" y="96" width="80" height="28" rx="14" fill="#f1f5f9" stroke="#e2e8f0" />
+
+      {/* chip inferior “válido” */}
+      <g transform="translate(320, 250)">
+        <rect x="-70" y="-18" width="140" height="36" rx="18" fill="#ecfeff" stroke="#a5f3fc" />
+        <circle r="8" fill="#22d3ee" />
+        <rect x="12" y="-6" width="64" height="12" rx="6" fill="#06b6d4" opacity="0.25" />
       </g>
     </svg>
   )

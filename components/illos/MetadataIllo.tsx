@@ -1,34 +1,56 @@
 // components/illos/MetadataIllo.tsx
-export default function MetadataIllo({ className = '' }: { className?: string }) {
+// Ilustración neutral: metadata pública (chips) + dato protegido
+export default function MetadataIllo(
+  { className = '' }: { className?: string } = {}
+) {
   return (
     <svg
-      viewBox="0 0 560 320"
+      viewBox="0 0 640 360"
       role="img"
-      aria-labelledby="metaTitle metaDesc"
-      className={className + ' w-full h-auto'}
+      aria-label="Metadata pública y dato protegido"
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <title id="metaTitle">Metadata pública + dato protegido</title>
-      <desc id="metaDesc">Mitad izquierda pública, mitad derecha privada/protegida.</desc>
+      <defs>
+        <linearGradient id="gMeta" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#2f7fff" />
+          <stop offset="1" stopColor="#a855f7" />
+        </linearGradient>
+      </defs>
 
-      <rect x="16" y="16" width="528" height="288" rx="16" fill="#ffffff" stroke="#e2e8f0" />
+      {/* base card */}
+      <rect x="24" y="24" width="592" height="312" rx="16" fill="#fff" stroke="#e2e8f0" />
 
-      {/* Izquierda: pública */}
-      <rect x="32" y="40" width="240" height="240" rx="12" fill="#ecfeff" stroke="#06b6d4" />
-      {['token: KYCv2', 'policy: AML-std', 'scope: POS'].map((t, i) => (
-        <text key={t} x="52" y={80 + i * 28} fill="#0e7490" fontWeight="600">{t}</text>
-      ))}
-      <text x="152" y="260" textAnchor="middle" fill="#0e7490" fontWeight="700">Metadata pública</text>
-
-      {/* Derecha: privada */}
-      <rect x="286" y="40" width="240" height="240" rx="12" fill="#f8fafc" stroke="#94a3b8" />
-      <rect x="306" y="88" width="200" height="14" rx="7" fill="#cbd5e1" />
-      <rect x="306" y="120" width="200" height="14" rx="7" fill="#cbd5e1" />
-      <rect x="306" y="152" width="160" height="14" rx="7" fill="#cbd5e1" />
-      <g transform="translate(436, 200)">
-        <rect x="-30" y="-18" width="60" height="36" rx="8" fill="#ffffff" stroke="#94a3b8" />
-        <path d="M-16,-18 a16,16 0 0 1 32,0" fill="none" stroke="#94a3b8" strokeWidth="3" />
+      {/* columna izquierda: chips de metadata pública */}
+      <g transform="translate(160, 110)">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <rect
+            key={i}
+            x="-90"
+            y={-60 + i * 22}
+            width="180"
+            height="16"
+            rx="8"
+            fill="#f1f5f9"
+            stroke="#e2e8f0"
+          />
+        ))}
       </g>
-      <text x="406" y="260" textAnchor="middle" fill="#334155" fontWeight="700">Dato protegido</text>
+
+      {/* columna derecha: bloque protegido */}
+      <g transform="translate(470, 110)">
+        <rect x="-100" y="-60" width="200" height="120" rx="12" fill="#0f172a" opacity="0.85" />
+        <rect x="-70" y="-30" width="140" height="10" rx="5" fill="#e2e8f0" opacity="0.4" />
+        <rect x="-70" y="-10" width="140" height="10" rx="5" fill="#e2e8f0" opacity="0.4" />
+        <rect x="-70" y="10"  width="140" height="10" rx="5" fill="#e2e8f0" opacity="0.4" />
+      </g>
+
+      {/* badge “policy” */}
+      <g transform="translate(470, 246)">
+        <rect x="-54" y="-18" width="108" height="36" rx="18" fill="#f8fafc" stroke="#e2e8f0" />
+        <circle cx="-28" cy="0" r="8" fill="url(#gMeta)" />
+        <rect x="-12" y="-6" width="64" height="12" rx="6" fill="#cbd5e1" />
+      </g>
     </svg>
   )
 }

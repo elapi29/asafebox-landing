@@ -1,32 +1,65 @@
 // components/illos/L2AnchoringIllo.tsx
-export default function L2AnchoringIllo({ className = '' }: { className?: string }) {
+// Ilustración neutral: log append-only con anclaje hacia un L2
+export default function L2AnchoringIllo(
+  { className = '' }: { className?: string } = {}
+) {
   return (
     <svg
-      viewBox="0 0 560 320"
+      viewBox="0 0 640 360"
       role="img"
-      aria-labelledby="l2Title l2Desc"
-      className={className + ' w-full h-auto'}
+      aria-label="Append-only log anclado a L2"
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <title id="l2Title">Anclaje a L2</title>
-      <desc id="l2Desc">Log append-only con flecha hacia una cadena L2.</desc>
+      <defs>
+        <linearGradient id="gLink" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#2f7fff" />
+          <stop offset="1" stopColor="#a855f7" />
+        </linearGradient>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
+        </marker>
+      </defs>
 
-      {/* Panel izquierdo: log */}
-      <rect x="16" y="16" width="260" height="288" rx="16" fill="#ffffff" stroke="#e2e8f0" />
-      {Array.from({ length: 7 }).map((_, i) => (
-        <rect key={i} x="40" y={48 + i * 32} width="200" height="18" rx="9" fill="#e2e8f0" />
+      {/* base card */}
+      <rect x="24" y="24" width="592" height="312" rx="16" fill="#fff" stroke="#e2e8f0" />
+
+      {/* bloques append-only */}
+      {Array.from({ length: 6 }).map((_, i) => (
+        <rect
+          key={i}
+          x={60 + i * 80}
+          y={110}
+          width="64"
+          height="64"
+          rx="10"
+          fill="#f8fafc"
+          stroke="#cbd5e1"
+        />
       ))}
-      <text x="146" y="280" textAnchor="middle" fill="#334155" fontWeight="600">Verify Log (append-only)</text>
 
-      {/* Flecha */}
-      <polygon points="296,160 336,176 336,144" fill="#94a3b8" />
-
-      {/* Panel derecho: L2 */}
-      <rect x="344" y="16" width="200" height="288" rx="16" fill="#f5f3ff" stroke="#c4b5fd" />
-      <text x="444" y="56" textAnchor="middle" fill="#6d28d9" fontWeight="700">Layer 2</text>
-      {Array.from({ length: 4 }).map((_, i) => (
-        <circle key={i} cx="444" cy={100 + i * 46} r="14" fill="#ddd6fe" stroke="#7c3aed" />
+      {/* flechas entre bloques */}
+      {Array.from({ length: 5 }).map((_, i) => (
+        <line
+          key={i}
+          x1={124 + i * 80}
+          y1={142}
+          x2={140 + i * 80}
+          y2={142}
+          stroke="#94a3b8"
+          strokeWidth="2"
+          markerEnd="url(#arrow)"
+        />
       ))}
-      <text x="444" y="280" textAnchor="middle" fill="#6d28d9" fontWeight="600">Economic anchoring</text>
+
+      {/* cinta hacia L2 */}
+      <rect x="60" y="210" width="520" height="14" rx="7" fill="url(#gLink)" opacity="0.9" />
+
+      {/* burbuja L2 */}
+      <g transform="translate(560, 210)">
+        <circle r="26" fill="#f8fafc" stroke="#cbd5e1" />
+        <rect x="-10" y="-4" width="20" height="8" rx="4" fill="#a855f7" />
+      </g>
     </svg>
   )
 }

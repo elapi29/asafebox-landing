@@ -1,45 +1,60 @@
 // components/illos/IntegritySealIllo.tsx
-export default function IntegritySealIllo({ className = '' }: { className?: string }) {
+// Ilustración neutral: “stack” de huellas encadenadas bajo un sello maestro
+export default function IntegritySealIllo(
+  { className = '' }: { className?: string } = {}
+) {
   return (
     <svg
-      viewBox="0 0 560 320"
+      viewBox="0 0 640 360"
       role="img"
-      aria-labelledby="sealTitle sealDesc"
-      className={className + ' w-full h-auto'}
+      aria-label="Stack de huellas encadenadas con sello maestro"
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <title id="sealTitle">Sello de integridad encadenado</title>
-      <desc id="sealDesc">Pila de huellas con un sello maestro que garantiza integridad.</desc>
+      <defs>
+        <linearGradient id="gSeal" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#2f7fff" />
+          <stop offset="1" stopColor="#a855f7" />
+        </linearGradient>
+        <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="6" stdDeviation="10" floodOpacity="0.12" />
+        </filter>
+      </defs>
 
-      {/* Base card */}
-      <rect x="16" y="16" width="528" height="288" rx="16" fill="#ffffff" stroke="#e2e8f0" />
+      {/* base card */}
+      <rect x="24" y="24" width="592" height="312" rx="16" fill="#fff" stroke="#e2e8f0" />
 
-      {/* Grid de “huellas” */}
-      {Array.from({ length: 4 }).map((_, r) =>
-        Array.from({ length: 8 }).map((__, c) => {
-          const x = 48 + c * 56
-          const y = 56 + r * 50
-          return (
-            <g key={`${r}-${c}`} transform={`translate(${x},${y})`}>
-              <rect x="-18" y="-12" width="36" height="24" rx="6" fill="#ffffff" stroke="#cbd5e1" />
-              <ellipse cx="0" cy="0" rx="10" ry="12" fill="none" stroke="#64748b" strokeWidth="2"/>
-              <ellipse cx="0" cy="0" rx="5"  ry="7"  fill="none" stroke="#64748b" strokeWidth="2"/>
+      {/* pila de “huellas” */}
+      {Array.from({ length: 5 }).map((_, i) => {
+        const y = 80 + i * 34
+        return (
+          <g key={i} transform={`translate(110, ${y})`}>
+            <rect x="-70" y="-16" width="140" height="32" rx="8" fill="#ffffff" stroke="#cbd5e1" />
+            <g opacity="0.9">
+              <ellipse cx="0" cy="0" rx="20" ry="12" fill="none" stroke="#334155" strokeWidth="2" />
+              <ellipse cx="0" cy="0" rx="13" ry="8" fill="none" stroke="#334155" strokeWidth="2" />
+              <ellipse cx="0" cy="0" rx="6" ry="4" fill="none" stroke="#334155" strokeWidth="2" />
             </g>
-          )
-        })
-      )}
+            {/* cadena */}
+            <rect x="40" y="-6" width="52" height="12" rx="6" fill="#e2e8f0" />
+          </g>
+        )
+      })}
 
-      {/* Sello maestro */}
-      <g transform="translate(460, 60)">
-        <circle r="44" fill="#f1f5f9" stroke="#94a3b8" />
-        <circle r="30" fill="#e0e7ff" stroke="#6366f1" />
-        <path d="M-12 4 l8 8 16-20" fill="none" stroke="#1d4ed8" strokeWidth="4" strokeLinecap="round" />
+      {/* sello maestro */}
+      <g transform="translate(430, 170)" filter="url(#soft)">
+        <circle r="56" fill="url(#gSeal)" />
+        <circle r="44" fill="#fff" opacity="0.15" />
+        {/* check estilizado */}
+        <path d="M-18 2 l10 10 l18 -24" fill="none" stroke="#fff" strokeWidth="6" strokeLinecap="round" />
       </g>
 
-      {/* Banda “PQ-ready” */}
-      <rect x="40" y="236" width="480" height="40" rx="10" fill="#dbeafe" />
-      <text x="280" y="262" textAnchor="middle" fill="#1e40af" fontWeight="600" fontSize="14">
-        Transporte autenticado Post-Quantum-Ready (mTLS)
-      </text>
+      {/* leyenda neutral */}
+      <rect x="340" y="252" width="240" height="48" rx="10" fill="#f8fafc" stroke="#e2e8f0" />
+      <g transform="translate(460, 276)">
+        <circle r="8" fill="#a855f7" />
+        <rect x="16" y="-6" width="120" height="12" rx="6" fill="#cbd5e1" />
+      </g>
     </svg>
   )
 }

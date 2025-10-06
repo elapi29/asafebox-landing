@@ -4,14 +4,21 @@ import L2AnchoringIllo from './illos/L2AnchoringIllo'
 import BlindRevealIllo from './illos/BlindRevealIllo'
 import MetadataIllo from './illos/MetadataIllo'
 
-type Card = { Cmp: (p?: { className?: string }) => JSX.Element; title: string; desc: string }
+type IlloProps = { className?: string }
+type IlloCmp = (props?: IlloProps) => JSX.Element
+
+type Card = {
+  Cmp: IlloCmp
+  title: string
+  desc: string
+}
 
 export default function BankingShowcase() {
   const cards: Card[] = [
     { Cmp: IntegritySealIllo, title: 'Sello de integridad', desc: 'Pila de huellas protegida por un sello maestro.' },
     { Cmp: L2AnchoringIllo,  title: 'Verify Log → L2',       desc: 'Append-only y anclaje económico en L2.' },
-    { Cmp: BlindRevealIllo,  title: 'Privacidad (ZK)',        desc: 'Validez sin revelar el dato.' },
-    { Cmp: MetadataIllo,     title: 'Metadata pública',       desc: 'Tokens/políticas visibles, dato protegido.' },
+    { Cmp: BlindRevealIllo,  title: 'Privacidad (ZK)',       desc: 'Validez sin revelar el dato.' },
+    { Cmp: MetadataIllo,     title: 'Metadata pública',      desc: 'Tokens/políticas visibles; dato protegido.' },
   ]
 
   return (
@@ -20,7 +27,7 @@ export default function BankingShowcase() {
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {cards.map(({ Cmp, title, desc }) => (
           <figure key={title} className="rounded-2xl border border-slate-200 p-4 shadow-soft bg-white">
-            <Cmp className="w-full" />
+            <Cmp className="w-full h-auto" />
             <figcaption className="mt-3">
               <div className="text-base font-semibold">{title}</div>
               <p className="text-sm text-slate-600">{desc}</p>
