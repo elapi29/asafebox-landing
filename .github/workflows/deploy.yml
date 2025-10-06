@@ -24,13 +24,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          # ⛔️ IMPORTANTE: sin cache porque no hay lockfile
+          # cache: 'npm'  <- eliminado
 
-      # No usamos npm ci porque no hay lockfile; instalamos normal
       - name: Install deps (no lockfile)
         run: npm install --no-audit --no-fund
 
-      # Con output: 'export' en next.config.mjs, el build genera ./out
       - name: Build (Next static export)
         run: npm run build
 
