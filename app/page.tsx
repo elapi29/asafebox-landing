@@ -4,14 +4,16 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 
-const DEFAULT_LOCALE = 'en'; // cambiálo si querés 'es' o 'de'
+const DEFAULT_LOCALE = 'en';
 
 export default function RootRedirect() {
   useEffect(() => {
-    // redirect client-side para export estático
-    window.location.replace(`/${DEFAULT_LOCALE}/`);
+    const base = (process.env.NEXT_PUBLIC_BASE_PATH ?? '');
+    // asegura subpath correcto en GH Pages
+    window.location.replace(`${base}/${DEFAULT_LOCALE}/`);
   }, []);
 
+  const base = (process.env.NEXT_PUBLIC_BASE_PATH ?? '');
   return (
     <main className="min-h-screen flex items-center justify-center p-8">
       <div className="text-center">
@@ -19,7 +21,7 @@ export default function RootRedirect() {
         <p>
           Si no ocurre en 1s, abrí{' '}
           <Link href={`/${DEFAULT_LOCALE}/`} className="underline">
-            {`/${DEFAULT_LOCALE}/`}
+            {`${base}/${DEFAULT_LOCALE}/`}
           </Link>
         </p>
       </div>

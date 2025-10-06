@@ -15,6 +15,10 @@ concurrency:
   group: "pages"
   cancel-in-progress: true
 
+env:
+  # 👇 Hace que el código del browser conozca el subpath de GH Pages
+  NEXT_PUBLIC_BASE_PATH: /asafebox-landing
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,8 +28,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          # ⛔️ IMPORTANTE: sin cache porque no hay lockfile
-          # cache: 'npm'  <- eliminado
+          # sin cache porque no hay lockfile
+          # cache: 'npm'
 
       - name: Install deps (no lockfile)
         run: npm install --no-audit --no-fund
@@ -40,9 +44,9 @@ jobs:
 
   deploy:
     needs: build
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
-    runs-on: ubuntu-latest
     steps:
       - name: Deploy to Pages
         uses: actions/deploy-pages@v4

@@ -1,11 +1,11 @@
 // components/LanguageSwitcher.tsx
 'use client'
+import Link from 'next/link'
 
 type Locale = 'es' | 'en' | 'de'
 
 export default function LanguageSwitcher({ locale }: { locale: Locale }) {
   const locales: Locale[] = ['es', 'en', 'de']
-  const base = (process.env.NEXT_PUBLIC_BASE_PATH || '') // ej: '/asafebox-landing'
 
   return (
     <nav
@@ -15,9 +15,9 @@ export default function LanguageSwitcher({ locale }: { locale: Locale }) {
       {locales.map((l) => {
         const active = l === locale
         return (
-          <a
+          <Link
             key={l}
-            href={`${base}/${l}`}
+            href={`/${l}/`}              // 👈 Link maneja basePath solo
             aria-current={active ? 'page' : undefined}
             className={[
               'inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium transition',
@@ -27,7 +27,7 @@ export default function LanguageSwitcher({ locale }: { locale: Locale }) {
             ].join(' ')}
           >
             {l.toUpperCase()}
-          </a>
+          </Link>
         )
       })}
     </nav>
