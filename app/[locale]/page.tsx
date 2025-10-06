@@ -8,6 +8,8 @@ import PrivacyBlindReveal from '../../components/PrivacyBlindReveal'
 import Features from '../../components/Features'
 import SectorTabs from '../../components/SectorTabs'
 import Footer from '../../components/Footer'
+import JewelrySection from '../../components/JewelrySection'
+import FeatureChips from '../../components/FeatureChips' // 👈 faltaba este import
 
 export default async function Page({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale)
@@ -24,6 +26,7 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         disclaimer={dict.hero.disclaimer}
       />
 
+      {/* Chips de features globales (compacto, tipo zksync/starknet) */}
       <section className="mx-auto max-w-6xl px-6 py-12">
         <FeatureChips
           items={[
@@ -33,7 +36,8 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
             dict.features.pqcReady,
           ]}
         />
-</section>
+      </section>
+
       {/* Cómo funciona */}
       <section className="px-6 py-12">
         <h2 className="text-center text-2xl font-bold">{dict.howItWorks.title}</h2>
@@ -62,7 +66,7 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
       {/* Privacidad */}
       <PrivacyBlindReveal title={dict.privacy.title} body={dict.privacy.body} cta={dict.privacy.cta} />
 
-      {/* Features */}
+      {/* Features (bloques simples, pueden quedar como refuerzo visual) */}
       <Features
         immutableEvidence={dict.features.immutableEvidence}
         privacyBR={dict.features.privacyBR}
@@ -70,7 +74,7 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         pqcReady={dict.features.pqcReady}
       />
 
-      {/* Sectores → cards; el de “Jewelry” lleva a /[locale]/industries/jewelry */}
+      {/* Sectores */}
       <SectorTabs
         title={dict.sectors.title}
         realEstate={dict.sectors.realEstate}
@@ -84,6 +88,23 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         neutralTitle={dict.sectors.neutralTitle}
         neutralBody={dict.sectors.neutralBody}
         locale={params.locale}
+      />
+
+      {/* 💎 Sección Joyería (preview en home) */}
+      <JewelrySection
+        title={dict.jewelry.title}
+        subtitle={dict.jewelry.subtitle}
+        ctaDemo={dict.jewelry.ctaDemo}
+        ctaExample={dict.jewelry.ctaExample}
+        benefits={dict.jewelry.benefits}
+        howToTitle={dict.jewelry.howToTitle}
+        howToSteps={dict.jewelry.howToSteps}
+        originBlock={dict.jewelry.originBlock}
+        kpis={dict.jewelry.kpis}
+        qrLabel={dict.jewelry.qrLabel}
+        qrUrl={dict.jewelry.qrUrl}
+        diagramCaption={dict.jewelry.diagramCaption}
+        diagram={dict.jewelry.diagram}
       />
 
       <Footer />
