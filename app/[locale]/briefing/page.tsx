@@ -1,4 +1,6 @@
 // app/[locale]/briefing/page.tsx
+"use client"
+
 import type { Locale } from '../../../i18n/dictionaries'
 import GatewayLegend from '../../../components/GatewayLegend'
 import SystemLegend from '../../../components/SystemLegend'
@@ -39,6 +41,8 @@ export default function BriefingPage({ params }: { params: { locale: Locale } })
           <SystemLegend />
         </section>
       </div>
+
+      {/* Estilos de impresión sin depender de server-only */}
       <style jsx global>{`
         @media print {
           .print\\:hidden { display: none !important; }
