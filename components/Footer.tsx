@@ -1,7 +1,6 @@
 // components/Footer.tsx
 import Link from 'next/link';
 import Image from 'next/image';
-import wordmark from '@/public/brand/asafebox-wordmark.png';
 
 export default function Footer({ locale }: { locale: 'es' | 'en' | 'de' }) {
   const home = `/${locale}/`;
@@ -10,7 +9,7 @@ export default function Footer({ locale }: { locale: 'es' | 'en' | 'de' }) {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4">
         <Link href={home} className="inline-flex items-center" prefetch={false}>
           <Image
-            src={wordmark}
+            src="/brand/asafebox-wordmark.png"
             alt="AsafeBox"
             width={128}
             height={24}
