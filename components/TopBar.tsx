@@ -1,25 +1,31 @@
 // components/TopBar.tsx
-import Link from 'next/link'
-import { withBase } from './lib/withBase'
-import type { Locale } from '../i18n/dictionaries'
+'use client'
 
-export default function TopBar({ locale }: { locale: Locale }) {
+import Link from 'next/link'
+import withBase from './lib/withBase'
+
+export default function TopBar({ locale }: { locale: string }) {
+  const home = `/${locale}`
   const logoSrc = withBase('/brand/asafebox-wordmark.png')
-  const homeHref = `/${locale}`   // Link maneja basePath automáticamente
 
   return (
-    <header className="sticky top-0 z-40 glass">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
-        <Link href={homeHref} className="flex items-center gap-2">
+    <header className="fixed inset-x-0 top-0 z-50">
+      <div className="glass mx-auto flex max-w-6xl items-center justify-between rounded-b-2xl px-4 py-3">
+        <Link href={home} className="flex items-center gap-2">
+          {/* si prefieres SVG, cambia a /brand/asafebox-logo.svg */}
           <img
             src={logoSrc}
             alt="AsafeBox"
+            width={128}
+            height={24}
             className="h-6 w-auto"
-            loading="eager"
-            decoding="async"
           />
         </Link>
-        {/* … el resto del nav … */}
+
+        <nav className="flex items-center gap-6 text-sm font-medium text-slate-700">
+          <Link href={`${home}#features`} className="hover:underline">Features</Link>
+          <Link href={`${home}#pricing`} className="hover:underline">Pricing</Link>
+        </nav>
       </div>
     </header>
   )

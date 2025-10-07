@@ -1,12 +1,12 @@
+// app/layout.tsx
 import '../styles/globals.css'
-import TopBar from '../components/TopBar'
+import type { ReactNode } from 'react'
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="es">
       <body className="min-h-screen bg-white text-slate-900 antialiased">
-        <TopBar />
-        {/* padding-top para que el contenido no quede debajo de la barra */}
+        {/* El TopBar va en app/[locale]/layout.tsx */}
         <div className="pt-20">{children}</div>
       </body>
     </html>
