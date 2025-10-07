@@ -8,10 +8,7 @@ import PrivacyBlindReveal from '../../components/PrivacyBlindReveal'
 import Features from '../../components/Features'
 import SectorTabs from '../../components/SectorTabs'
 import Footer from '../../components/Footer'
-// import JewelrySection from '../../components/JewelrySection' // (silenciado por ahora)
 import FeatureChips from '../../components/FeatureChips'
-import GatewayLegend from '../../components/GatewayLegend'
-import SystemLegend from '../../components/SystemLegend'
 
 export default async function Page({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale)
@@ -28,7 +25,6 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         disclaimer={dict.hero.disclaimer}
       />
 
-      {/* Chips de features globales (compacto, tipo zksync/starknet) */}
       <section className="mx-auto max-w-6xl px-6 py-12">
         <FeatureChips
           items={[
@@ -40,7 +36,6 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         />
       </section>
 
-      {/* Cómo funciona */}
       <section className="px-6 py-12">
         <h2 className="text-center text-2xl font-bold">{dict.howItWorks.title}</h2>
         <p className="mx-auto mt-2 max-w-2xl text-center text-slate-600">{dict.howItWorks.subtitle}</p>
@@ -56,7 +51,6 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         </div>
       </section>
 
-      {/* Evidencia inmutable */}
       <EvidenceImmutable
         title={dict.evidence.title}
         body={dict.evidence.body}
@@ -65,14 +59,8 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         sealBody={dict.evidence.sealBody}
       />
 
-      {/* Privacidad */}
-      <PrivacyBlindReveal
-        title={dict.privacy.title}
-        body={dict.privacy.body}
-        cta={dict.privacy.cta}
-      />
+      <PrivacyBlindReveal title={dict.privacy.title} body={dict.privacy.body} cta={dict.privacy.cta} />
 
-      {/* Features (bloques simples, refuerzo visual) */}
       <Features
         immutableEvidence={dict.features.immutableEvidence}
         privacyBR={dict.features.privacyBR}
@@ -80,7 +68,6 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         pqcReady={dict.features.pqcReady}
       />
 
-      {/* Sectores */}
       <SectorTabs
         title={dict.sectors.title}
         realEstate={dict.sectors.realEstate}
@@ -95,21 +82,6 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         neutralBody={dict.sectors.neutralBody}
         locale={params.locale}
       />
-
-      {/* Leyendas (Gateway 4xx + Sistema) */}
-      <section className="mx-auto max-w-6xl px-6 py-12">
-        <h3 className="text-xl font-bold">Gateway-Verify — códigos y acciones</h3>
-        <p className="mb-4 text-slate-600">Semántica de respuestas y efectos (freeze / log).</p>
-        <GatewayLegend />
-
-        <h3 className="mt-10 text-xl font-bold">Lógica del sistema (pasillo)</h3>
-        <p className="mb-4 text-slate-600">Bloques y responsabilidades.</p>
-        <SystemLegend />
-      </section>
-
-      {/* 💎 Sección Joyería (preview en home) — silenciada
-      <JewelrySection ... />
-      */}
 
       <Footer />
     </main>
