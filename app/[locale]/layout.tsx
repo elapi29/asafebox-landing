@@ -2,7 +2,7 @@
 import type { ReactNode } from 'react'
 import type { Locale } from '../../i18n/dictionaries'
 import TopBar from '../../components/TopBar'
-import '../globals.css'
+import '../../styles/globals.css'        // ⬅️  ESTA ES LA RUTA CORRECTA
 
 export default function LocaleLayout({
   children,
