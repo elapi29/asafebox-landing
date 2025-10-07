@@ -1,39 +1,101 @@
 // components/TopBar.tsx
 'use client';
-import Link from 'next/link';
-{/*import BrandWordmark from './BrandWordmark'; */}
 
-const LOCALES = ['es','en','de'] as const;
+import Link from 'next/link';
+import { useState, useRef, useEffect } from 'react';
+import NextImage from 'next/image';
+
+const LOCALES = ['es', 'en', 'de'] as const;
 
 export default function TopBar({ locale }: { locale: string }) {
   const home = `/${locale}/`;
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+
+  // cerrar dropdown al click afuera / ESC
+  useEffect(() => {
+    function onDoc(e: MouseEvent) {
+      if (!menuRef.current) return;
+      if (!menuRef.current.contains(e.target as Node)) setOpen(false);
+    }
+    function onEsc(e: KeyboardEvent) {
+      if (e.key === 'Escape') setOpen(false);
+    }
+    document.addEventListener('mousedown', onDoc);
+    document.addEventListener('keydown', onEsc);
+    return () => {
+      document.removeEventListener('mousedown', onDoc);
+      document.removeEventListener('keydown', onEsc);
+    };
+  }, []);
+
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <div className="glass mx-auto flex max-w-6xl items-center justify-between rounded-b-2xl px-4 py-3">
-        {/* components/TopBar.tsx (solo el bloque del logo)*/}
-      <Link href={home} className="flex items-center gap-2" prefetch={false}>
-        <Image
-          src="/brand/asafebox-wordmark.svg"   // usa .png si ese es el que tenés
-          alt="AsafeBox®"
-          width={160}
-          height={32}
-          priority
-          unoptimized
-          className="h-8 w-auto md:h-9"
-        />
-      </Link>
-
+        {/* LOGO grande (como zkSync) */}
+        <Link href={home} className="flex items-center gap-2" prefetch={false}>
+          <NextImage
+            src="/brand/asafebox-wordmark.svg"   // usa .png si ese archivo es el que tenés
+            alt="AsafeBox®"
+            width={176}
+            height={36}
+            priority
+            unoptimized
+            className="h-8 w-auto md:h-9"
+          />
+        </Link>
 
         <nav className="flex items-center gap-6 text-sm font-medium text-slate-700">
-          <Link href={`${home}#features`} prefetch={false} className="hover:underline">Features</Link>
-          <Link href={`${home}#pricing`}  prefetch={false} className="hover:underline">Pricing</Link>
+          <Link href={`${home}#intro`} className="hover:underline" prefetch={false}>
+            Introduction
+          </Link>
 
-          <div className="ml-4 flex items-center gap-2">
+          {/* PRODUCTS (dropdown) */}
+          <div className="relative" ref={menuRef}>
+            <button
+              type="button"
+              onClick={() => setOpen(v => !v)}
+              className="inline-flex items-center gap-1 rounded-md px-2 py-1 hover:bg-slate-100"
+              aria-haspopup="menu"
+              aria-expanded={open}
+            >
+              Products
+              <svg viewBox="0 0 20 20" aria-hidden className="h-4 w-4">
+                <path d="M6 8l4 4 4-4" fill="currentColor" />
+              </svg>
+            </button>
+
+            {open && (
+              <div
+                role="menu"
+                className="absolute right-0 mt-2 w-72 rounded-xl border border-slate-200 bg-white p-2 shadow-lg"
+              >
+                <MenuItem href={`${home}products/signature-pq`} label="Signature PQ-ready Connect" />
+                <MenuItem href={`${home}products/blind-reveal`}   label="Blind-Reveal Connect" />
+                <MenuItem href={`${home}products/audit`}          label="Audit Connect" />
+                <MenuItem href={`${home}products/mtls-pq`}        label="mTLS PQ-Ready" />
+                <MenuItem href={`${home}products/blindreveal-gov`} label="BlindReveal Governing Connect" />
+              </div>
+            )}
+          </div>
+
+          <Link href={`${home}#contact`} className="hover:underline" prefetch={false}>
+            Contact
+          </Link>
+
+          {/* Language Switcher */}
+          <div className="ml-2 flex items-center gap-2">
             {LOCALES.map(code => {
-              const href = `/${code}/`; const active = code === locale;
+              const href = `/${code}/`;
+              const active = code === locale;
               return (
-                <Link key={code} href={href} prefetch={false}
-                  className={`rounded-md px-2 py-1 ${active ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'}`}
+                <Link
+                  key={code}
+                  href={href}
+                  prefetch={false}
+                  className={`rounded-md px-2 py-1 ${
+                    active ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'
+                  }`}
                   aria-current={active ? 'page' : undefined}
                 >
                   {code.toUpperCase()}
@@ -44,5 +106,18 @@ export default function TopBar({ locale }: { locale: string }) {
         </nav>
       </div>
     </header>
+  );
+}
+
+function MenuItem({ href, label }: { href: string; label: string }) {
+  return (
+    <Link
+      href={href}
+      prefetch={false}
+      className="block rounded-lg px-3 py-2 text-slate-700 hover:bg-slate-50"
+      role="menuitem"
+    >
+      {label}
+    </Link>
   );
 }
