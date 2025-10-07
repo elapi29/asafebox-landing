@@ -8,17 +8,21 @@ const DEFAULT_LOCALE = 'en'; // cambiálo si querés 'es' o 'de'
 
 export default function RootRedirect() {
   useEffect(() => {
-    window.location.replace(`/${DEFAULT_LOCALE}/`);
+    const base = process.env.NEXT_PUBLIC_BASE_PATH || '';
+    // redirect client-side respetando basePath en GitHub Pages
+    window.location.replace(`${base}/${DEFAULT_LOCALE}/`);
   }, []);
+
+  const base = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
   return (
     <main className="min-h-screen flex items-center justify-center p-8">
       <div className="text-center">
-        <p className="mb-3">Redirecting…</p>
+        <p className="mb-3">Redirigiendo…</p>
         <p>
-          If it doesn’t happen in ~1s, open{' '}
-          <Link href={`/${DEFAULT_LOCALE}/`} className="underline">
-            {`/${DEFAULT_LOCALE}/`}
+          Si no ocurre en 1s, abrí{' '}
+          <Link href={`${base}/${DEFAULT_LOCALE}/`} className="underline">
+            {`${base}/${DEFAULT_LOCALE}/`}
           </Link>
         </p>
       </div>

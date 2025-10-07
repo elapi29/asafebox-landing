@@ -1,3 +1,4 @@
+// app/[locale]/layout.tsx
 import '../../styles/globals.css'
 import TopBar from '../../components/TopBar'
 import type { Metadata } from 'next'
@@ -27,7 +28,7 @@ export default function LocaleLayout({
   return (
     <html lang={params.locale}>
       <body className="min-h-screen bg-white text-slate-900 antialiased">
-        <TopBar />
+        <TopBar locale={params.locale} />
         <div className="pt-20">{children}</div>
       </body>
     </html>

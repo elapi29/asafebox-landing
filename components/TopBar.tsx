@@ -1,16 +1,18 @@
 // components/TopBar.tsx
-import Link from 'next/link'
-import Image from 'next/image'
+import Link from 'next/link';
+import Image from 'next/image';
 
-export default function TopBar() {
-  const base = process.env.NEXT_PUBLIC_BASE_PATH || ''
+export default function TopBar({ locale = 'en' }: { locale?: 'es' | 'en' | 'de' }) {
+  const base = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const homeHref = `${base}/${locale}/`;
+
   return (
-    <header className="w-full sticky top-0 z-40">
-      <div className="glass mx-auto max-w-6xl px-4 h-14 flex items-center justify-between rounded-b-2xl">
-        <Link href={`${base}/`}>
+    <header className="w-full border-b border-neutral-200">
+      <div className="mx-auto max-w-6xl px-4 h-14 flex items-center justify-between">
+        <Link href={homeHref}>
           <span className="inline-flex items-center gap-2">
             <Image
-              src={`${base}/brand/asafebox-logo.svg`}
+              src="/brand/asafebox-logo.svg"
               alt="AsafeBox"
               width={160}
               height={40}
@@ -20,10 +22,10 @@ export default function TopBar() {
           </span>
         </Link>
         <nav className="text-sm">
-          <Link href={`${base}/#features`} className="px-3">Features</Link>
-          <Link href={`${base}/#pricing`} className="px-3">Pricing</Link>
+          <Link href={`${homeHref}#features`} className="px-3">Features</Link>
+          <Link href={`${homeHref}#pricing`} className="px-3">Pricing</Link>
         </nav>
       </div>
     </header>
-  )
+  );
 }
