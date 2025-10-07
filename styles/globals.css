@@ -14,3 +14,9 @@
 .glass {
   @apply bg-white/60 backdrop-blur-md border border-white/20;
 }
+
+@media print {
+  .print\:hidden { display: none !important; }
+  body { background: #fff; }
+  main { padding: 0; }
+}

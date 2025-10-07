@@ -1,10 +1,9 @@
 // app/[locale]/briefing/page.tsx
-"use client"
-
 import type { Locale } from '../../../i18n/dictionaries'
 import GatewayLegend from '../../../components/GatewayLegend'
 import SystemLegend from '../../../components/SystemLegend'
 import LanguageSwitcher from '../../../components/LanguageSwitcher'
+import PrintButton from '../../../components/PrintButton'
 
 export const metadata = {
   title: 'Briefing • Gateway & System — aSAFEBOX®',
@@ -19,13 +18,7 @@ export default function BriefingPage({ params }: { params: { locale: Locale } })
           <LanguageSwitcher locale={params.locale} />
           <div className="mb-6 flex items-center justify-between">
             <h1 className="text-2xl font-bold">Briefing — Gateway-Verify & System</h1>
-            <a
-              href="#"
-              onClick={(e) => { e.preventDefault(); if (typeof window !== 'undefined') window.print() }}
-              className="rounded-full border border-slate-300 px-4 py-1.5 text-sm font-semibold hover:bg-slate-50"
-            >
-              Print / Save as PDF
-            </a>
+            <PrintButton />
           </div>
         </div>
 
@@ -41,15 +34,6 @@ export default function BriefingPage({ params }: { params: { locale: Locale } })
           <SystemLegend />
         </section>
       </div>
-
-      {/* Estilos de impresión sin depender de server-only */}
-      <style jsx global>{`
-        @media print {
-          .print\\:hidden { display: none !important; }
-          body { background: #fff; }
-          main { padding: 0; }
-        }
-      `}</style>
     </main>
   )
 }
