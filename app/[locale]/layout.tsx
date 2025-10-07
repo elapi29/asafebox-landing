@@ -1,35 +1,21 @@
 // app/[locale]/layout.tsx
-import '../../styles/globals.css'
+import type { ReactNode } from 'react'
+import type { Locale } from '../../i18n/dictionaries'
 import TopBar from '../../components/TopBar'
-import type { Metadata } from 'next'
-import { Locale, getDictionary } from '../../i18n/dictionaries'
-
-export async function generateStaticParams() {
-  return [{ locale: 'es' }, { locale: 'en' }, { locale: 'de' }]
-}
-
-export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
-  const dict = await getDictionary(params.locale)
-  return {
-    title: dict.meta.siteName,
-    description: dict.meta.description,
-    openGraph: { title: dict.meta.siteName, description: dict.meta.description },
-    twitter: { title: dict.meta.siteName, description: dict.meta.description },
-  }
-}
+import '../globals.css'
 
 export default function LocaleLayout({
   children,
   params,
 }: {
-  children: React.ReactNode
+  children: ReactNode
   params: { locale: Locale }
 }) {
   return (
     <html lang={params.locale}>
-      <body className="min-h-screen bg-white text-slate-900 antialiased">
+      <body>
         <TopBar locale={params.locale} />
-        <div className="pt-20">{children}</div>
+        {children}
       </body>
     </html>
   )

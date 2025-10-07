@@ -1,17 +1,22 @@
 // next.config.mjs
-const isCI = process.env.GITHUB_ACTIONS === 'true';
-const repo = 'asafebox-landing';
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  images: { unoptimized: true },
-  basePath: isCI ? `/${repo}` : '',
-  assetPrefix: isCI ? `/${repo}/` : '',
+  basePath: '/asafebox-landing',
   trailingSlash: true,
-  env: {
-    NEXT_PUBLIC_BASE_PATH: isCI ? `/${repo}` : '',
-  },
-};
+  async redirects() {
+    return [
+      // raíz del sitio -> idioma por defecto
+      { source: '/', destination: '/es', permanent: false },
 
-export default nextConfig;
+      // si entran a /asafebox-landing (raíz con basePath), Next aplica basePath solo, así que
+      // la regla de arriba ya lo cubre. Esta extra es por si quedara algún enlace duro viejo:
+      { source: '/asafebox-landing', destination: '/es', permanent: false },
+
+      // cualquier ruta que no empiece por es|en|de -> a /es/...
+      { source: '/:path((?!es|en|de).*)', destination: '/es/:path*', permanent: false },
+    ]
+  },
+}
+
+export default nextConfig
