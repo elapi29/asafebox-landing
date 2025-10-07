@@ -1,5 +1,5 @@
 // components/GatewayLegend.tsx
-import { ShieldCheck, BracketsX, ClockAlert, HandStop, HashX, SnowLock, Ledger } from './icons/GatewayIcons'
+import { ShieldCheck, BracketsX, ClockAlert, HandStop, HashX, SnowLock, Ledger } from './GatewayIcons'
 
 type Item = { icon: (p:{className?:string})=>JSX.Element; label: string; tone: 'ok'|'warn'|'err'|'brand'|'muted' }
 

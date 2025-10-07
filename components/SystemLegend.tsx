@@ -1,5 +1,5 @@
 // components/SystemLegend.tsx
-import { CloudArrows, ShieldNode, HardwareKey, BlocksChain, Replay, ZKBadge, ZKBadgeX } from './icons/SystemIcons'
+import { CloudArrows, ShieldNode, HardwareKey, BlocksChain, Replay, ZKBadge, ZKBadgeX } from './SystemIcons'
 
 const Row = ({ Icon, title, desc, tone = 'text-slate-700' }:{
   Icon: (p:{className?:string})=>JSX.Element; title:string; desc:string; tone?:string
