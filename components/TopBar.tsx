@@ -2,7 +2,7 @@
 'use client'
 
 import Link from 'next/link'
-import withBase from './lib/withBase'
+import { withBase } from './lib/withBase'
 
 export default function TopBar({ locale }: { locale: string }) {
   const home = `/${locale}`

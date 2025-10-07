@@ -1,5 +1,5 @@
 // components/Footer.tsx
-import withBase from './lib/withBase'
+import { withBase } from './lib/withBase'
 
 export default function Footer() {
   const logo = withBase('/brand/asafebox-logo.svg')
