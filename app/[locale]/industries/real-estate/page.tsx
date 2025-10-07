@@ -1,6 +1,6 @@
 // app/[locale]/industries/real-estate/page.tsx
 import { getDictionary, Locale } from '../../../../i18n/dictionaries'
-import LanguageSwitcher from '../../../../components/LanguageSwitcher'
+{/*import LanguageSwitcher from '../../../../components/LanguageSwitcher'*/}
 import Footer from '../../../../components/Footer'
 
 export default async function RealEstatePage({ params }: { params: { locale: Locale } }) {
@@ -8,7 +8,7 @@ export default async function RealEstatePage({ params }: { params: { locale: Loc
 
   return (
     <main>
-      <LanguageSwitcher locale={params.locale} />
+      {/*<LanguageSwitcher locale={params.locale} />*/}
 
       <section className="px-6 py-10">
         <h1 className="text-3xl font-bold">{dict.sectors.realEstate}</h1>
