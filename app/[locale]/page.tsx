@@ -83,7 +83,7 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         locale={params.locale}
       />
 
-      // al final del archivo app/[locale]/page.tsx
+      {/*/ al final del archivo app/[locale]/page.tsx*/}
       <Footer locale={params.locale} />
 
     </main>
