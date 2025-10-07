@@ -1,6 +1,6 @@
 // app/[locale]/page.tsx
 import { getDictionary, Locale } from '../../i18n/dictionaries'
-import LanguageSwitcher from '../../components/LanguageSwitcher'
+{/*import LanguageSwitcher from '../../components/LanguageSwitcher'*/}
 import Hero from '../../components/Hero'
 import Illustration from '../../components/Illustration'
 import EvidenceImmutable from '../../components/EvidenceImmutable'
@@ -15,7 +15,7 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
 
   return (
     <main>
-      <LanguageSwitcher locale={params.locale} />
+      {/*<LanguageSwitcher locale={params.locale} />
 
       <Hero
         title={dict.hero.title}
@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         emailPlaceholder={dict.hero.emailPlaceholder}
         cta={dict.hero.cta}
         disclaimer={dict.hero.disclaimer}
-      />
+      />*/}
 
       <section className="mx-auto max-w-6xl px-6 py-12">
         <FeatureChips

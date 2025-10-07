@@ -2,15 +2,12 @@
 import type { ReactNode } from 'react'
 import type { Locale } from '../../i18n/dictionaries'
 import TopBar from '../../components/TopBar'
-import '../../styles/globals.css'        // ⬅️  ESTA ES LA RUTA CORRECTA
+import '../../styles/globals.css'
 
 export const dynamicParams = false;
-
 export function generateStaticParams() {
-  // locales que querés exportar
   return [{ locale: 'es' }, { locale: 'en' }, { locale: 'de' }];
 }
-
 
 export default function LocaleLayout({
   children,
@@ -21,9 +18,10 @@ export default function LocaleLayout({
 }) {
   return (
     <html lang={params.locale}>
-      <body>
+      {/* padding-top para despegar el contenido del TopBar fijo */}
+      <body className="min-h-screen bg-white text-slate-900 antialiased pt-20">
         <TopBar locale={params.locale} />
-        {children}
+        <main>{children}</main>
       </body>
     </html>
   )
