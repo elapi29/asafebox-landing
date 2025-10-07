@@ -1,30 +1,19 @@
 // app/[locale]/industries/banking/page.tsx
-import DSRShowcase from '../../../../components/DSRShowcase'
+import { getDictionary, Locale } from '../../../../i18n/dictionaries'
+import LanguageSwitcher from '../../../../components/LanguageSwitcher'
 import BankingShowcase from '../../../../components/BankingShowcase'
+import Footer from '../../../../components/Footer'   // ⬅️ FALTA ESTE IMPORT
 
-export const metadata = {
-  title: 'Banking — aSAFEBOX®',
-  description: 'Integrity, privacy and audit-readiness for financial operations.',
-}
+export default async function BankingPage({ params }: { params: { locale: Locale } }) {
+  const dict = await getDictionary(params.locale)
 
-export default function BankingPage() {
   return (
-    <main className="min-h-[60vh]">
-      <header className="mx-auto max-w-6xl px-6 pt-10">
-        <h1 className="text-3xl font-bold">Banking: integrity, privacy and audit</h1>
-        <p className="mt-2 text-slate-600">
-          Evidence for each step (transactions, signatures, onboarding/KYC) with PQ-ready transport.
-        </p>
-      </header>
-
-      {/* Escena tipo zksync (DSR) */}
-      <DSRShowcase />
-
-      {/* Cards/galería bancaria (tus 4 conceptos resumidos) */}
+    <main>
+      <LanguageSwitcher locale={params.locale} />
+      {/* …tu contenido (titulos/props que uses con dict)… */}
       <BankingShowcase />
 
-      <Footer locale={params.locale} />
-
+      <Footer locale={params.locale} />  {/* ⬅️ ya compila */}
     </main>
   )
 }
