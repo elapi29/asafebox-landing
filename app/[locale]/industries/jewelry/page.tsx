@@ -164,6 +164,9 @@ export default async function JewelryPage({ params }: { params: { locale: Locale
           <figcaption className="mt-2 text-center text-slate-600">{J.diagramCaption}</figcaption>
         </figure>
       </section>
+
+      <Footer locale={params.locale} />
+
     </main>
   )
 }

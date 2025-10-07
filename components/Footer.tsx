@@ -1,21 +1,26 @@
 // components/Footer.tsx
-import { withBase } from './lib/withBase'
+import Link from 'next/link';
+import Image from 'next/image';
+import wordmark from '@/public/brand/asafebox-wordmark.png';
 
-export default function Footer() {
-  const logo = withBase('/brand/asafebox-logo.svg')
+export default function Footer({ locale }: { locale: 'es' | 'en' | 'de' }) {
+  const home = `/${locale}/`;
   return (
-    <footer className="mx-auto mt-24 max-w-6xl px-6 py-12 text-sm text-slate-600">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <img src={logo} alt="AsafeBox" className="h-5 w-auto" />
-          <span>© {new Date().getFullYear()} AsafeBox</span>
-        </div>
-        <div className="flex gap-4">
-          <a href="mailto:hello@asafebox.io" className="hover:underline">Contact</a>
-          <a href="#" className="hover:underline">Legal</a>
-        </div>
+    <footer className="border-t border-slate-200 py-10">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4">
+        <Link href={home} className="inline-flex items-center" prefetch={false}>
+          <Image
+            src={wordmark}
+            alt="AsafeBox"
+            width={128}
+            height={24}
+            unoptimized
+            className="h-6 w-auto"
+          />
+        </Link>
+        <p className="text-sm text-slate-500">© {new Date().getFullYear()} AsafeBox</p>
       </div>
     </footer>
-  )
+  );
 }
 

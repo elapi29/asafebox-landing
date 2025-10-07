@@ -20,7 +20,8 @@ export default async function FintechPage({ params }: { params: { locale: Locale
         </div>
       </section>
 
-      <Footer />
+      <Footer locale={params.locale} />
+
     </main>
   )
 }

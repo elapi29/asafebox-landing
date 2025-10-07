@@ -20,7 +20,8 @@ export default async function RealEstatePage({ params }: { params: { locale: Loc
         </div>
       </section>
 
-      <Footer />
+      <Footer locale={params.locale} />
+
     </main>
   )
 }

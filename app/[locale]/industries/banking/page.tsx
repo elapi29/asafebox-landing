@@ -22,6 +22,9 @@ export default function BankingPage() {
 
       {/* Cards/galería bancaria (tus 4 conceptos resumidos) */}
       <BankingShowcase />
+
+      <Footer locale={params.locale} />
+
     </main>
   )
 }
