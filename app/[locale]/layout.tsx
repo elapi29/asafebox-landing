@@ -4,6 +4,14 @@ import type { Locale } from '../../i18n/dictionaries'
 import TopBar from '../../components/TopBar'
 import '../../styles/globals.css'        // ⬅️  ESTA ES LA RUTA CORRECTA
 
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  // locales que querés exportar
+  return [{ locale: 'es' }, { locale: 'en' }, { locale: 'de' }];
+}
+
+
 export default function LocaleLayout({
   children,
   params,
