@@ -4,37 +4,24 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 
-const DEFAULT_LOCALE = 'en';
+const DEFAULT_LOCALE = 'en'; // cambiálo si querés 'es' o 'de'
 
 export default function RootRedirect() {
   useEffect(() => {
-    const base = (process.env.NEXT_PUBLIC_BASE_PATH ?? '');
-    // asegura subpath correcto en GH Pages
-    window.location.replace(`${base}/${DEFAULT_LOCALE}/`);
+    window.location.replace(`/${DEFAULT_LOCALE}/`);
   }, []);
 
-  const base = (process.env.NEXT_PUBLIC_BASE_PATH ?? '');
   return (
     <main className="min-h-screen flex items-center justify-center p-8">
       <div className="text-center">
-        <p className="mb-3">Redirigiendo…</p>
+        <p className="mb-3">Redirecting…</p>
         <p>
-          Si no ocurre en 1s, abrí{' '}
+          If it doesn’t happen in ~1s, open{' '}
           <Link href={`/${DEFAULT_LOCALE}/`} className="underline">
-            {`${base}/${DEFAULT_LOCALE}/`}
+            {`/${DEFAULT_LOCALE}/`}
           </Link>
         </p>
       </div>
-      <section className="mx-auto max-w-6xl px-6 py-12">
-      <FeatureChips
-         items={[
-         dict.features.immutableEvidence,
-         dict.features.privacyBR,
-         dict.features.auditReady,
-          dict.features.pqcReady,
-        ]}
-      />
-</section>
     </main>
   );
 }

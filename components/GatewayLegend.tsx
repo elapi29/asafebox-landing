@@ -1,5 +1,28 @@
 // components/GatewayLegend.tsx
-import { OkIcon, WarnIcon, StopIcon } from './icons/GatewayIcons';
+function OkIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden>
+      <circle cx="12" cy="12" r="10" fill="#10b981" opacity="0.12" />
+      <path d="M7 12l3 3 7-7" stroke="#10b981" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+function WarnIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden>
+      <circle cx="12" cy="12" r="10" fill="#f59e0b" opacity="0.12" />
+      <path d="M12 7v6m0 4h.01" stroke="#f59e0b" strokeWidth="2" fill="none" strokeLinecap="round" />
+    </svg>
+  );
+}
+function StopIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden>
+      <circle cx="12" cy="12" r="10" fill="#ef4444" opacity="0.12" />
+      <path d="M15 9l-6 6M9 9l6 6" stroke="#ef4444" strokeWidth="2" fill="none" strokeLinecap="round" />
+    </svg>
+  );
+}
 
 type Row = { icon: JSX.Element; code: string; label: string; note?: string };
 
@@ -27,3 +50,4 @@ export default function GatewayLegend() {
     </div>
   );
 }
+
