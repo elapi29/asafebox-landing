@@ -11,19 +11,26 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
 
   return (
     <main>
-      {/* 1) CTA: Dejanos tu E-mail */}
-      <section className="mx-auto max-w-6xl px-6 pt-4 pb-10">
-        <EmailCapture
-          title={dict.hero.title}
-          subtitle={dict.hero.subtitle}
-          emailPlaceholder={dict.hero.emailPlaceholder}
-          cta={dict.hero.cta}
-          disclaimer={dict.hero.disclaimer}
-          locale={params.locale}
-        />
+      {/* HERO + Email (sin chips) */}
+      <section className="mx-auto max-w-6xl px-6 pt-6 pb-10">
+        <h1 className="text-3xl font-bold text-slate-900">{dict.hero.title}</h1>
+        <p className="mt-2 max-w-2xl text-slate-600">{dict.hero.subtitle}</p>
+
+        <div className="mt-6">
+          <EmailCapture
+            placeholder={dict.hero.emailPlaceholder}
+            cta={dict.hero.cta}
+            successPath="/thanks/"   // tu componente arma el _next con basePath
+          />
+        </div>
+
+        {/* disclaimer bajo el form (opcional) */}
+        {dict.hero.disclaimer && (
+          <p className="mt-2 text-xs text-slate-500">{dict.hero.disclaimer}</p>
+        )}
       </section>
 
-      {/* 2) Evidencia inmutable (sí va en Home) */}
+      {/* Evidencia inmutable (sí va en Home) */}
       <section className="px-6">
         <EvidenceImmutable
           title={dict.evidence.title}
@@ -34,7 +41,7 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         />
       </section>
 
-      {/* 3) Privacidad con Blind-Reveal (sí va en Home) */}
+      {/* Privacidad con Blind-Reveal (sí va en Home) */}
       <section className="px-6">
         <PrivacyBlindReveal
           title={dict.privacy.title}
@@ -43,10 +50,7 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
         />
       </section>
 
-      {/* 4) (OPCIONAL) Si usás un bloque de Features globales, lo podés dejar; los "chips" NO. */}
-      {/* Si no querés nada acá, elimina este bloque. */}
-
-      {/* 5) Soluciones por industria (sí va) */}
+      {/* Soluciones por industria (sí va) */}
       <section className="px-6 py-12">
         <SectorTabs
           title={dict.sectors.title}
