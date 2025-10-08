@@ -5,7 +5,7 @@ const nextConfig = {
   trailingSlash: true,
   env: {
     NEXT_PUBLIC_BASE_PATH: '/asafebox-landing', // ← espejo del basePath (para <img>)
-    NEXT_PUBLIC_FORMSPREE_ENDPOINT: 'https://formspree.io/f/mblzlrgq',
+    NEXT_PUBLIC_FORMSPREE_ENDPOINT: 'https://formspree.io/f/mblzlrqg',
 
   },
   async redirects() {
