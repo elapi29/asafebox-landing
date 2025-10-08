@@ -192,12 +192,12 @@ export default async function IntroductionPage({ params }: { params: { locale: L
         </p>
       </section>
 
-      <section className="mx-auto max-w-5xl pb-12">
+      {/*<section className="mx-auto max-w-5xl pb-12">
         <SystemLegend />
         <div className="mt-6">
           <GatewayLegend />
         </div>
-      </section>
+      </section>*/}
 
       <Footer locale={params.locale} />
     </main>
