@@ -2,30 +2,17 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { withBase } from './lib/withBase';
 
 const LOCALES = ['es', 'en', 'de'] as const;
 
-/** Detecta el basePath en runtime:
- *  - En prod (GitHub Pages): "/asafebox-landing"
- *  - En dev/local: ""
- */
-function useBasePath() {
-  const [bp, setBp] = useState('');
-  useEffect(() => {
-    const p = window.location.pathname || '';
-    setBp(p.startsWith('/asafebox-landing') ? '/asafebox-landing' : '');
-  }, []);
-  return bp;
-}
-
 export default function TopBar({ locale }: { locale: string }) {
-  const basePath = useBasePath();
-  const home = `/${locale}/`; // ¡con slash final!
+  const home = `/${locale}/`; // slash final: importante en GitHub Pages
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
-  // close dropdown al click afuera / ESC
+  // cerrar dropdown al click afuera / ESC
   useEffect(() => {
     const onDoc = (e: MouseEvent) => {
       if (!menuRef.current) return;
@@ -40,25 +27,23 @@ export default function TopBar({ locale }: { locale: string }) {
     };
   }, []);
 
-  const logoSvg = `${basePath}/brand/asafebox-wordmark.svg`;
-  const logoPng = `${basePath}/brand/asafebox-wordmark.png`;
-
+  const logo = withBase('/brand/asafebox-wordmark.png'); // ✅ EXISTE
+  <Link href={home} prefetch={false} className="flex items-center gap-2">
+    <img src={logo} alt="In aSAFEBOX®" width={176} height={36} className="h-9 w-auto md:h-10" />
+  </Link>
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <div className="glass mx-auto flex max-w-6xl items-center justify-between rounded-b-2xl px-4 py-3">
-        {/* LOGO grande, estilo zkSync */}
+        {/* LOGO (PNG real, grande) */}
         <Link href={home} className="flex items-center gap-2" prefetch={false}>
-          <picture>
-            <source srcSet={logoSvg} type="image/svg+xml" />
-            <img
-              src={logoPng}
-              alt="AsafeBox®"
-              width={176}
-              height={36}
-              className="h-8 w-auto md:h-9"
-              decoding="async"
-            />
-          </picture>
+          <img
+            src={logo}
+            alt="In aSAFEBOX®"
+            width={176}
+            height={36}
+            className="h-9 w-auto md:h-10"
+            decoding="async"
+          />
         </Link>
 
         <nav className="flex items-center gap-6 text-sm font-medium text-slate-700">
@@ -66,7 +51,7 @@ export default function TopBar({ locale }: { locale: string }) {
             Introduction
           </Link>
 
-          {/* PRODUCTS (dropdown) */}
+          {/* Products (dropdown) */}
           <div className="relative" ref={menuRef}>
             <button
               type="button"
@@ -76,7 +61,7 @@ export default function TopBar({ locale }: { locale: string }) {
               aria-expanded={open}
             >
               Products
-              <svg viewBox="0 0 20 20" aria-hidden className="h-4 w-4">
+              <svg viewBox="0 0 20 20" className="h-4 w-4" aria-hidden>
                 <path d="M6 8l4 4 4-4" fill="currentColor" />
               </svg>
             </button>
@@ -86,11 +71,11 @@ export default function TopBar({ locale }: { locale: string }) {
                 role="menu"
                 className="absolute right-0 mt-2 w-80 rounded-xl border border-slate-200 bg-white p-2 shadow-lg"
               >
-                <MenuItem href={`${home}products/signature-pq`}   label="Signature PQ-ready Connect" />
+                <MenuItem href={`${home}products/signature-pq`}    label="Signature PQ-ready Connect" />
                 <MenuItem href={`${home}products/blind-reveal`}    label="Blind-Reveal Connect" />
-                <MenuItem href={`${home}products/audit`}           label="Audit Connect" />
+                <MenuItem href={`${home}products/audit`}           label="Ultrafast Audit Connect" />
                 <MenuItem href={`${home}products/mtls-pq`}         label="mTLS PQ-Ready" />
-                <MenuItem href={`${home}products/blindreveal-gov`} label="BlindReveal Governing Connect" />
+                <MenuItem href={`${home}products/blindreveal-gov`} label="KYC Governing Connect" />
               </div>
             )}
           </div>
