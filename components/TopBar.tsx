@@ -44,7 +44,10 @@ export default function TopBar({ locale }: { locale: string }) {
         </Link>
 
         <nav className="flex items-center gap-6 text-sm font-medium text-slate-700">
-          <Link href={`${home}#intro`} className="hover:underline" prefetch={false}>
+          {/*<Link href={`${home}#intro`} className="hover:underline" prefetch={false}>
+            Introduction
+          </Link>*/}
+          <Link href={`${home}introduction/`} className="hover:underline" prefetch={false}>
             Introduction
           </Link>
 
