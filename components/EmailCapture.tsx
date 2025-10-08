@@ -11,29 +11,22 @@ type Props = {
 
 export default function EmailCapture({ placeholder, cta, successPath = '/thanks/' }: Props) {
   const [email, setEmail] = useState('')
-  const [name, setName] = useState('')          // opcional: ayuda con spam score
-  const [hp, setHp] = useState('')              // honeypot
+  const [name, setName] = useState('')
+  const [hp, setHp] = useState('')
 
-  // basePath para GH Pages (inyectado en build desde next.config.mjs)
   const base = process.env.NEXT_PUBLIC_BASE_PATH || ''
   const nextUrl = `${base}${successPath}`
-
-  // endpoint público de Formspree (inyectado en build)
   const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || ''
 
-  // Usamos redirect server-side de Formspree si hay endpoint
   const action = useMemo(() => {
     if (!endpoint) return ''
     const join = endpoint.includes('?') ? '&' : '?'
-    // Formspree soporta `?redirect=https://...`
     return `${endpoint}${join}redirect=${encodeURIComponent(nextUrl)}`
   }, [endpoint, nextUrl])
 
-  // Fallback: si no hay endpoint, interceptamos y redirigimos client-side
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     if (!action) {
       e.preventDefault()
-      // podrías hacer aquí un fetch a tu propia API si quisieras
       window.location.assign(nextUrl)
     }
   }
@@ -43,9 +36,9 @@ export default function EmailCapture({ placeholder, cta, successPath = '/thanks/
       action={action || undefined}
       method="POST"
       onSubmit={onSubmit}
-      className="mx-auto flex w-full max-w-md flex-col gap-2 rounded-xl border border-slate-200 bg-white p-3 shadow-sm sm:flex-row sm:items-center"
+      className="mx-auto flex w-full max-w-3xl flex-col gap-3 rounded-2xl border border-slate-200 bg-white/80 p-4 shadow-sm backdrop-blur sm:flex-row sm:items-center"
     >
-      {/* HONEYPOT anti-bots */}
+      {/* honeypot */}
       <input
         type="text"
         name="_gotcha"
@@ -57,16 +50,17 @@ export default function EmailCapture({ placeholder, cta, successPath = '/thanks/
         aria-hidden="true"
       />
 
-      {/* Un campo opcional de nombre ayuda a reducir spam */}
+      {/* Nombre (opcional) */}
       <input
         type="text"
         name="name"
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Name (optional)"
-        className="w-full rounded-lg border-0 px-3 py-2 text-base outline-none placeholder:text-slate-400 focus:ring-2 focus:ring-brand-500 sm:max-w-[40%]"
+        className="h-12 w-full min-w-0 rounded-xl border border-slate-300 px-4 text-base outline-none placeholder:text-slate-400 focus:border-slate-400 focus:ring-0 sm:max-w-[30%]"
       />
 
+      {/* Email */}
       <input
         type="email"
         name="email"
@@ -74,18 +68,18 @@ export default function EmailCapture({ placeholder, cta, successPath = '/thanks/
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder={placeholder}
-        className="w-full flex-1 rounded-lg border-0 px-3 py-2 text-base outline-none placeholder:text-slate-400 focus:ring-2 focus:ring-brand-500"
-        aria-label="Email"
         autoComplete="email"
         inputMode="email"
+        className="h-12 w-full flex-1 min-w-0 rounded-xl border border-slate-300 px-4 text-base outline-none placeholder:text-slate-400 focus:border-slate-400 focus:ring-0"
+        aria-label="Email"
       />
 
-      {/* Subject ayuda con filtros */}
+      {/* Subject ayuda a filtros */}
       <input type="hidden" name="_subject" value="New signup from AsafeBox Landing" />
 
       <button
         type="submit"
-        className="whitespace-nowrap rounded-lg bg-brand-900 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-800 focus-visible:outline-2 focus-visible:outline-offset-2"
+        className="h-12 shrink-0 rounded-xl bg-slate-900 px-5 text-sm font-semibold text-white hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-offset-2"
       >
         {cta}
       </button>
