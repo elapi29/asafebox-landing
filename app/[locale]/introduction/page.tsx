@@ -25,15 +25,11 @@ export default async function IntroductionPage({ params }: { params: { locale: L
           />
         </div>
 
-        {/* bloques técnicos (si ya los tenés) */}
+        {/* bloques técnicos (opcionales) */}
         <div className="mt-10 grid gap-8">
           <SystemLegend />
           <GatewayLegend />
         </div>
-
-        <p className="mt-10 text-center text-slate-600">
-          {dict.howItWorks.footerNote /* si existe; si no, podés borrar esta línea */}
-        </p>
       </section>
 
       <Footer locale={params.locale} />
