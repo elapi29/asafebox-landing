@@ -69,12 +69,12 @@ export default async function IntroductionPage({ params }: { params: { locale: L
               </tr>
               <tr>
                 <td className="px-4 py-3"><strong>Escáner de rayos X y aduana</strong></td>
-                <td className="px-4 py-3"><strong>Gateway-Verify 4xx + log-sig</strong></td>
+                <td className="px-4 py-3"><strong>Blockchecker</strong></td>
                 <td className="px-4 py-3">Que la caja no trae mercancía falsa y lo registrado coincide con la realidad física.</td>
               </tr>
               <tr>
                 <td className="px-4 py-3"><strong>Candado con llave dual</strong></td>
-                <td className="px-4 py-3"><strong>Firma HSM Ne’eman/Amīn</strong></td>
+                <td className="px-4 py-3"><strong>Firma con Privacidad Absoluta entre 2 o más Agentes</strong></td>
                 <td className="px-4 py-3">Que dos custodios distintos aprueban abrir/cerrar — y queda constancia.</td>
               </tr>
             </tbody>
