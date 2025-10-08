@@ -1,0 +1,67 @@
+<svg width="320" height="250" viewBox="0 0 320 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Blind ballot box v4 (keyhole + hand with key)">
+  <title>Blind ballot box v4 — keyhole + hand with key, In aSAFEBOX gradient</title>
+  <defs>
+    <linearGradient id="av" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF6A00"/>
+      <stop offset="100%" stop-color="#9B5BFF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Box geometry -->
+  <g id="box" fill="none" stroke="url(#av)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- top face -->
+    <path id="top" d="M70 70 L160 44 L250 70 L160 96 Z"/>
+    <!-- left face -->
+    <path d="M70 70 L70 154 L160 180 L160 96 Z"/>
+    <!-- right face -->
+    <path d="M250 70 L250 154 L160 180 L160 96 Z"/>
+  </g>
+
+  <!-- Ballot first (so slit can occlude it to look inserted) -->
+  <g transform="translate(160,124) rotate(-14)">
+    <rect x="-26" y="-34" width="68" height="68" rx="4" fill="none" stroke="url(#av)" stroke-width="2"/>
+    <text x="0" y="-2" text-anchor="middle" font-family="Inter, system-ui" font-size="14" font-weight="800" fill="url(#av)">Known</text>
+  </g>
+
+  <!-- Proper perspective slit on top (drawn AFTER the ballot to occlude top edge) -->
+  <polygon points="138,79 182,66 196,70 152,83"
+           fill="#FFFFFF" fill-opacity="0.9" stroke="url(#av)" stroke-width="2.2" stroke-linejoin="round"/>
+
+  <!-- Discontinuous bottom/front edge -->
+  <path d="M70 154 L160 180 L250 154" fill="none" stroke="url(#av)" stroke-width="2" stroke-dasharray="10 10" stroke-linecap="round"/>
+  <path d="M70 154 L98 164" fill="none" stroke="url(#av)" stroke-width="2" stroke-linecap="round"/>
+  <path d="M222 164 L250 154" fill="none" stroke="url(#av)" stroke-width="2" stroke-linecap="round"/>
+  <!-- Vertical dashes -->
+  <path d="M70 70 L70 154" fill="none" stroke="url(#av)" stroke-width="2" stroke-dasharray="6 8" stroke-linecap="round"/>
+  <path d="M250 70 L250 154" fill="none" stroke="url(#av)" stroke-width="2" stroke-dasharray="6 8" stroke-linecap="round"/>
+
+  <!-- Keyhole (Schlüsselloch) on the right face -->
+  <g transform="translate(220,116)" fill="none" stroke="url(#av)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- classic keyhole: circle + tapered stem -->
+    <circle cx="0" cy="-8" r="8"/>
+    <path d="M-5 0 L0 -2 L5 0 L3 14 H-3 Z"/>
+  </g>
+
+  <!-- Hand with key approaching from right -->
+  <g transform="translate(255,122)">
+    <!-- key -->
+    <g fill="none" stroke="url(#av)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="30" cy="0" r="8"/>
+      <path d="M22 0 H6"/>
+      <rect x="-8" y="-3" width="14" height="6" rx="2"/>
+      <path d="M-8 -3 v-6 h6 v6"/>
+    </g>
+    <!-- hand (simple outline) -->
+    <path d="M30 6
+             c-3 6 -10 10 -18 10
+             h-10
+             c-4 0 -8 -3 -8 -7
+             v-6
+             c0 -4 3 -7 7 -7
+             h6
+             c2 0 4 1 6 2" fill="none" stroke="url(#av)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- subtle shadow -->
+  <ellipse cx="160" cy="206" rx="96" ry="12" fill="#0B1020" opacity="0.07"/>
+</svg>

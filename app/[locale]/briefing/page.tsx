@@ -6,7 +6,7 @@ import LanguageSwitcher from '../../../components/LanguageSwitcher'
 import PrintButton from '../../../components/PrintButton'
 
 export const metadata = {
-  title: 'Briefing • Gateway & System — aSAFEBOX®',
+  title: 'Briefing • Gateway & System — In aSAFEBOX®',
   robots: { index: false, follow: false },
 }
 

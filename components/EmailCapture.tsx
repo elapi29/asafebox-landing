@@ -86,4 +86,3 @@ export default function EmailCapture({ placeholder, cta, successPath = '/thanks/
     </form>
   )
 }
-
