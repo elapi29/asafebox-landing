@@ -63,18 +63,18 @@ export default async function IntroductionPage({ params }: { params: { locale: L
             </thead>
             <tbody className="divide-y divide-slate-100">
               <tr>
-                <td className="px-4 py-3"><strong>Camión</strong> que mueve la caja</td>
+                <td className="px-4 py-3"><strong>Camión que mueve la caja</strong></td>
                 <td className="px-4 py-3"><strong>Blockchain</strong></td>
                 <td className="px-4 py-3">Que el contenedor llega intacto y nadie reordena las cajas.</td>
               </tr>
               <tr>
                 <td className="px-4 py-3"><strong>Escáner de rayos X y aduana</strong></td>
-                <td className="px-4 py-3"><strong>Blockchecker</strong></td>
+                <td className="px-4 py-3"><strong>In aSafebox® Blockchecker</strong></td>
                 <td className="px-4 py-3">Que la caja no trae mercancía falsa y lo registrado coincide con la realidad física.</td>
               </tr>
               <tr>
                 <td className="px-4 py-3"><strong>Candado con llave dual</strong></td>
-                <td className="px-4 py-3"><strong>Firma con Privacidad Absoluta entre 2 o más Agentes</strong></td>
+                <td className="px-4 py-3"><strong>In aSafebox® Blockruler - Firma con Privacidad Absoluta entre 2 o más Agentes</strong></td>
                 <td className="px-4 py-3">Que dos custodios distintos aprueban abrir/cerrar — y queda constancia.</td>
               </tr>
             </tbody>
@@ -88,12 +88,12 @@ export default async function IntroductionPage({ params }: { params: { locale: L
             body="Garantiza que nadie reordena o borra bloques; reloj público y prueba de no-repudio."
           />
           <Card
-            title="Integridad del contenido → HMAC + ZK + Gateway-Verify"
+            title="Integridad del contenido → Blockchecker"
             body="Demuestra que el dato dentro del bloque es exactamente el que salió del emisor; rechaza duplicados (nonce)."
           />
           <Card
-            title="Responsabilidad humana → Firmas duales + flags"
-            body="Quién aprobó y con qué reglas (Ax/Rx). Permite congelar y revertir si un custodio incumple."
+            title="Responsabilidad humana → Blockruler"
+            body="Quién aprobó y con qué reglas (Smart Contract Flags). Permite congelar y revertir si un custodio incumple."
           />
         </div>
 
@@ -125,14 +125,14 @@ export default async function IntroductionPage({ params }: { params: { locale: L
             </thead>
             <tbody className="divide-y divide-slate-100">
               <tr>
-                <td className="px-4 py-3">Alguien altera un JSON antes de firmar</td>
+                <td className="px-4 py-3">Alguien altera un BLOQUE antes de firmar</td>
                 <td className="px-4 py-3">❌ No — el bloque guardará el dato alterado “para siempre”.</td>
-                <td className="px-4 py-3">✅ HMAC no cuadra → <strong>409 + freeze</strong>.</td>
+                <td className="px-4 py-3">✅ Blockchecker no cuadra → <strong>Error + Freeze</strong>.</td>
               </tr>
               <tr>
                 <td className="px-4 py-3">Se re-envía el mismo mensaje (replay)</td>
                 <td className="px-4 py-3">❌ La cadena lo aceptaría como transacción nueva.</td>
-                <td className="px-4 py-3">✅ Nonce duplicado → <strong>400 + freeze</strong>.</td>
+                <td className="px-4 py-3">✅ Blockchecker → <strong>Error + Freeze</strong>.</td>
               </tr>
               <tr>
                 <td className="px-4 py-3">Custodio firma bajo coacción</td>
@@ -146,7 +146,7 @@ export default async function IntroductionPage({ params }: { params: { locale: L
         <blockquote className="mt-6 rounded-xl border-l-4 border-slate-300 bg-slate-50 p-4 text-slate-700">
           <p className="font-medium">Frase-síntesis</p>
           <p className="mt-1">
-            “La blockchain es el libro contable; el side-car de verificación es el auditor de cada asiento; y
+            “La blockchain es el libro contable; In aSafebox® es el Blockcheker, Blockruler y puede ejecutar auditoría pre- y post-Blockchain de cada asiento; y
             las firmas duales son los jefes de contabilidad que aprueban con llave doble.
             Solo con los tres tienes trazabilidad que resiste auditorías y ataques.”
           </p>
@@ -187,8 +187,8 @@ export default async function IntroductionPage({ params }: { params: { locale: L
 
         <p className="mt-6 text-slate-700">
           <strong>Moraleja.</strong> Blockchain = transporte + precinto: asegura orden e integridad del envío.
-          La <em>verificación de paquete</em> (Gateway-Verify, HMAC, ZK) confirma autenticidad, vigencia y no-repetición.
-          La <em>gobernanza</em> (firmas HSM duales, flags Controlados) hace cumplir reglas humanas antes de liquidar.
+          La <em>verificación de paquete</em> confirma autenticidad, vigencia y no-repetición.
+          La <em>gobernanza</em> (firmas duales, flags Controlados) hace cumplir reglas humanas antes de liquidar.
         </p>
       </section>
 
