@@ -97,9 +97,10 @@ export default async function IntroductionPage({ params }: { params: { locale: L
           />
         </div>
 
-        <p className="mt-3 text-sm text-slate-600">
+        {/*<p className="mt-3 text-sm text-slate-600">
           Sin la 2 y la 3, solo tienes “datos ordenados”, no trazabilidad auditada.
-        </p>
+        </p>*/}
+
       </section>
 
       {/* Branding conceptual (acuñar nombres) */}
