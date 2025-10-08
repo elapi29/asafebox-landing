@@ -105,7 +105,7 @@ export default async function IntroductionPage({ params }: { params: { locale: L
 
       {/* Branding conceptual (acuñar nombres) */}
       <section className="mx-auto max-w-5xl py-10">
-        <h2 className="text-2xl font-semibold">In aSafeBox®: Blockchecker · Blocksender · Blockauditory · Blockruler</h2>
+        <h2 className="text-2xl font-semibold">In aSafeBox®: Blockchecker · Blocksender · Blockauditory · Blockflags</h2>
         <p className="mt-2 text-slate-600">
           Un esquema que separa transporte, verificación de contenido, auditoría y gobierno humano —
           para que cada bloque no solo esté ordenado, sino verificado y gobernado.
