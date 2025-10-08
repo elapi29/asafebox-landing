@@ -25,7 +25,6 @@ export default async function IntroductionPage({ params }: { params: { locale: L
           />
         </div>
 
-        {/* bloques técnicos (opcionales) */}
         <div className="mt-10 grid gap-8">
           <SystemLegend />
           <GatewayLegend />
