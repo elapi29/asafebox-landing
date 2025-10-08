@@ -1,53 +1,34 @@
-// components/EmailCapture.tsx
+// components/EmailCapture.tsx  (déjalo como lo tenías)
 'use client'
 
-import { useState, FormEvent } from 'react'
+import { useState } from 'react'
 
 type Props = {
   placeholder: string
   cta: string
-  successPath?: string // default: '/thanks/'
+  successPath?: string
 }
 
 export default function EmailCapture({ placeholder, cta, successPath = '/thanks/' }: Props) {
   const [email, setEmail] = useState('')
-
-  // Si TENÉS Formsprree, setealo en env. Si no, action queda vacío.
   const action = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || ''
 
-  // Construye nextUrl respetando basePath (local y GitHub Pages)
-  const buildNextUrl = () => {
-    const envBase = process.env.NEXT_PUBLIC_BASE_PATH || ''
-    if (envBase) return `${envBase}${successPath}`
-    if (typeof window !== 'undefined') {
-      const base = window.location.pathname.startsWith('/asafebox-landing') ? '/asafebox-landing' : ''
-      return `${base}${successPath}`
-    }
-    return successPath
-  }
-  const nextUrl = buildNextUrl()
-
-  // Si no hay action (sin Formspree), intercepto y redirijo manualmente
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    if (!action) {
-      e.preventDefault()
-      window.location.assign(nextUrl)
-    }
-  }
+  const base = process.env.NEXT_PUBLIC_BASE_PATH || ''
+  const nextUrl = `${base}${successPath}`
 
   return (
     <form
       action={action || undefined}
       method="POST"
-      onSubmit={onSubmit}
       className="mx-auto flex w-full max-w-md items-center gap-2 rounded-xl border border-slate-200 bg-white p-2 shadow-sm"
     >
-      {/* Con Formspree, _next hace el redirect server-side */}
+      {/* Redirect en Formspree */}
       {action ? <input type="hidden" name="_next" value={nextUrl} /> : null}
 
+      {/* Campo requerido por Formspree */}
       <input
         type="email"
-        name="email"
+        name="email"            // ⬅️ clave: debe llamarse 'email' (o el nombre que esperes en Formspree)
         required
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -55,6 +36,10 @@ export default function EmailCapture({ placeholder, cta, successPath = '/thanks/
         className="w-full rounded-lg border-0 px-3 py-2 text-base outline-none placeholder:text-slate-400 focus:ring-2 focus:ring-brand-500"
         aria-label="Email"
       />
+
+      {/* Opcional: asunto personalizado en Formspree */}
+      <input type="hidden" name="_subject" value="New signup from AsafeBox Landing" />
+
       <button
         type="submit"
         className="whitespace-nowrap rounded-lg bg-brand-900 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-800 focus-visible:outline-2 focus-visible:outline-offset-2"
