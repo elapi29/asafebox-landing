@@ -2,25 +2,36 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useRef, useEffect } from 'react';
-import NextImage from 'next/image';
+import { useEffect, useState, useRef } from 'react';
 
 const LOCALES = ['es', 'en', 'de'] as const;
 
+/** Detecta el basePath en runtime:
+ *  - En prod (GitHub Pages): "/asafebox-landing"
+ *  - En dev/local: ""
+ */
+function useBasePath() {
+  const [bp, setBp] = useState('');
+  useEffect(() => {
+    const p = window.location.pathname || '';
+    setBp(p.startsWith('/asafebox-landing') ? '/asafebox-landing' : '');
+  }, []);
+  return bp;
+}
+
 export default function TopBar({ locale }: { locale: string }) {
-  const home = `/${locale}/`;
+  const basePath = useBasePath();
+  const home = `/${locale}/`; // ¡con slash final!
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
-  // cerrar dropdown al click afuera / ESC
+  // close dropdown al click afuera / ESC
   useEffect(() => {
-    function onDoc(e: MouseEvent) {
+    const onDoc = (e: MouseEvent) => {
       if (!menuRef.current) return;
       if (!menuRef.current.contains(e.target as Node)) setOpen(false);
-    }
-    function onEsc(e: KeyboardEvent) {
-      if (e.key === 'Escape') setOpen(false);
-    }
+    };
+    const onEsc = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
     document.addEventListener('mousedown', onDoc);
     document.addEventListener('keydown', onEsc);
     return () => {
@@ -29,20 +40,25 @@ export default function TopBar({ locale }: { locale: string }) {
     };
   }, []);
 
+  const logoSvg = `${basePath}/brand/asafebox-wordmark.svg`;
+  const logoPng = `${basePath}/brand/asafebox-wordmark.png`;
+
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <div className="glass mx-auto flex max-w-6xl items-center justify-between rounded-b-2xl px-4 py-3">
-        {/* LOGO grande (como zkSync) */}
+        {/* LOGO grande, estilo zkSync */}
         <Link href={home} className="flex items-center gap-2" prefetch={false}>
-          <NextImage
-            src="/brand/asafebox-wordmark.svg"   // usa .png si ese archivo es el que tenés
-            alt="AsafeBox®"
-            width={176}
-            height={36}
-            priority
-            unoptimized
-            className="h-8 w-auto md:h-9"
-          />
+          <picture>
+            <source srcSet={logoSvg} type="image/svg+xml" />
+            <img
+              src={logoPng}
+              alt="AsafeBox®"
+              width={176}
+              height={36}
+              className="h-8 w-auto md:h-9"
+              decoding="async"
+            />
+          </picture>
         </Link>
 
         <nav className="flex items-center gap-6 text-sm font-medium text-slate-700">
@@ -68,12 +84,12 @@ export default function TopBar({ locale }: { locale: string }) {
             {open && (
               <div
                 role="menu"
-                className="absolute right-0 mt-2 w-72 rounded-xl border border-slate-200 bg-white p-2 shadow-lg"
+                className="absolute right-0 mt-2 w-80 rounded-xl border border-slate-200 bg-white p-2 shadow-lg"
               >
-                <MenuItem href={`${home}products/signature-pq`} label="Signature PQ-ready Connect" />
-                <MenuItem href={`${home}products/blind-reveal`}   label="Blind-Reveal Connect" />
-                <MenuItem href={`${home}products/audit`}          label="Audit Connect" />
-                <MenuItem href={`${home}products/mtls-pq`}        label="mTLS PQ-Ready" />
+                <MenuItem href={`${home}products/signature-pq`}   label="Signature PQ-ready Connect" />
+                <MenuItem href={`${home}products/blind-reveal`}    label="Blind-Reveal Connect" />
+                <MenuItem href={`${home}products/audit`}           label="Audit Connect" />
+                <MenuItem href={`${home}products/mtls-pq`}         label="mTLS PQ-Ready" />
                 <MenuItem href={`${home}products/blindreveal-gov`} label="BlindReveal Governing Connect" />
               </div>
             )}

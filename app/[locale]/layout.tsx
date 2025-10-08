@@ -18,7 +18,6 @@ export default function LocaleLayout({
 }) {
   return (
     <html lang={params.locale}>
-      {/* padding-top para despegar el contenido del TopBar fijo*/}
       <body className="min-h-screen bg-white text-slate-900 antialiased pt-20">
         <TopBar locale={params.locale} />
         <main>{children}</main>
