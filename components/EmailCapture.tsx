@@ -1,29 +1,50 @@
 // components/EmailCapture.tsx
 'use client'
 
-import { useState } from 'react'
+import { useState, FormEvent } from 'react'
 
 type Props = {
   placeholder: string
   cta: string
-  successPath?: string
+  successPath?: string // default: '/thanks/'
 }
 
-export default function EmailCapture({ placeholder, cta, successPath = '/thanks' }: Props) {
+export default function EmailCapture({ placeholder, cta, successPath = '/thanks/' }: Props) {
   const [email, setEmail] = useState('')
+
+  // Si TENÉS Formsprree, setealo en env. Si no, action queda vacío.
   const action = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || ''
 
-  // Para GitHub Pages con basePath
-  const base = process.env.NEXT_PUBLIC_BASE_PATH || ''
-  const nextUrl = `${base}${successPath}`
+  // Construye nextUrl respetando basePath (local y GitHub Pages)
+  const buildNextUrl = () => {
+    const envBase = process.env.NEXT_PUBLIC_BASE_PATH || ''
+    if (envBase) return `${envBase}${successPath}`
+    if (typeof window !== 'undefined') {
+      const base = window.location.pathname.startsWith('/asafebox-landing') ? '/asafebox-landing' : ''
+      return `${base}${successPath}`
+    }
+    return successPath
+  }
+  const nextUrl = buildNextUrl()
+
+  // Si no hay action (sin Formspree), intercepto y redirijo manualmente
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    if (!action) {
+      e.preventDefault()
+      window.location.assign(nextUrl)
+    }
+  }
 
   return (
     <form
-      action={action}
+      action={action || undefined}
       method="POST"
+      onSubmit={onSubmit}
       className="mx-auto flex w-full max-w-md items-center gap-2 rounded-xl border border-slate-200 bg-white p-2 shadow-sm"
     >
-      <input type="hidden" name="_next" value={nextUrl} />
+      {/* Con Formspree, _next hace el redirect server-side */}
+      {action ? <input type="hidden" name="_next" value={nextUrl} /> : null}
+
       <input
         type="email"
         name="email"
