@@ -26,7 +26,7 @@ export default function TopBar({ locale }: { locale: string }) {
     };
   }, []);
 
-  const logo = withBase('/brand/asafebox-wordmark.png'); // ✅ existe
+  const logo = withBase('/brand/asafebox-logo.svg'); // ✅ existe
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
