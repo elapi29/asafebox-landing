@@ -12,7 +12,6 @@ export default function TopBar({ locale }: { locale: string }) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
-  // cerrar dropdown al click afuera / ESC
   useEffect(() => {
     const onDoc = (e: MouseEvent) => {
       if (!menuRef.current) return;
@@ -27,14 +26,12 @@ export default function TopBar({ locale }: { locale: string }) {
     };
   }, []);
 
-  const logo = withBase('/brand/asafebox-wordmark.png'); // ✅ EXISTE
-  <Link href={home} prefetch={false} className="flex items-center gap-2">
-    <img src={logo} alt="In aSAFEBOX®" width={176} height={36} className="h-9 w-auto md:h-10" />
-  </Link>
+  const logo = withBase('/brand/asafebox-wordmark.png'); // ✅ existe
+
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <div className="glass mx-auto flex max-w-6xl items-center justify-between rounded-b-2xl px-4 py-3">
-        {/* LOGO (PNG real, grande) */}
+        {/* LOGO grande */}
         <Link href={home} className="flex items-center gap-2" prefetch={false}>
           <img
             src={logo}
@@ -71,11 +68,11 @@ export default function TopBar({ locale }: { locale: string }) {
                 role="menu"
                 className="absolute right-0 mt-2 w-80 rounded-xl border border-slate-200 bg-white p-2 shadow-lg"
               >
-                <MenuItem href={`${home}products/signature-pq`}    label="Signature PQ-ready Connect" />
+                <MenuItem href={`${home}products/signature-pq`}   label="Signature PQ-ready Connect" />
                 <MenuItem href={`${home}products/blind-reveal`}    label="Blind-Reveal Connect" />
-                <MenuItem href={`${home}products/audit`}           label="Ultrafast Audit Connect" />
+                <MenuItem href={`${home}products/audit`}           label="Audit Connect" />
                 <MenuItem href={`${home}products/mtls-pq`}         label="mTLS PQ-Ready" />
-                <MenuItem href={`${home}products/blindreveal-gov`} label="KYC Governing Connect" />
+                <MenuItem href={`${home}products/blindreveal-gov`} label="Governing Connect" />
               </div>
             )}
           </div>
