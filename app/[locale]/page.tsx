@@ -1,12 +1,13 @@
-// app/[locale]/under-construction/page.tsx
-import { getDictionary, Locale } from '../../../i18n/dictionaries'
-import UnderConstruction from '../../../components/UnderConstruction'
-import Footer from '../../../components/Footer'
+// app/[locale]/page.tsx
+import { getDictionary, Locale } from '../../i18n/dictionaries'
+import UnderConstruction from '../../components/UnderConstruction'
+import Footer from '../../components/Footer'
 
-export default async function UnderConstructionPage({
+export default async function LocaleHome({
   params,
 }: { params: { locale: Locale } }) {
-  const dict = await getDictionary(params.locale)
+  // Si querés usar el dict más adelante, lo dejamos cargado
+  await getDictionary(params.locale)
 
   return (
     <main className="px-6 py-16">
