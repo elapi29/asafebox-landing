@@ -74,13 +74,13 @@ export default function IntroductionPage({ params }: { params: { locale: Locale 
           <li>**Simple setup**: hosted endpoints + templates; no crypto expertise required.</li>
         </ul>
         <div className="mt-6 flex flex-wrap gap-3">
-          <a href={`/${params.locale}/industries/real-estate/`} className="btn">
+          <a href={`/${locale}/under-construction/`} className="btn"> 
             Real Estate
           </a>
-          <a href={`/${params.locale}/industries/jewelry/`} className="btn">
+          <a href={`/${locale}/under-construction/`} className="btn">
             Jewelry
           </a>
-          <a href={`/${params.locale}/#contact`} className="btn-secondary">
+          <a href={`/${locale}/under-construction/`} className="btn-secondary">
             Talk to us
           </a>
         </div>
@@ -95,13 +95,13 @@ export default function IntroductionPage({ params }: { params: { locale: Locale 
           <li>**Privacy by design**: ZK proofs to validate claims without exposing secrets.</li>
         </ul>
         <div className="mt-6 flex flex-wrap gap-3">
-          <a href={`/${params.locale}/industries/banking/`} className="btn">
+          <a href={`/${locale}/under-construction/`} className="btn">
             Banking
           </a>
-          <a href={`/${params.locale}/industries/fintech/`} className="btn">
+          <a href={`/${locale}/under-construction/`} className="btn">
             Fintech
           </a>
-          <a href={`/${params.locale}/#contact`} className="btn-secondary">
+          <a href={`/${locale}/under-construction/`} className="btn-secondary">
             Request a briefing
           </a>
         </div>
@@ -116,11 +116,11 @@ export default function IntroductionPage({ params }: { params: { locale: Locale 
           <Card title="Audit Connect" body="Hash-linked logs and integrity seals for mass verification." />
         </div>
         <div className="mt-6 flex flex-wrap gap-3">
-          <a href={`/${params.locale}/products/signature-pq/`} className="btn">Signature PQ-ready</a>
-          <a href={`/${params.locale}/products/blind-reveal/`} className="btn">Blind-Reveal</a>
-          <a href={`/${params.locale}/products/audit/`} className="btn">Audit</a>
-          <a href={`/${params.locale}/products/mtls-pq/`} className="btn">mTLS PQ-Ready</a>
-          <a href={`/${params.locale}/products/blindreveal-gov/`} className="btn">Governing</a>
+          <a href={`/${locale}/under-construction/`} className="btn">Signature PQ-ready</a>
+          <a href={`/${locale}/under-construction/`} className="btn">Blind-Reveal</a>
+          <a href={`/${locale}/under-construction/`} className="btn">Audit</a>
+          <a href={`/${locale}/under-construction/`} className="btn">mTLS PQ-Ready</a>
+          <a href={`/${locale}/under-construction/`} className="btn">Governing</a>
         </div>
       </section>
 

@@ -1,38 +1,35 @@
 // app/[locale]/products/[slug]/page.tsx
-import type { Locale } from '../../../../i18n/dictionaries';
-import UnderConstruction from '../../../../components/UnderConstruction';
-import Footer from '../../../../components/Footer';
+import UnderConstruction from '../../../../components/UnderConstruction'
+import type { Locale } from '../../../../i18n/dictionaries'
 
-export const dynamicParams = false;
-
-// slugs que queremos pre-generar (deben matchear los del TopBar y chips)
-const SLUGS = [
-  'signature-pq',
-  'blind-reveal',
-  'audit',
-  'mtls-pq',
-  'blindreveal-gov',
-];
-
-// Next export necesita saber todos los params para este segmento dinámico
+/**
+ * IMPORTANT for `output: "export"`:
+ * Pre-generate all locale+slug combinations so GitHub Pages has real files.
+ */
 export function generateStaticParams() {
-  // OJO: los locales ya se generan en app/[locale]/layout.tsx
-  // En este nivel solo devolvemos slug
-  return SLUGS.map((slug) => ({ slug }));
+  const locales: Locale[] = ['es', 'en', 'de']
+  const slugs = [
+    'signature-pq',
+    'blind-reveal',
+    'audit',
+    'mtls-pq',
+    'blindreveal-gov',
+  ]
+
+  return locales.flatMap((locale) =>
+    slugs.map((slug) => ({ locale, slug }))
+  )
 }
 
-export default function ProductUnderConstruction({
+export default function ProductPlaceholderPage({
   params,
 }: {
-  params: { locale: Locale; slug: string };
+  params: { locale: Locale; slug: string }
 }) {
-  // Mostramos la misma pantalla “Under construction”
+  // We render UC directly — no redirect — so the page is static.
   return (
     <main className="px-6 py-16">
       <UnderConstruction locale={params.locale} />
-      <div className="mt-12">
-        <Footer locale={params.locale} />
-      </div>
     </main>
-  );
+  )
 }
