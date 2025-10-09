@@ -1,4 +1,3 @@
-// components/TopBar.tsx
 'use client';
 
 import Link from 'next/link';
@@ -7,9 +6,7 @@ import { withBase } from './lib/withBase';
 
 const LOCALES = ['es', 'en', 'de'] as const;
 
-// ───────────────────────────────────────────────────────────────────────────────
-// ÍCONOS (SVG inline)
-// ───────────────────────────────────────────────────────────────────────────────
+// Íconos
 const SignatureIcon = ({ className = 'h-5 w-5' }) => (
   <svg viewBox="0 0 24 24" className={className} aria-hidden>
     <path d="M3 21h6M4 17l9-9 4 4-9 9H4zM14 8l2-2 4 4-2 2" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
@@ -76,8 +73,7 @@ const PaperIcon = ({ className = 'h-5 w-5' }) => (
   </svg>
 );
 
-// chevron pequeño en stroke para evitar triángulos gigantes
-const ChevronDown = ({ className = 'h-4 w-4 flex-none' }) => (
+const ChevronDown = ({ className = 'h-4 w-4' }) => (
   <svg viewBox="0 0 20 20" className={className} aria-hidden>
     <path d="M6 8l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
   </svg>
@@ -92,17 +88,8 @@ const CloseIcon = ({ className = 'h-6 w-6' }) => (
     <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
   </svg>
 );
-// 1) Añadí este chevron mini (stroke, tamaño fijo)
-const TinyChevron = ({ up = false }: { up?: boolean }) => (
-  <svg width="12" height="12" viewBox="0 0 24 24" className={`ml-2 flex-none ${up ? 'rotate-180' : ''}`} aria-hidden>
-    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
-  </svg>
-);
 
-
-// ───────────────────────────────────────────────────────────────────────────────
-// MenuItem reutilizable
-// ───────────────────────────────────────────────────────────────────────────────
+// MenuItem
 function MenuItem({
   href,
   label,
@@ -136,18 +123,15 @@ export default function TopBar({ locale }: { locale: string }) {
   const home = `/${locale}/`;
   const logo = withBase('/brand/asafebox-logo.svg');
 
-  // Desktop dropdowns
   const [openProducts, setOpenProducts] = useState(false);
   const [openIntro, setOpenIntro] = useState(false);
   const productsRef = useRef<HTMLDivElement | null>(null);
   const introRef = useRef<HTMLDivElement | null>(null);
 
-  // Mobile panel
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobIntroOpen, setMobIntroOpen] = useState(false);
   const [mobProductsOpen, setMobProductsOpen] = useState(false);
 
-  // Cierre por click afuera / ESC
   useEffect(() => {
     const onDoc = (e: MouseEvent) => {
       if (productsRef.current && !productsRef.current.contains(e.target as Node)) setOpenProducts(false);
@@ -168,11 +152,19 @@ export default function TopBar({ locale }: { locale: string }) {
     };
   }, []);
 
+  const closeAllMenus = () => {
+    setOpenIntro(false);
+    setOpenProducts(false);
+    setMobileOpen(false);
+  };
+
+  // URL centralizada a under-construction por locale
+  const uc = withBase(`/${locale}/under-construction/`);
+
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <div className="glass mx-auto flex max-w-6xl items-center justify-between rounded-b-2xl px-3 py-2 sm:px-4 sm:py-3">
-        {/* LOGO */}
-        <Link href={home} className="flex min-w-0 items-center gap-2" prefetch={false}>
+        <Link href={withBase(home)} className="flex min-w-0 items-center gap-2" prefetch={false}>
           <img
             src={logo}
             alt="In aSAFEBOX®"
@@ -183,9 +175,9 @@ export default function TopBar({ locale }: { locale: string }) {
           />
         </Link>
 
-        {/* Desktop nav */}
+        {/* Desktop */}
         <nav className="hidden items-center gap-6 text-sm font-medium text-slate-700 md:flex">
-          {/* Introduction dropdown (desktop) */}
+          {/* Introduction */}
           <div className="relative" ref={introRef}>
             <button
               type="button"
@@ -199,17 +191,17 @@ export default function TopBar({ locale }: { locale: string }) {
             </button>
             {openIntro && (
               <div role="menu" className="absolute right-0 mt-2 w-96 rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
-                <MenuItem href={`${home}introduction/#what-is`}        label="A. What is In aSafeBox®" Icon={WhatIcon} />
-                <MenuItem href={`${home}introduction/#how-it-works`}   label="B. How it works"          Icon={HowIcon} />
-                <MenuItem href={`${home}introduction/#small-business`} label="C. For Small Businesses"  Icon={SMBIcon} />
-                <MenuItem href={`${home}introduction/#institutions`}   label="D. For Institutions"      Icon={InstIcon} />
-                <MenuItem href={`${home}introduction/#developers`}     label="E. Developers"            Icon={DevIcon} />
-                <MenuItem href={`${home}introduction/#white-paper`}    label="F. White Paper"           Icon={PaperIcon} />
+                <MenuItem href={withBase(`/${locale}/introduction/#what-is`)}        label="A. What is In aSafeBox®" Icon={WhatIcon} onClick={closeAllMenus}/>
+                <MenuItem href={withBase(`/${locale}/introduction/#how-it-works`)}   label="B. How it works"          Icon={HowIcon} onClick={closeAllMenus}/>
+                <MenuItem href={withBase(`/${locale}/introduction/#small-business`)} label="C. For Small Businesses"  Icon={SMBIcon} onClick={closeAllMenus}/>
+                <MenuItem href={withBase(`/${locale}/introduction/#institutions`)}   label="D. For Institutions"      Icon={InstIcon} onClick={closeAllMenus}/>
+                <MenuItem href={withBase(`/${locale}/introduction/#developers`)}     label="E. Developers"            Icon={DevIcon} onClick={closeAllMenus}/>
+                <MenuItem href={withBase(`/${locale}/introduction/#white-paper`)}    label="F. White Paper"           Icon={PaperIcon} onClick={closeAllMenus}/>
               </div>
             )}
           </div>
 
-          {/* Products dropdown (desktop) */}
+          {/* Products → SIEMPRE under-construction */}
           <div className="relative" ref={productsRef}>
             <button
               type="button"
@@ -223,27 +215,20 @@ export default function TopBar({ locale }: { locale: string }) {
             </button>
             {openProducts && (
               <div role="menu" className="absolute right-0 mt-2 w-80 rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
-                <MenuItem href={`${home}products/signature-pq`}    label="Signature PQ-ready Connect"    Icon={SignatureIcon} />
-                <MenuItem href={`${home}products/blind-reveal`}    label="Blockaudit · Blind-Reveal"     Icon={ZKIcon} />
-                <MenuItem href={`${home}products/audit`}           label="Blockchecker · Audit"           Icon={AuditIcon} />
-                <MenuItem href={`${home}products/mtls-pq`}         label="Blocksender · mTLS PQ-Ready"    Icon={MtlsIcon} />
-                <MenuItem href={`${home}products/blindreveal-gov`} label="Blockcontrol · Governing"       Icon={GovIcon} /> 
-                {/*// dentro del dropdown de Products (desktop)
-                <MenuItem href={`${home}under-construction/`} label="Signature PQ-ready Connect" Icon={SignatureIcon} />
-                <MenuItem href={`${home}under-construction/`} label="Blockaudit · Blind-Reveal"  Icon={ZKIcon} />
-                <MenuItem href={`${home}under-construction/`} label="Blockchecker · Audit"      Icon={AuditIcon} />
-                <MenuItem href={`${home}under-construction/`} label="Blocksender · mTLS PQ-Ready" Icon={MtlsIcon} />
-                <MenuItem href={`${home}under-construction/`} label="Blockcontrol · Governing"   Icon={GovIcon} />*/}
-
+                <MenuItem href={uc} label="Signature PQ-ready Connect" Icon={SignatureIcon} onClick={closeAllMenus}/>
+                <MenuItem href={uc} label="Blockaudit · Blind-Reveal"  Icon={ZKIcon}       onClick={closeAllMenus}/>
+                <MenuItem href={uc} label="Blockchecker · Audit"       Icon={AuditIcon}    onClick={closeAllMenus}/>
+                <MenuItem href={uc} label="Blocksender · mTLS PQ-Ready" Icon={MtlsIcon}    onClick={closeAllMenus}/>
+                <MenuItem href={uc} label="Blockcontrol · Governing"   Icon={GovIcon}      onClick={closeAllMenus}/>
               </div>
             )}
           </div>
 
-          <Link href={`${home}#contact`} className="hover:underline" prefetch={false}>
+          <Link href={withBase(`/${locale}/#contact`)} className="hover:underline" prefetch={false}>
             Contact
           </Link>
 
-          {/* Language Switcher (desktop) */}
+          {/* Idiomas */}
           <div className="ml-2 flex items-center gap-2">
             {LOCALES.map(code => {
               const href = `/${code}/`;
@@ -251,7 +236,7 @@ export default function TopBar({ locale }: { locale: string }) {
               return (
                 <Link
                   key={code}
-                  href={href}
+                  href={withBase(href)}
                   prefetch={false}
                   className={`rounded-md px-2 py-1 ${active ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'}`}
                   aria-current={active ? 'page' : undefined}
@@ -263,7 +248,7 @@ export default function TopBar({ locale }: { locale: string }) {
           </div>
         </nav>
 
-        {/* Mobile hamburger */}
+        {/* Mobile */}
         <button
           type="button"
           className="inline-flex items-center rounded-md p-2 text-slate-700 hover:bg-slate-100 md:hidden"
@@ -275,10 +260,10 @@ export default function TopBar({ locale }: { locale: string }) {
         </button>
       </div>
 
-      {/* Mobile panel (compacto, con transición de altura) */}
+      {/* Panel mobile */}
       {mobileOpen && (
         <div className="mx-auto block max-w-6xl rounded-b-2xl border-x border-b border-slate-200 bg-white px-3 pb-3 pt-2 shadow md:hidden">
-          {/* Introduction accordion */}
+          {/* Introduction */}
           <button
             type="button"
             onClick={() => setMobIntroOpen(v => !v)}
@@ -290,23 +275,20 @@ export default function TopBar({ locale }: { locale: string }) {
               <HowIcon className="h-[18px] w-[18px] shrink-0" />
               Introduction
             </span>
-            <TinyChevron up={mobIntroOpen} />
+            <ChevronDown className={`h-4 w-4 shrink-0 text-slate-700 transition-transform duration-200 ${mobIntroOpen ? 'rotate-180' : ''}`} />
           </button>
-          <div
-            id="mob-intro"
-            className={`overflow-hidden rounded-lg bg-slate-50 transition-[max-height] duration-300 ease-out ${mobIntroOpen ? 'max-h-96' : 'max-h-0'}`}
-          >
+          <div id="mob-intro" className={`overflow-hidden rounded-lg bg-slate-50 transition-[max-height] duration-300 ease-out ${mobIntroOpen ? 'max-h-96' : 'max-h-0'}`}>
             <div className="p-2 space-y-1">
-              <MenuItem href={`${home}introduction/#what-is`}        label="A. What is In aSafeBox®" Icon={WhatIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={`${home}introduction/#how-it-works`}   label="B. How it works"          Icon={HowIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={`${home}introduction/#small-business`} label="C. For Small Businesses"  Icon={SMBIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={`${home}introduction/#institutions`}   label="D. For Institutions"      Icon={InstIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={`${home}introduction/#developers`}     label="E. Developers"            Icon={DevIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={`${home}introduction/#white-paper`}    label="F. White Paper"           Icon={PaperIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={withBase(`/${locale}/introduction/#what-is`)}        label="A. What is In aSafeBox®" Icon={WhatIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={withBase(`/${locale}/introduction/#how-it-works`)}   label="B. How it works"          Icon={HowIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={withBase(`/${locale}/introduction/#small-business`)} label="C. For Small Businesses"  Icon={SMBIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={withBase(`/${locale}/introduction/#institutions`)}   label="D. For Institutions"      Icon={InstIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={withBase(`/${locale}/introduction/#developers`)}     label="E. Developers"            Icon={DevIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={withBase(`/${locale}/introduction/#white-paper`)}    label="F. White Paper"           Icon={PaperIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
             </div>
           </div>
 
-          {/* Products accordion */}
+          {/* Products → SIEMPRE under-construction */}
           <button
             type="button"
             onClick={() => setMobProductsOpen(v => !v)}
@@ -318,32 +300,20 @@ export default function TopBar({ locale }: { locale: string }) {
               <SignatureIcon className="h-[18px] w-[18px] shrink-0" />
               Products
             </span>
-              <TinyChevron up={mobProductsOpen} />
+            <ChevronDown className={`h-4 w-4 shrink-0 text-slate-700 transition-transform duration-200 ${mobProductsOpen ? 'rotate-180' : ''}`} />
           </button>
-          <div
-            id="mob-products"
-            className={`overflow-hidden rounded-lg bg-slate-50 transition-[max-height] duration-300 ease-out ${mobProductsOpen ? 'max-h-96' : 'max-h-0'}`}
-          >
+          <div id="mob-products" className={`overflow-hidden rounded-lg bg-slate-50 transition-[max-height] duration-300 ease-out ${mobProductsOpen ? 'max-h-96' : 'max-h-0'}`}>
             <div className="p-2 space-y-1">
-              
-              <MenuItem href={`${home}products/signature-pq`}    label="Signature PQ-ready Connect"     Icon={SignatureIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={`${home}products/blind-reveal`}    label="Blockaudit · Blind-Reveal"      Icon={ZKIcon}       onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={`${home}products/audit`}           label="Blockchecker · Audit"            Icon={AuditIcon}    onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={`${home}products/mtls-pq`}         label="Blocksender · mTLS PQ-Ready"     Icon={MtlsIcon}     onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={`${home}products/blindreveal-gov`} label="Blockcontrol · Governing"        Icon={GovIcon}      onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-
-              {/*<MenuItem href={`${home}under-construction/`} label="Signature PQ-ready Connect" Icon={SignatureIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={`${home}under-construction/`} label="Blockaudit · Blind-Reveal"  Icon={ZKIcon}       onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={`${home}under-construction/`} label="Blockchecker · Audit"       Icon={AuditIcon}    onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={`${home}under-construction/`} label="Blocksender · mTLS PQ-Ready" Icon={MtlsIcon}    onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={`${home}under-construction/`} label="Blockcontrol · Governing"   Icon={GovIcon}      onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />*/}
-
+              <MenuItem href={uc} label="Signature PQ-ready Connect" Icon={SignatureIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={uc} label="Blockaudit · Blind-Reveal"  Icon={ZKIcon}       onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={uc} label="Blockchecker · Audit"       Icon={AuditIcon}    onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={uc} label="Blocksender · mTLS PQ-Ready" Icon={MtlsIcon}    onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={uc} label="Blockcontrol · Governing"   Icon={GovIcon}      onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
             </div>
           </div>
 
-          {/* Contact */}
           <Link
-            href={`${home}#contact`}
+            href={withBase(`/${locale}/#contact`)}
             prefetch={false}
             className="mt-2 block rounded-lg px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-50"
             onClick={() => setMobileOpen(false)}
@@ -351,7 +321,7 @@ export default function TopBar({ locale }: { locale: string }) {
             Contact
           </Link>
 
-          {/* Language Switcher (mobile) */}
+          {/* Idiomas mobile */}
           <div className="mt-2 flex items-center gap-2 px-1">
             {LOCALES.map(code => {
               const href = `/${code}/`;
@@ -359,7 +329,7 @@ export default function TopBar({ locale }: { locale: string }) {
               return (
                 <Link
                   key={code}
-                  href={href}
+                  href={withBase(href)}
                   prefetch={false}
                   className={`min-w-[44px] rounded-md px-3 py-2 text-center text-sm ${active ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'}`}
                   aria-current={active ? 'page' : undefined}
