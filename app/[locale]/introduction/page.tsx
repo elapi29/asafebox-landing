@@ -1,210 +1,160 @@
 // app/[locale]/introduction/page.tsx
-import { getDictionary, Locale } from '../../../i18n/dictionaries'
+import type { Locale } from '../../../i18n/dictionaries'
 import Illustration from '../../../components/Illustration'
+import BlindRevealIllo from '../../../components/illos/BlindRevealIllo'
 import SystemLegend from '../../../components/SystemLegend'
 import GatewayLegend from '../../../components/GatewayLegend'
 import Footer from '../../../components/Footer'
 
-// 👇 importa la ilustración neutral ZK
-import BlindRevealIllo from '../../../components/illos/BlindRevealIllo'
-
-export default async function IntroductionPage({ params }: { params: { locale: Locale } }) {
-  const dict = await getDictionary(params.locale)
-
+export default function IntroductionPage({ params }: { params: { locale: Locale } }) {
   return (
-    <main id="intro" className="px-6">
-      {/* H1 + subtítulo (tu copy de "Cómo funciona") */}
-      <section className="mx-auto max-w-5xl py-10">
-        <h1 className="text-3xl font-bold">{dict.howItWorks.title}</h1>
-        <p className="mt-2 text-slate-600">{dict.howItWorks.subtitle}</p>
+    <main className="px-6">
+      {/* A. What is In aSafeBox® */}
+      <section id="what-is" className="mx-auto max-w-6xl py-10">
+        <h1 className="text-3xl font-bold">What is In aSafeBox®</h1>
+        <p className="mt-3 text-slate-700">
+          In aSafeBox® is a **trust layer** for data and transactions. It separates
+          transport, content verification, audit, and human governance so every record
+          is not only ordered, but **verified** and **policy-compliant**.
+        </p>
 
-        {/* Diagrama general (cadena → identidad cegada) */}
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <Card
+            title="Blocksender"
+            body="Authenticated, PQ-ready transport (mTLS) to move events securely from A→B."
+          />
+          <Card
+            title="Blockchecker"
+            body="Content integrity: HMAC/nonce and zero-knowledge checks to reject tampering or replay."
+          />
+          <Card
+            title="Blockruler & Blockauditory"
+            body="Dual approvals, flags, and immutable evidence to satisfy policy and audits."
+          />
+        </div>
+      </section>
+
+      {/* B. How it works */}
+      <section id="how-it-works" className="mx-auto max-w-6xl py-10">
+        <h2 className="text-2xl font-semibold">How it works</h2>
+        <p className="mt-2 text-slate-700">
+          From an immutable chain of evidence to a blinded identity — all under a post-quantum-ready transport.
+        </p>
+
+        {/* Vista general (sender → ledger → blind identity → receiver) */}
         <div className="mt-8">
           <Illustration
-            transportLabel={dict.illustration.transport}
-            sender={dict.illustration.sender}
-            ledger={dict.illustration.ledger}
-            blindId={dict.illustration.blindId}
-            receiver={dict.illustration.receiver}
-            caption={dict.illustration.caption}
+            transportLabel="Post-Quantum-Ready Transport Security"
+            sender="Sender"
+            ledger="Immutable Ledger"
+            blindId="Blinded Identity"
+            receiver="Receiver"
+            caption="Authenticated transport, tamper-proof evidence and privacy by design."
           />
         </div>
-      </section>
 
-      {/* Zoom: Blind-Reveal / ZK (ilustración neutral) */}
-      <section className="mx-auto max-w-5xl py-10">
-        <h2 className="text-2xl font-semibold">Blind-Reveal / Verificación con ZK</h2>
-        <p className="mt-2 text-slate-600">
-          Validez del dato sin exponerlo: el emisor demuestra que un enunciado es cierto,
-          y el verificador lo comprueba sin ver el dato sensible.
-        </p>
-        <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-4">
-          <BlindRevealIllo className="w-full h-auto" />
-        </div>
-      </section>
-
-      {/* Trazabilidad ≠ simplemente poner todo en una blockchain */}
-      <section className="mx-auto max-w-5xl py-10">
-        <h2 className="text-2xl font-semibold">Trazabilidad ≠ simplemente “poner todo en una blockchain”</h2>
-        <p className="mt-2 text-slate-600">
-          La cadena garantiza orden y sello de tiempo. La trazabilidad real exige además validar contenido y
-          hacer cumplir reglas humanas antes de liquidar.
-        </p>
-
-        {/* Tabla 1: analogía logística */}
-        <div className="mt-6 overflow-x-auto rounded-2xl border border-slate-200 bg-white">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-slate-50 text-slate-600">
-              <tr>
-                <th className="px-4 py-3">Etapa del envío</th>
-                <th className="px-4 py-3">¿Quién la cubre?</th>
-                <th className="px-4 py-3">Qué garantiza</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              <tr>
-                <td className="px-4 py-3"><strong>Camión que mueve la caja</strong></td>
-                <td className="px-4 py-3"><strong>Blockchain</strong></td>
-                <td className="px-4 py-3">Que el contenedor llega intacto y nadie reordena las cajas.</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3"><strong>Escáner de rayos X y aduana</strong></td>
-                <td className="px-4 py-3"><strong>In aSafebox® Blockchecker</strong></td>
-                <td className="px-4 py-3">Que la caja no trae mercancía falsa y lo registrado coincide con la realidad física.</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3"><strong>Candado con llave dual</strong></td>
-                <td className="px-4 py-3"><strong>In aSafebox® Blockruler - Firma con Privacidad Absoluta entre 2 o más Agentes</strong></td>
-                <td className="px-4 py-3">Que dos custodios distintos aprueban abrir/cerrar — y queda constancia.</td>
-              </tr>
-            </tbody>
-          </table>
+        {/* Zoom en Blind-Reveal / ZK */}
+        <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-4">
+          <BlindRevealIllo className="h-auto w-full" />
         </div>
 
-        {/* Tres capas de trazabilidad */}
         <div className="mt-8 grid gap-4 md:grid-cols-3">
-          <Card
-            title="Integridad de secuencia → Blockchain"
-            body="Garantiza que nadie reordena o borra bloques; reloj público y prueba de no-repudio."
-          />
-          <Card
-            title="Integridad del contenido → Blockchecker"
-            body="Demuestra que el dato dentro del bloque es exactamente el que salió del emisor; rechaza duplicados (nonce)."
-          />
-          <Card
-            title="Responsabilidad humana → Blockruler"
-            body="Quién aprobó y con qué reglas (Smart Contract Flags). Permite congelar y revertir si un custodio incumple."
-          />
+          <Card title="Sequence integrity" body="Blockchain ordering + timestamping you can’t rewrite." />
+          <Card title="Content integrity" body="Blockchecker: the JSON you verify is the JSON that gets recorded." />
+          <Card title="Human governance" body="Dual-signing & flags to enforce policies before settlement." />
         </div>
-
-        {/*<p className="mt-3 text-sm text-slate-600">
-          Sin la 2 y la 3, solo tienes “datos ordenados”, no trazabilidad auditada.
-        </p>*/}
-
       </section>
 
-      {/* Branding conceptual (acuñar nombres) */}
-      <section className="mx-auto max-w-5xl py-10">
-        <h2 className="text-2xl font-semibold">In aSafeBox®: Blockchecker · Blocksender · Blockauditory · Blockflags</h2>
-        <p className="mt-2 text-slate-600">
-          Un esquema que separa transporte, verificación de contenido, auditoría y gobierno humano —
-          para que cada bloque no solo esté ordenado, sino verificado y gobernado.
+      {/* C. For Small Businesses */}
+      <section id="small-business" className="mx-auto max-w-6xl py-10">
+        <h2 className="text-2xl font-semibold">For Small Businesses</h2>
+        <ul className="mt-3 list-disc space-y-2 pl-5 text-slate-700">
+          <li>**Verify documents** with a QR in seconds (sales, invoices, PoS slips).</li>
+          <li>**Onboard clients** with sealed, auditable KYC without exposing raw PII.</li>
+          <li>**Simple setup**: hosted endpoints + templates; no crypto expertise required.</li>
+        </ul>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a href={`/${params.locale}/industries/real-estate/`} className="btn">
+            Real Estate
+          </a>
+          <a href={`/${params.locale}/industries/jewelry/`} className="btn">
+            Jewelry
+          </a>
+          <a href={`/${params.locale}/#contact`} className="btn-secondary">
+            Talk to us
+          </a>
+        </div>
+      </section>
+
+      {/* D. For Institutions */}
+      <section id="institutions" className="mx-auto max-w-6xl py-10">
+        <h2 className="text-2xl font-semibold">For Institutions</h2>
+        <ul className="mt-3 list-disc space-y-2 pl-5 text-slate-700">
+          <li>**Audit-ready evidence** streams: immutable, chain-linked, and explainable.</li>
+          <li>**Policy flags & dual approvals**: freeze paths and reversible workflows.</li>
+          <li>**Privacy by design**: ZK proofs to validate claims without exposing secrets.</li>
+        </ul>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a href={`/${params.locale}/industries/banking/`} className="btn">
+            Banking
+          </a>
+          <a href={`/${params.locale}/industries/fintech/`} className="btn">
+            Fintech
+          </a>
+          <a href={`/${params.locale}/#contact`} className="btn-secondary">
+            Request a briefing
+          </a>
+        </div>
+      </section>
+
+      {/* E. Developers */}
+      <section id="developers" className="mx-auto max-w-6xl py-10">
+        <h2 className="text-2xl font-semibold">Developers</h2>
+        <div className="mt-3 grid gap-4 md:grid-cols-3">
+          <Card title="Signature PQ-ready Connect" body="Endpoints + clients for PQ mTLS and tamper-proof signing." />
+          <Card title="Blind-Reveal Connect" body="ZK-friendly flows: prove facts without revealing sensitive payloads." />
+          <Card title="Audit Connect" body="Hash-linked logs and integrity seals for mass verification." />
+        </div>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a href={`/${params.locale}/products/signature-pq/`} className="btn">Signature PQ-ready</a>
+          <a href={`/${params.locale}/products/blind-reveal/`} className="btn">Blind-Reveal</a>
+          <a href={`/${params.locale}/products/audit/`} className="btn">Audit</a>
+          <a href={`/${params.locale}/products/mtls-pq/`} className="btn">mTLS PQ-Ready</a>
+          <a href={`/${params.locale}/products/blindreveal-gov/`} className="btn">Governing</a>
+        </div>
+      </section>
+
+      {/* F. White Paper */}
+      <section id="white-paper" className="mx-auto max-w-6xl py-10">
+        <h2 className="text-2xl font-semibold">White Paper</h2>
+        <p className="mt-2 text-slate-700">
+          Dive deeper into the design goals, threat models and formal guarantees behind In aSafeBox®.
         </p>
+        {/* reemplazá href por el path real si ya tenés el PDF publicado */}
+        <a
+          href="#"
+          className="mt-4 inline-block rounded-xl bg-slate-900 px-5 py-3 text-white shadow hover:bg-slate-800"
+        >
+          Download White Paper (PDF)
+        </a>
       </section>
 
-      {/* Tabla 2: qué detecta (solo chain vs nuestro esquema) */}
-      <section className="mx-auto max-w-5xl py-10">
-        <h3 className="text-xl font-semibold">Cobertura comparada</h3>
-        <div className="mt-4 overflow-x-auto rounded-2xl border border-slate-200 bg-white">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-slate-50 text-slate-600">
-              <tr>
-                <th className="px-4 py-3">Suceso real</th>
-                <th className="px-4 py-3">¿Lo detecta solo la chain?</th>
-                <th className="px-4 py-3">¿Lo detecta nuestro esquema?</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              <tr>
-                <td className="px-4 py-3">Alguien altera un BLOQUE antes de firmar</td>
-                <td className="px-4 py-3">❌ No — el bloque guardará el dato alterado “para siempre”.</td>
-                <td className="px-4 py-3">✅ Blockchecker no cuadra → <strong>Error + Freeze</strong>.</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3">Se re-envía el mismo mensaje (replay)</td>
-                <td className="px-4 py-3">❌ La cadena lo aceptaría como transacción nueva.</td>
-                <td className="px-4 py-3">✅ Blockchecker → <strong>Error + Freeze</strong>.</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3">Custodio firma bajo coacción</td>
-                <td className="px-4 py-3">✅ Guarda la firma.</td>
-                <td className="px-4 py-3">✅ Firma existe <em>pero</em> el otro custodio levanta flag <strong>Rx</strong> y congela antes de asentar.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <blockquote className="mt-6 rounded-xl border-l-4 border-slate-300 bg-slate-50 p-4 text-slate-700">
-          <p className="font-medium">Frase-síntesis</p>
-          <p className="mt-1">
-            “La blockchain es el libro contable; In aSafebox® es el Blockcheker, Blockruler y puede ejecutar auditoría pre- y post-Blockchain de cada asiento; y
-            las firmas duales son los jefes de contabilidad que aprueban con llave doble.
-            Solo con los tres tienes trazabilidad que resiste auditorías y ataques.”
-          </p>
-        </blockquote>
-      </section>
-
-      {/* Tabla 3: qué hace/no hace el “camión” (otra analogía) */}
-      <section className="mx-auto max-w-5xl py-10">
-        <h3 className="text-xl font-semibold">Qué hace y qué no hace el “camión”</h3>
-        <div className="mt-4 overflow-x-auto rounded-2xl border border-slate-200 bg-white">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-slate-50 text-slate-600">
-              <tr>
-                <th className="px-4 py-3">Propiedad</th>
-                <th className="px-4 py-3">¿Qué hace el camión?</th>
-                <th className="px-4 py-3">¿Qué NO hace, aun siendo excelente?</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              <tr>
-                <td className="px-4 py-3"><strong>Movimiento ordenado</strong></td>
-                <td className="px-4 py-3">Lleva las cajas del punto A al B sin saltarse ninguna.</td>
-                <td className="px-4 py-3">No abre cajas para ver si el contenido coincide con lo declarado.</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3"><strong>Rastro visible</strong></td>
-                <td className="px-4 py-3">Queda constancia pública de la ruta y tiempos.</td>
-                <td className="px-4 py-3">No certifica si la carga venía alterada desde el origen.</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3"><strong>Precinto del remolque</strong></td>
-                <td className="px-4 py-3">Sella puertas; si alguien rompe, se detecta.</td>
-                <td className="px-4 py-3">No evita que una caja falsa se cargue antes del precinto.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <p className="mt-6 text-slate-700">
-          <strong>Moraleja.</strong> Blockchain = transporte + precinto: asegura orden e integridad del envío.
-          La <em>verificación de paquete</em> confirma autenticidad, vigencia y no-repetición.
-          La <em>gobernanza</em> (firmas duales, flags Controlados) hace cumplir reglas humanas antes de liquidar.
-        </p>
-      </section>
-
-      {/*<section className="mx-auto max-w-5xl pb-12">
+      {/* Diagramas / leyendas (opcional, deja valor visual) */}
+      <section id="diagrams" className="mx-auto max-w-6xl pb-14">
         <SystemLegend />
         <div className="mt-6">
           <GatewayLegend />
         </div>
-      </section>*/}
+      </section>
 
       <Footer locale={params.locale} />
     </main>
   )
 }
 
+// —————————————————————————————————————————————————————————————
+// helpers de UI (botones y cards)
+// —————————————————————————————————————————————————————————————
 function Card({ title, body }: { title: string; body: string }) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-4">

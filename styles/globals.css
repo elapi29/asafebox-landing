@@ -20,3 +20,11 @@
   body { background: #fff; }
   main { padding: 0; }
 }
+
+.btn {
+  @apply inline-flex items-center rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-slate-800;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-50;
+}

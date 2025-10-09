@@ -1,4 +1,3 @@
-// components/TopBar.tsx
 'use client';
 
 import Link from 'next/link';
@@ -42,8 +41,44 @@ const GovIcon = ({ className = 'h-4 w-4' }) => (
   </svg>
 );
 
+// Pictos para Introduction (A–F)
+const WhatIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden>
+    <path d="M4 7h16M4 12h10M4 17h7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
+  </svg>
+);
+const HowIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden>
+    <path d="M5 5h6v6H5zM13 5h6v6h-6zM9 13h6v6H9z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/>
+  </svg>
+);
+const SMBIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden>
+    <path d="M4 20V8l8-3 8 3v12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/>
+    <path d="M9 20v-6h6v6" fill="none" stroke="currentColor" strokeWidth="1.8"/>
+  </svg>
+);
+const InstIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden>
+    <path d="M3 10l9-6 9 6v9H3z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/>
+    <path d="M7 19v-6h10v6" fill="none" stroke="currentColor" strokeWidth="1.8"/>
+  </svg>
+);
+const DevIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden>
+    <path d="M8 12l-3 3 3 3M16 12l3 3-3 3" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+    <path d="M14 7l-4 10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+  </svg>
+);
+const PaperIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden>
+    <path d="M7 3h7l5 5v13H7z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/>
+    <path d="M14 3v6h6" fill="none" stroke="currentColor" strokeWidth="1.8"/>
+  </svg>
+);
+
 // ───────────────────────────────────────────────────────────────────────────────
-// Ítem del menú con ícono
+// Item del menú con icono
 // ───────────────────────────────────────────────────────────────────────────────
 function MenuItem({
   href,
@@ -71,15 +106,23 @@ function MenuItem({
 
 export default function TopBar({ locale }: { locale: string }) {
   const home = `/${locale}/`; // slash final: importante en GitHub Pages
-  const [open, setOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement | null>(null);
+  const [openProducts, setOpenProducts] = useState(false);
+  const [openIntro, setOpenIntro] = useState(false);
+  const productsRef = useRef<HTMLDivElement | null>(null);
+  const introRef = useRef<HTMLDivElement | null>(null);
 
+  // cierre por click afuera / ESC para ambos menús
   useEffect(() => {
     const onDoc = (e: MouseEvent) => {
-      if (!menuRef.current) return;
-      if (!menuRef.current.contains(e.target as Node)) setOpen(false);
+      if (productsRef.current && !productsRef.current.contains(e.target as Node)) setOpenProducts(false);
+      if (introRef.current && !introRef.current.contains(e.target as Node)) setOpenIntro(false);
     };
-    const onEsc = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    const onEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setOpenProducts(false);
+        setOpenIntro(false);
+      }
+    };
     document.addEventListener('mousedown', onDoc);
     document.addEventListener('keydown', onEsc);
     return () => {
@@ -106,18 +149,44 @@ export default function TopBar({ locale }: { locale: string }) {
         </Link>
 
         <nav className="flex items-center gap-6 text-sm font-medium text-slate-700">
-          <Link href={`${home}introduction/`} className="hover:underline" prefetch={false}>
-            Introduction
-          </Link>
-
-          {/* Products (dropdown con iconos) */}
-          <div className="relative" ref={menuRef}>
+          {/* Introduction (dropdown A–F) */}
+          <div className="relative" ref={introRef}>
             <button
               type="button"
-              onClick={() => setOpen(v => !v)}
+              onClick={() => setOpenIntro(v => !v)}
               className="inline-flex items-center gap-1 rounded-md px-2 py-1 hover:bg-slate-100"
               aria-haspopup="menu"
-              aria-expanded={open}
+              aria-expanded={openIntro}
+            >
+              Introduction
+              <svg viewBox="0 0 20 20" className="h-4 w-4" aria-hidden>
+                <path d="M6 8l4 4 4-4" fill="currentColor" />
+              </svg>
+            </button>
+
+            {openIntro && (
+              <div
+                role="menu"
+                className="absolute right-0 mt-2 w-96 rounded-xl border border-slate-200 bg-white p-2 shadow-lg"
+              >
+                <MenuItem href={`${home}introduction/#what-is`}        label="A. What is In aSafeBox®" Icon={WhatIcon} />
+                <MenuItem href={`${home}introduction/#how-it-works`}   label="B. How it works"          Icon={HowIcon} />
+                <MenuItem href={`${home}introduction/#small-business`} label="C. For Small Businesses"  Icon={SMBIcon} />
+                <MenuItem href={`${home}introduction/#institutions`}   label="D. For Institutions"      Icon={InstIcon} />
+                <MenuItem href={`${home}introduction/#developers`}     label="E. Developers"            Icon={DevIcon} />
+                <MenuItem href={`${home}introduction/#white-paper`}    label="F. White Paper"           Icon={PaperIcon} />
+              </div>
+            )}
+          </div>
+
+          {/* Products (dropdown con iconos) */}
+          <div className="relative" ref={productsRef}>
+            <button
+              type="button"
+              onClick={() => setOpenProducts(v => !v)}
+              className="inline-flex items-center gap-1 rounded-md px-2 py-1 hover:bg-slate-100"
+              aria-haspopup="menu"
+              aria-expanded={openProducts}
             >
               Products
               <svg viewBox="0 0 20 20" className="h-4 w-4" aria-hidden>
@@ -125,36 +194,16 @@ export default function TopBar({ locale }: { locale: string }) {
               </svg>
             </button>
 
-            {open && (
+            {openProducts && (
               <div
                 role="menu"
                 className="absolute right-0 mt-2 w-80 rounded-xl border border-slate-200 bg-white p-2 shadow-lg"
               >
-                <MenuItem
-                  href={`${home}products/signature-pq`}
-                  label="Signature PQ-ready Connect"
-                  Icon={SignatureIcon}
-                />
-                <MenuItem
-                  href={`${home}products/blind-reveal`}
-                  label="Blockaudit · Blind-Reveal"
-                  Icon={ZKIcon}
-                />
-                <MenuItem
-                  href={`${home}products/audit`}
-                  label="Blockchecker · Audit"
-                  Icon={AuditIcon}
-                />
-                <MenuItem
-                  href={`${home}products/mtls-pq`}
-                  label="Blocksender · mTLS PQ-Ready"
-                  Icon={MtlsIcon}
-                />
-                <MenuItem
-                  href={`${home}products/blindreveal-gov`}
-                  label="Blockcontrol · Governing"
-                  Icon={GovIcon}
-                />
+                <MenuItem href={`${home}products/signature-pq`}    label="Signature PQ-ready Connect"    Icon={SignatureIcon} />
+                <MenuItem href={`${home}products/blind-reveal`}    label="Blockaudit · Blind-Reveal"     Icon={ZKIcon} />
+                <MenuItem href={`${home}products/audit`}           label="Blockchecker · Audit"           Icon={AuditIcon} />
+                <MenuItem href={`${home}products/mtls-pq`}         label="Blocksender · mTLS PQ-Ready"    Icon={MtlsIcon} />
+                <MenuItem href={`${home}products/blindreveal-gov`} label="Blockcontrol · Governing"       Icon={GovIcon} />
               </div>
             )}
           </div>

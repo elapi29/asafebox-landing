@@ -1,91 +1,233 @@
-// components/TwoFlows.tsx
-export default function TwoFlows() {
+// components/TopBar.tsx
+'use client';
+
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
+import { withBase } from './lib/withBase';
+
+const LOCALES = ['es', 'en', 'de'] as const;
+
+// ───────────────────────────────────────────────────────────────────────────────
+// ÍCONOS (SVG inline, livianos y consistentes)
+// ───────────────────────────────────────────────────────────────────────────────
+const SignatureIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden>
+    <path d="M3 21h6M4 17l9-9 4 4-9 9H4zM14 8l2-2 4 4-2 2" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+const ZKIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden>
+    <path d="M2 12s3-6 10-6 10 6 10 6-3 6-10 6-10-6-10-6z" fill="none" stroke="currentColor" strokeWidth="1.8"/>
+    <circle cx="12" cy="12" r="3" fill="currentColor"/>
+    <path d="M16.5 6.5l4 4M7.5 17.5l-4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+  </svg>
+);
+const AuditIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden>
+    <rect x="4" y="4" width="12" height="16" rx="2" fill="none" stroke="currentColor" strokeWidth="1.8"/>
+    <path d="M8 9h6M8 13h6M16 16l4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+  </svg>
+);
+const MtlsIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden>
+    <rect x="3" y="10" width="14" height="9" rx="2" fill="none" stroke="currentColor" strokeWidth="1.8"/>
+    <path d="M10 10V7a4 4 0 1 1 8 0v3" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+    <path d="M5 14h10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+  </svg>
+);
+const GovIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden>
+    <path d="M4 20h16M7 20l7-7 3 3-7 4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M12 9l2-2 3 3-2 2z" fill="currentColor"/>
+  </svg>
+);
+
+// Pictos simples para secciones de Introduction
+const OverviewIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden>
+    <path d="M4 7h16M4 12h10M4 17h7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
+  </svg>
+);
+const TraceIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden>
+    <path d="M4 18l6-6 4 4 6-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
+  </svg>
+);
+const MatrixIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden>
+    <rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" strokeWidth="1.8"/>
+    <path d="M4 12h16M12 4v16" stroke="currentColor" strokeWidth="1.8"/>
+  </svg>
+);
+const TruckIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden>
+    <path d="M3 16h13V9H9l-2-3H3zM16 13h3l2 3v3h-5z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/>
+    <circle cx="7" cy="19" r="2" fill="currentColor"/><circle cx="18" cy="19" r="2" fill="currentColor"/>
+  </svg>
+);
+const DiagramIcon = ({ className = 'h-4 w-4' }) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden>
+    <path d="M5 5h6v6H5zM13 5h6v6h-6zM9 13h6v6H9z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/>
+  </svg>
+);
+
+// ───────────────────────────────────────────────────────────────────────────────
+// Ítem del menú con ícono
+// ───────────────────────────────────────────────────────────────────────────────
+function MenuItem({
+  href,
+  label,
+  Icon,
+}: {
+  href: string;
+  label: string;
+  Icon: (p: { className?: string }) => JSX.Element;
+}) {
   return (
-    <section className="mx-auto max-w-6xl px-6 py-12 space-y-14">
-      {/* ====== Flujo 1 ====== */}
-      <figure className="rounded-2xl border border-slate-200 p-5 shadow-sm bg-white">
-        <figcaption className="mb-4 text-center text-lg font-semibold text-slate-900">
-          Emisor → Receptor
-        </figcaption>
+    <Link
+      href={href}
+      prefetch={false}
+      role="menuitem"
+      className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-slate-800 hover:bg-slate-50 focus:bg-slate-50"
+    >
+      <span className="rounded-md bg-slate-100 p-2 text-slate-700">
+        <Icon className="h-4 w-4" />
+      </span>
+      <span className="leading-none">{label}</span>
+    </Link>
+  );
+}
 
-        <svg viewBox="0 0 1200 300" className="w-full h-auto" role="img" aria-label="Flujo 1: Emisor a Receptor">
-          {/* Banda superior: Comunicación Encriptada Post-Cuántica */}
-          <rect x="20" y="20" width="1160" height="60" rx="12" className="fill-blue-100" />
-          <text x="600" y="58" textAnchor="middle" className="fill-blue-900 text-sm">
-            Comunicación Encriptada Post-Cuántica (mTLS PQ-Ready)
-          </text>
+export default function TopBar({ locale }: { locale: string }) {
+  const home = `/${locale}/`; // slash final: importante en GitHub Pages
+  const [openProducts, setOpenProducts] = useState(false);
+  const [openIntro, setOpenIntro] = useState(false);
+  const productsRef = useRef<HTMLDivElement | null>(null);
+  const introRef = useRef<HTMLDivElement | null>(null);
 
-          {/* Subtítulo de protección */}
-          <text x="600" y="100" textAnchor="middle" className="fill-slate-600 text-[12px]">
-            Protegido por Encadenamiento Inmutable
-          </text>
+  // cierre por click afuera / ESC para ambos menús
+  useEffect(() => {
+    const onDoc = (e: MouseEvent) => {
+      if (productsRef.current && !productsRef.current.contains(e.target as Node)) setOpenProducts(false);
+      if (introRef.current && !introRef.current.contains(e.target as Node)) setOpenIntro(false);
+    };
+    const onEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setOpenProducts(false);
+        setOpenIntro(false);
+      }
+    };
+    document.addEventListener('mousedown', onDoc);
+    document.addEventListener('keydown', onEsc);
+    return () => {
+      document.removeEventListener('mousedown', onDoc);
+      document.removeEventListener('keydown', onEsc);
+    };
+  }, []);
 
-          {/* Línea de flujo */}
-          <line x1="80" y1="190" x2="1120" y2="190" className="stroke-slate-300" strokeWidth="4" strokeDasharray="6 8"/>
+  const logo = withBase('/brand/asafebox-logo.svg'); // ✅ existe
 
-          {/* Emisor → Receptor */}
-          {[
-            { x:160,  title:"Emisor" },
-            { x:1040, title:"Receptor" },
-          ].map((b, i) => (
-            <g key={i} transform={`translate(${b.x}, 190)`}>
-              <rect x="-110" y="-40" width="220" height="80" rx="14" className="fill-white stroke-slate-300" />
-              <text x="0" y="6" textAnchor="middle" className="fill-slate-900 text-[14px] font-semibold">{b.title}</text>
-            </g>
-          ))}
+  return (
+    <header className="fixed inset-x-0 top-0 z-50">
+      <div className="glass mx-auto flex max-w-6xl items-center justify-between rounded-b-2xl px-4 py-3">
+        {/* LOGO */}
+        <Link href={home} className="flex items-center gap-2" prefetch={false}>
+          <img
+            src={logo}
+            alt="In aSAFEBOX®"
+            width={176}
+            height={36}
+            className="h-9 w-auto md:h-10"
+            decoding="async"
+          />
+        </Link>
 
-          {/* Flechas intermedias + “encadenamiento” (tres eslabones) */}
-          <g transform="translate(600,190)">
-            <polygon points="-30,0 -5,10 -5,-10" className="fill-slate-300" />
-            <circle cx="10" cy="0" r="6" className="fill-slate-300" />
-            <circle cx="34" cy="0" r="6" className="fill-slate-300" />
-            <circle cx="58" cy="0" r="6" className="fill-slate-300" />
-            <polygon points="85,0 110,10 110,-10" className="fill-slate-300" />
-          </g>
-        </svg>
-      </figure>
+        <nav className="flex items-center gap-6 text-sm font-medium text-slate-700">
+          {/* Introduction (dropdown con secciones internas) */}
+          <div className="relative" ref={introRef}>
+            <button
+              type="button"
+              onClick={() => setOpenIntro(v => !v)}
+              className="inline-flex items-center gap-1 rounded-md px-2 py-1 hover:bg-slate-100"
+              aria-haspopup="menu"
+              aria-expanded={openIntro}
+            >
+              Introduction
+              <svg viewBox="0 0 20 20" className="h-4 w-4" aria-hidden>
+                <path d="M6 8l4 4 4-4" fill="currentColor" />
+              </svg>
+            </button>
 
-      {/* ====== Flujo 2 ====== */}
-      <figure className="rounded-2xl border border-slate-200 p-5 shadow-sm bg-white">
-        <figcaption className="mb-4 text-center text-lg font-semibold text-slate-900">
-          Ledger Inmutable + Identidad Cegada
-        </figcaption>
-
-        <svg viewBox="0 0 1200 340" className="w-full h-auto" role="img" aria-label="Flujo 2: Ledger inmutable e identidad cegada">
-          {/* Banda superior: protección de clientes */}
-          <rect x="20" y="20" width="1160" height="60" rx="12" className="fill-blue-100" />
-          <text x="600" y="58" textAnchor="middle" className="fill-blue-900 text-sm">
-            Protección máxima de clientes con Identidad Cegada
-          </text>
-
-          {/* Grid de Ledger (millones de transacciones) */}
-          <text x="270" y="110" textAnchor="middle" className="fill-slate-600 text-[12px]">
-            Ledger Inmutable de millones de transacciones
-          </text>
-          <g transform="translate(270,170)">
-            {Array.from({ length: 6 }).map((_, r) =>
-              Array.from({ length: 8 }).map((__, c) => (
-                <rect key={`${r}-${c}`} x={c*22-85} y={r*16-40} width="18" height="12" rx="2" className="fill-slate-300" />
-              ))
+            {openIntro && (
+              <div
+                role="menu"
+                className="absolute right-0 mt-2 w-96 rounded-xl border border-slate-200 bg-white p-2 shadow-lg"
+              >
+                <MenuItem href={`${home}introduction/#overview`}         label="Overview"                 Icon={OverviewIcon} />
+                <MenuItem href={`${home}introduction/#blind-reveal`}     label="Blind-Reveal · ZK"        Icon={ZKIcon} />
+                <MenuItem href={`${home}introduction/#traceability`}     label="Traceability ≠ blockchain" Icon={TraceIcon} />
+                <MenuItem href={`${home}introduction/#coverage-matrix`}  label="Coverage matrix"          Icon={MatrixIcon} />
+                <MenuItem href={`${home}introduction/#truck-analogy`}    label="Logistics analogy"        Icon={TruckIcon} />
+                <MenuItem href={`${home}introduction/#diagrams`}         label="Diagrams & Legends"       Icon={DiagramIcon} />
+              </div>
             )}
-            {/* Raíz / hash agregado */}
-            <rect x="90" y="-18" width="90" height="36" rx="6" className="fill-white stroke-slate-300" />
-            <text x="135" y="2" textAnchor="middle" className="fill-slate-900 text-[12px]">Raíz Merkle</text>
-          </g>
+          </div>
 
-          {/* Flecha hacia Identidad Cegada */}
-          <polygon points="540,170 570,180 570,160" className="fill-slate-300" />
+          {/* Products (dropdown con íconos) */}
+          <div className="relative" ref={productsRef}>
+            <button
+              type="button"
+              onClick={() => setOpenProducts(v => !v)}
+              className="inline-flex items-center gap-1 rounded-md px-2 py-1 hover:bg-slate-100"
+              aria-haspopup="menu"
+              aria-expanded={openProducts}
+            >
+              Products
+              <svg viewBox="0 0 20 20" className="h-4 w-4" aria-hidden>
+                <path d="M6 8l4 4 4-4" fill="currentColor" />
+              </svg>
+            </button>
 
-          {/* Identidad Cegada (blind) */}
-          <g transform="translate(880,170)">
-            <rect x="-140" y="-50" width="280" height="100" rx="14" className="fill-white stroke-slate-300" />
-            <text x="0" y="-10" textAnchor="middle" className="fill-slate-900 text-[14px] font-semibold">Identidad Cegada</text>
-            <text x="0" y="18" textAnchor="middle" className="fill-slate-600 text-[12px]">
-              Validez sin exponer datos del cliente
-            </text>
-          </g>
-        </svg>
-      </figure>
-    </section>
-  )
+            {openProducts && (
+              <div
+                role="menu"
+                className="absolute right-0 mt-2 w-80 rounded-xl border border-slate-200 bg-white p-2 shadow-lg"
+              >
+                <MenuItem href={`${home}products/signature-pq`}    label="Signature PQ-ready Connect"    Icon={SignatureIcon} />
+                <MenuItem href={`${home}products/blind-reveal`}    label="Blockaudit · Blind-Reveal"     Icon={ZKIcon} />
+                <MenuItem href={`${home}products/audit`}           label="Blockchecker · Audit"           Icon={AuditIcon} />
+                <MenuItem href={`${home}products/mtls-pq`}         label="Blocksender · mTLS PQ-Ready"    Icon={MtlsIcon} />
+                <MenuItem href={`${home}products/blindreveal-gov`} label="Blockcontrol · Governing"       Icon={GovIcon} />
+              </div>
+            )}
+          </div>
+
+          <Link href={`${home}#contact`} className="hover:underline" prefetch={false}>
+            Contact
+          </Link>
+
+          {/* Language Switcher */}
+          <div className="ml-2 flex items-center gap-2">
+            {LOCALES.map(code => {
+              const href = `/${code}/`;
+              const active = code === locale;
+              return (
+                <Link
+                  key={code}
+                  href={href}
+                  prefetch={false}
+                  className={`rounded-md px-2 py-1 ${
+                    active ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'
+                  }`}
+                  aria-current={active ? 'page' : undefined}
+                >
+                  {code.toUpperCase()}
+                </Link>
+              );
+            })}
+          </div>
+        </nav>
+      </div>
+    </header>
+  );
 }
