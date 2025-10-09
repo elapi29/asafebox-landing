@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { withBase } from './lib/withBase' // ⬅️ importa el helper
 
 type Locale = 'es' | 'en' | 'de'
 type ChipInput = string | { label: string; href?: string }
@@ -8,31 +9,23 @@ export default function FeatureChips({
   items,
   compact = false,
 }: {
-  /** Si pasás locale y no pasás items → modo automático con links a /products */
   locale?: Locale
-  /** Si pasás items → modo custom. Puede ser string[] o {label, href}[] */
   items?: ChipInput[]
-  /** Tamaño compacto opcional */
   compact?: boolean
 }) {
-  // Estilo común
   const pill = `rounded-2xl bg-slate-900 text-white hover:bg-slate-800 ${
     compact ? 'px-4 py-2 text-sm' : 'px-6 py-3'
   }`
 
-  // ───────────────────────────────────────────────────────────────────────────
-  // MODO A (AUTO POR LOCALE): si NO hay items, construir chips de Products
-  // ───────────────────────────────────────────────────────────────────────────
+  // MODO A: auto por locale → apunta a /{locale}/products/*
   if (!items || items.length === 0) {
-    // Fallback defensivo si no llegó locale (evita crashear en build)
     const loc = (locale || 'en') as Locale
-    const base = `/${loc}/products/`
     const chips = [
-      { label: 'Signature PQ-ready', href: base + 'signature-pq/' },
-      { label: 'Blind-Reveal',       href: base + 'blind-reveal/' },
-      { label: 'Audit',              href: base + 'audit/' },
-      { label: 'mTLS PQ-Ready',      href: base + 'mtls-pq/' },
-      { label: 'Governing',          href: base + 'blindreveal-gov/' },
+      { label: 'Signature PQ-ready', href: withBase(`/${loc}/products/signature-pq/`) },
+      { label: 'Blind-Reveal',       href: withBase(`/${loc}/products/blind-reveal/`) },
+      { label: 'Audit',              href: withBase(`/${loc}/products/audit/`) },
+      { label: 'mTLS PQ-Ready',      href: withBase(`/${loc}/products/mtls-pq/`) },
+      { label: 'Governing',          href: withBase(`/${loc}/products/blindreveal-gov/`) },
     ]
 
     return (
@@ -46,18 +39,18 @@ export default function FeatureChips({
     )
   }
 
-  // ───────────────────────────────────────────────────────────────────────────
-  // MODO B (CUSTOM): items provistos por el caller (string[] o {label, href}[])
-  // ───────────────────────────────────────────────────────────────────────────
-  const norm = items.map<Required<Pick<ChipInput & { label: string }, 'label'>> & { href?: string }>(
-    it => (typeof it === 'string' ? { label: it } : { label: it.label, href: it.href })
+  // MODO B: custom (string[] o {label, href}[])
+  const norm = items.map(it =>
+    typeof it === 'string' ? { label: it } : { label: it.label, href: it.href }
   )
 
   return (
     <div className="mt-6 flex flex-wrap gap-4">
-      {norm.map((c) =>
-        c.href ? (
-          <Link key={c.label} href={c.href} prefetch={false} className={pill}>
+      {norm.map((c) => {
+        // si el caller pasó href interno (empieza con /), lo pasamos por withBase
+        const href = c.href?.startsWith('/') ? withBase(c.href) : c.href
+        return href ? (
+          <Link key={c.label} href={href} prefetch={false} className={pill}>
             {c.label}
           </Link>
         ) : (
@@ -65,7 +58,7 @@ export default function FeatureChips({
             {c.label}
           </span>
         )
-      )}
+      })}
     </div>
   )
 }
