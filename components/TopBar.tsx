@@ -77,7 +77,7 @@ const PaperIcon = ({ className = 'h-5 w-5' }) => (
 );
 
 // chevron pequeño en stroke para evitar triángulos gigantes
-const ChevronDown = ({ className = 'h-4 w-4' }) => (
+const ChevronDown = ({ className = 'h-4 w-4 flex-none' }) => (
   <svg viewBox="0 0 20 20" className={className} aria-hidden>
     <path d="M6 8l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
   </svg>
@@ -92,6 +92,13 @@ const CloseIcon = ({ className = 'h-6 w-6' }) => (
     <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
   </svg>
 );
+// 1) Añadí este chevron mini (stroke, tamaño fijo)
+const TinyChevron = ({ up = false }: { up?: boolean }) => (
+  <svg width="12" height="12" viewBox="0 0 24 24" className={`ml-2 flex-none ${up ? 'rotate-180' : ''}`} aria-hidden>
+    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+  </svg>
+);
+
 
 // ───────────────────────────────────────────────────────────────────────────────
 // MenuItem reutilizable
@@ -276,13 +283,7 @@ export default function TopBar({ locale }: { locale: string }) {
               <HowIcon className="h-[18px] w-[18px] shrink-0" />
               Introduction
             </span>
-            <svg
-              viewBox="0 0 20 20"
-              className={`h-4 w-4 shrink-0 text-slate-700 transition-transform duration-200 ${mobIntroOpen ? 'rotate-180' : ''}`}
-              aria-hidden
-            >
-              <path d="M6 8l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            </svg>
+            <TinyChevron up={mobIntroOpen} />
           </button>
           <div
             id="mob-intro"
@@ -310,13 +311,7 @@ export default function TopBar({ locale }: { locale: string }) {
               <SignatureIcon className="h-[18px] w-[18px] shrink-0" />
               Products
             </span>
-            <svg
-              viewBox="0 0 20 20"
-              className={`h-4 w-4 shrink-0 text-slate-700 transition-transform duration-200 ${mobProductsOpen ? 'rotate-180' : ''}`}
-              aria-hidden
-            >
-              <path d="M6 8l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            </svg>
+              <TinyChevron up={mobProductsOpen} />
           </button>
           <div
             id="mob-products"
