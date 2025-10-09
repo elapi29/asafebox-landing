@@ -1,41 +1,74 @@
 // app/[locale]/page.tsx
-import Link from 'next/link'
+import { getDictionary, Locale } from '../../i18n/dictionaries'
+import EmailCapture from '../../components/EmailCapture'
+import EvidenceImmutable from '../../components/EvidenceImmutable'
+import PrivacyBlindReveal from '../../components/PrivacyBlindReveal'
+import SectorTabs from '../../components/SectorTabs'
 import Footer from '../../components/Footer'
-import type { Locale } from '../../i18n/dictionaries'
 
-export default function HomePage({ params }: { params: { locale: Locale } }) {
-  const { locale } = params
+export default async function Page({ params }: { params: { locale: Locale } }) {
+  const dict = await getDictionary(params.locale)
 
   return (
-    <main className="px-6 py-16">
-      {/* Placeholder simple para recuperar la home (podés volver a tu Hero luego) */}
-      <section className="mx-auto max-w-6xl py-10">
-        <h1 className="text-4xl font-bold">In aSAFEBOX®</h1>
-        <p className="mt-3 text-lg text-slate-600">
-          Evidencia criptográfica, verificación previa al asentamiento y gobierno humano.
-        </p>
+    <main>
+      {/* HERO + Email (sin chips) */}
+      <section className="mx-auto max-w-6xl px-6 pt-6 pb-10">
+        <h1 className="text-3xl font-bold text-slate-900">{dict.hero.title}</h1>
+        <p className="mt-2 max-w-2xl text-slate-600">{dict.hero.subtitle}</p>
 
-        <div className="mt-6 flex flex-wrap gap-3">
-          <Link
-            href={`/${locale}/introduction/`}
-            className="rounded-xl bg-slate-900 px-5 py-2.5 text-white hover:bg-slate-800"
-            prefetch={false}
-          >
-            How it works
-          </Link>
-          <Link
-            href={`/${locale}/products/signature-pq/`}
-            className="rounded-xl border border-slate-300 px-5 py-2.5 hover:bg-slate-50"
-            prefetch={false}
-          >
-            Products
-          </Link>
+        <div className="mt-6">
+          <EmailCapture
+            placeholder={dict.hero.emailPlaceholder}
+            cta={dict.hero.cta}
+            successPath="/thanks/"   // tu componente arma el _next con basePath
+          />
         </div>
+
+        {/* disclaimer bajo el form (opcional) */}
+        {dict.hero.disclaimer && (
+          <p className="mt-2 text-xs text-slate-500">{dict.hero.disclaimer}</p>
+        )}
       </section>
 
-      <div className="mt-12">
-        <Footer locale={locale} />
-      </div>
+      {/* Evidencia inmutable (sí va en Home) */}
+      <section className="px-6">
+        <EvidenceImmutable
+          title={dict.evidence.title}
+          body={dict.evidence.body}
+          bullets={dict.evidence.bullets}
+          sealTitle={dict.evidence.sealTitle}
+          sealBody={dict.evidence.sealBody}
+        />
+      </section>
+
+      {/* Privacidad con Blind-Reveal (sí va en Home) */}
+      <section className="px-6">
+        <PrivacyBlindReveal
+          title={dict.privacy.title}
+          body={dict.privacy.body}
+          cta={dict.privacy.cta}
+        />
+      </section>
+
+      {/* Soluciones por industria (sí va) */}
+      <section className="px-6 py-12">
+        <SectorTabs
+          title={dict.sectors.title}
+          realEstate={dict.sectors.realEstate}
+          fintech={dict.sectors.fintech}
+          banking={dict.sectors.banking}
+          jewelry={dict.sectors.jewelry}
+          realEstateCardBody={dict.sectors.realEstateCardBody}
+          bankingCardBody={dict.sectors.bankingCardBody}
+          fintechCardBody={dict.sectors.fintechCardBody}
+          jewelryCardBody={dict.sectors.jewelryCardBody}
+          neutralTitle={dict.sectors.neutralTitle}
+          neutralBody={dict.sectors.neutralBody}
+          locale={params.locale}
+        />
+      </section>
+
+      <Footer locale={params.locale} />
     </main>
   )
 }
