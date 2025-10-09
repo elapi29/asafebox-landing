@@ -28,7 +28,7 @@ export default function IntroductionPage({ params }: { params: { locale: Locale 
             body="Content integrity: HMAC/nonce and zero-knowledge checks to reject tampering or replay."
           />
           <Card
-            title="Blockruler & Blockauditory"
+            title="Blockgoverning & Blockauditory"
             body="Dual approvals, flags, and immutable evidence to satisfy policy and audits."
           />
         </div>
