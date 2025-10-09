@@ -6,7 +6,7 @@ import { withBase } from './lib/withBase';
 
 const LOCALES = ['es', 'en', 'de'] as const;
 
-// Íconos
+// ── Íconos ────────────────────────────────────────────────────────────────────
 const SignatureIcon = ({ className = 'h-5 w-5' }) => (
   <svg viewBox="0 0 24 24" className={className} aria-hidden>
     <path d="M3 21h6M4 17l9-9 4 4-9 9H4zM14 8l2-2 4 4-2 2" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
@@ -89,7 +89,7 @@ const CloseIcon = ({ className = 'h-6 w-6' }) => (
   </svg>
 );
 
-// MenuItem
+// ── Item menú ─────────────────────────────────────────────────────────────────
 function MenuItem({
   href,
   label,
@@ -105,7 +105,7 @@ function MenuItem({
 }) {
   return (
     <Link
-      href={href}
+      href={href}            // ← sin withBase en Link
       prefetch={false}
       role="menuitem"
       onClick={onClick}
@@ -120,8 +120,8 @@ function MenuItem({
 }
 
 export default function TopBar({ locale }: { locale: string }) {
-  const home = `/${locale}/`;
-  const logo = withBase('/brand/asafebox-logo.svg');
+  const home = `/${locale}/`;                              // ← Link maneja basePath
+  const logo = withBase('/brand/asafebox-logo.svg');       // ← assets sí con withBase
 
   const [openProducts, setOpenProducts] = useState(false);
   const [openIntro, setOpenIntro] = useState(false);
@@ -158,13 +158,12 @@ export default function TopBar({ locale }: { locale: string }) {
     setMobileOpen(false);
   };
 
-  // URL centralizada a under-construction por locale
-  const uc = withBase(`/${locale}/under-construction/`);
+  const uc = `/${locale}/under-construction/`;            // ← sin withBase
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <div className="glass mx-auto flex max-w-6xl items-center justify-between rounded-b-2xl px-3 py-2 sm:px-4 sm:py-3">
-        <Link href={withBase(home)} className="flex min-w-0 items-center gap-2" prefetch={false}>
+        <Link href={home} className="flex min-w-0 items-center gap-2" prefetch={false}>
           <img
             src={logo}
             alt="In aSAFEBOX®"
@@ -191,17 +190,17 @@ export default function TopBar({ locale }: { locale: string }) {
             </button>
             {openIntro && (
               <div role="menu" className="absolute right-0 mt-2 w-96 rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
-                <MenuItem href={withBase(`/${locale}/introduction/#what-is`)}        label="A. What is In aSafeBox®" Icon={WhatIcon} onClick={closeAllMenus}/>
-                <MenuItem href={withBase(`/${locale}/introduction/#how-it-works`)}   label="B. How it works"          Icon={HowIcon} onClick={closeAllMenus}/>
-                <MenuItem href={withBase(`/${locale}/introduction/#small-business`)} label="C. For Small Businesses"  Icon={SMBIcon} onClick={closeAllMenus}/>
-                <MenuItem href={withBase(`/${locale}/introduction/#institutions`)}   label="D. For Institutions"      Icon={InstIcon} onClick={closeAllMenus}/>
-                <MenuItem href={withBase(`/${locale}/introduction/#developers`)}     label="E. Developers"            Icon={DevIcon} onClick={closeAllMenus}/>
-                <MenuItem href={withBase(`/${locale}/introduction/#white-paper`)}    label="F. White Paper"           Icon={PaperIcon} onClick={closeAllMenus}/>
+                <MenuItem href={`${home}introduction/#what-is`}        label="A. What is In aSafeBox®" Icon={WhatIcon} onClick={closeAllMenus}/>
+                <MenuItem href={`${home}introduction/#how-it-works`}   label="B. How it works"          Icon={HowIcon} onClick={closeAllMenus}/>
+                <MenuItem href={`${home}introduction/#small-business`} label="C. For Small Businesses"  Icon={SMBIcon} onClick={closeAllMenus}/>
+                <MenuItem href={`${home}introduction/#institutions`}   label="D. For Institutions"      Icon={InstIcon} onClick={closeAllMenus}/>
+                <MenuItem href={`${home}introduction/#developers`}     label="E. Developers"            Icon={DevIcon} onClick={closeAllMenus}/>
+                <MenuItem href={`${home}introduction/#white-paper`}    label="F. White Paper"           Icon={PaperIcon} onClick={closeAllMenus}/>
               </div>
             )}
           </div>
 
-          {/* Products → SIEMPRE under-construction */}
+          {/* Products → under-construction */}
           <div className="relative" ref={productsRef}>
             <button
               type="button"
@@ -224,7 +223,7 @@ export default function TopBar({ locale }: { locale: string }) {
             )}
           </div>
 
-          <Link href={withBase(`/${locale}/#contact`)} className="hover:underline" prefetch={false}>
+          <Link href={`${home}#contact`} className="hover:underline" prefetch={false}>
             Contact
           </Link>
 
@@ -236,7 +235,7 @@ export default function TopBar({ locale }: { locale: string }) {
               return (
                 <Link
                   key={code}
-                  href={withBase(href)}
+                  href={href}   // ← sin withBase
                   prefetch={false}
                   className={`rounded-md px-2 py-1 ${active ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'}`}
                   aria-current={active ? 'page' : undefined}
@@ -279,16 +278,16 @@ export default function TopBar({ locale }: { locale: string }) {
           </button>
           <div id="mob-intro" className={`overflow-hidden rounded-lg bg-slate-50 transition-[max-height] duration-300 ease-out ${mobIntroOpen ? 'max-h-96' : 'max-h-0'}`}>
             <div className="p-2 space-y-1">
-              <MenuItem href={withBase(`/${locale}/introduction/#what-is`)}        label="A. What is In aSafeBox®" Icon={WhatIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={withBase(`/${locale}/introduction/#how-it-works`)}   label="B. How it works"          Icon={HowIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={withBase(`/${locale}/introduction/#small-business`)} label="C. For Small Businesses"  Icon={SMBIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={withBase(`/${locale}/introduction/#institutions`)}   label="D. For Institutions"      Icon={InstIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={withBase(`/${locale}/introduction/#developers`)}     label="E. Developers"            Icon={DevIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={withBase(`/${locale}/introduction/#white-paper`)}    label="F. White Paper"           Icon={PaperIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`${home}introduction/#what-is`}        label="A. What is In aSafeBox®" Icon={WhatIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`${home}introduction/#how-it-works`}   label="B. How it works"          Icon={HowIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`${home}introduction/#small-business`} label="C. For Small Businesses"  Icon={SMBIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`${home}introduction/#institutions`}   label="D. For Institutions"      Icon={InstIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`${home}introduction/#developers`}     label="E. Developers"            Icon={DevIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`${home}introduction/#white-paper`}    label="F. White Paper"           Icon={PaperIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
             </div>
           </div>
 
-          {/* Products → SIEMPRE under-construction */}
+          {/* Products → under-construction */}
           <button
             type="button"
             onClick={() => setMobProductsOpen(v => !v)}
@@ -313,7 +312,7 @@ export default function TopBar({ locale }: { locale: string }) {
           </div>
 
           <Link
-            href={withBase(`/${locale}/#contact`)}
+            href={`${home}#contact`}
             prefetch={false}
             className="mt-2 block rounded-lg px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-50"
             onClick={() => setMobileOpen(false)}
@@ -329,7 +328,7 @@ export default function TopBar({ locale }: { locale: string }) {
               return (
                 <Link
                   key={code}
-                  href={withBase(href)}
+                  href={href}  // ← sin withBase
                   prefetch={false}
                   className={`min-w-[44px] rounded-md px-3 py-2 text-center text-sm ${active ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'}`}
                   aria-current={active ? 'page' : undefined}
