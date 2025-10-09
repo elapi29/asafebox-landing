@@ -75,9 +75,11 @@ const PaperIcon = ({ className = 'h-5 w-5' }) => (
     <path d="M14 3v6h6" fill="none" stroke="currentColor" strokeWidth="1.8"/>
   </svg>
 );
+
+// chevron pequeño en stroke para evitar triángulos gigantes
 const ChevronDown = ({ className = 'h-4 w-4' }) => (
   <svg viewBox="0 0 20 20" className={className} aria-hidden>
-    <path d="M6 8l4 4 4-4" fill="currentColor" />
+    <path d="M6 8l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
 const BurgerIcon = ({ className = 'h-6 w-6' }) => (
@@ -138,7 +140,7 @@ export default function TopBar({ locale }: { locale: string }) {
   const [mobIntroOpen, setMobIntroOpen] = useState(false);
   const [mobProductsOpen, setMobProductsOpen] = useState(false);
 
-  // Cierre por click afuera / ESC (desktop)
+  // Cierre por click afuera / ESC
   useEffect(() => {
     const onDoc = (e: MouseEvent) => {
       if (productsRef.current && !productsRef.current.contains(e.target as Node)) setOpenProducts(false);
@@ -162,7 +164,7 @@ export default function TopBar({ locale }: { locale: string }) {
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <div className="glass mx-auto flex max-w-6xl items-center justify-between rounded-b-2xl px-3 py-2 sm:px-4 sm:py-3">
-        {/* LOGO (más alto en mobile) */}
+        {/* LOGO */}
         <Link href={home} className="flex min-w-0 items-center gap-2" prefetch={false}>
           <img
             src={logo}
@@ -237,9 +239,7 @@ export default function TopBar({ locale }: { locale: string }) {
                   key={code}
                   href={href}
                   prefetch={false}
-                  className={`rounded-md px-2 py-1 ${
-                    active ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'
-                  }`}
+                  className={`rounded-md px-2 py-1 ${active ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'}`}
                   aria-current={active ? 'page' : undefined}
                 >
                   {code.toUpperCase()}
@@ -261,57 +261,75 @@ export default function TopBar({ locale }: { locale: string }) {
         </button>
       </div>
 
-      {/* Mobile panel (slide-down) */}
+      {/* Mobile panel (compacto, con transición de altura) */}
       {mobileOpen && (
         <div className="mx-auto block max-w-6xl rounded-b-2xl border-x border-b border-slate-200 bg-white px-3 pb-3 pt-2 shadow md:hidden">
           {/* Introduction accordion */}
           <button
             type="button"
             onClick={() => setMobIntroOpen(v => !v)}
-            className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm font-medium hover:bg-slate-50"
+            className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-[15px] font-medium hover:bg-slate-50"
             aria-controls="mob-intro"
             aria-expanded={mobIntroOpen}
           >
             <span className="flex items-center gap-2">
-              <HowIcon className="h-5 w-5" />
+              <HowIcon className="h-[18px] w-[18px] shrink-0" />
               Introduction
             </span>
-            <ChevronDown className={`transition ${mobIntroOpen ? 'rotate-180' : ''}`} />
+            <svg
+              viewBox="0 0 20 20"
+              className={`h-4 w-4 shrink-0 text-slate-700 transition-transform duration-200 ${mobIntroOpen ? 'rotate-180' : ''}`}
+              aria-hidden
+            >
+              <path d="M6 8l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
           </button>
-          {mobIntroOpen && (
-            <div id="mob-intro" className="mt-1 space-y-1 rounded-lg bg-slate-50 p-2">
-              <MenuItem href={`${home}introduction/#what-is`}        label="A. What is In aSafeBox®" Icon={WhatIcon} onClick={() => setMobileOpen(false)} className="px-2 py-2" />
-              <MenuItem href={`${home}introduction/#how-it-works`}   label="B. How it works"          Icon={HowIcon} onClick={() => setMobileOpen(false)} className="px-2 py-2" />
-              <MenuItem href={`${home}introduction/#small-business`} label="C. For Small Businesses"  Icon={SMBIcon} onClick={() => setMobileOpen(false)} className="px-2 py-2" />
-              <MenuItem href={`${home}introduction/#institutions`}   label="D. For Institutions"      Icon={InstIcon} onClick={() => setMobileOpen(false)} className="px-2 py-2" />
-              <MenuItem href={`${home}introduction/#developers`}     label="E. Developers"            Icon={DevIcon} onClick={() => setMobileOpen(false)} className="px-2 py-2" />
-              <MenuItem href={`${home}introduction/#white-paper`}    label="F. White Paper"           Icon={PaperIcon} onClick={() => setMobileOpen(false)} className="px-2 py-2" />
+          <div
+            id="mob-intro"
+            className={`overflow-hidden rounded-lg bg-slate-50 transition-[max-height] duration-300 ease-out ${mobIntroOpen ? 'max-h-96' : 'max-h-0'}`}
+          >
+            <div className="p-2 space-y-1">
+              <MenuItem href={`${home}introduction/#what-is`}        label="A. What is In aSafeBox®" Icon={WhatIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`${home}introduction/#how-it-works`}   label="B. How it works"          Icon={HowIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`${home}introduction/#small-business`} label="C. For Small Businesses"  Icon={SMBIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`${home}introduction/#institutions`}   label="D. For Institutions"      Icon={InstIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`${home}introduction/#developers`}     label="E. Developers"            Icon={DevIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`${home}introduction/#white-paper`}    label="F. White Paper"           Icon={PaperIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
             </div>
-          )}
+          </div>
 
           {/* Products accordion */}
           <button
             type="button"
             onClick={() => setMobProductsOpen(v => !v)}
-            className="mt-1 flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm font-medium hover:bg-slate-50"
+            className="mt-1 flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-[15px] font-medium hover:bg-slate-50"
             aria-controls="mob-products"
             aria-expanded={mobProductsOpen}
           >
             <span className="flex items-center gap-2">
-              <SignatureIcon className="h-5 w-5" />
+              <SignatureIcon className="h-[18px] w-[18px] shrink-0" />
               Products
             </span>
-            <ChevronDown className={`transition ${mobProductsOpen ? 'rotate-180' : ''}`} />
+            <svg
+              viewBox="0 0 20 20"
+              className={`h-4 w-4 shrink-0 text-slate-700 transition-transform duration-200 ${mobProductsOpen ? 'rotate-180' : ''}`}
+              aria-hidden
+            >
+              <path d="M6 8l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
           </button>
-          {mobProductsOpen && (
-            <div id="mob-products" className="mt-1 space-y-1 rounded-lg bg-slate-50 p-2">
-              <MenuItem href={`${home}products/signature-pq`}    label="Signature PQ-ready Connect"    Icon={SignatureIcon} onClick={() => setMobileOpen(false)} className="px-2 py-2" />
-              <MenuItem href={`${home}products/blind-reveal`}    label="Blockaudit · Blind-Reveal"     Icon={ZKIcon}       onClick={() => setMobileOpen(false)} className="px-2 py-2" />
-              <MenuItem href={`${home}products/audit`}           label="Blockchecker · Audit"           Icon={AuditIcon}    onClick={() => setMobileOpen(false)} className="px-2 py-2" />
-              <MenuItem href={`${home}products/mtls-pq`}         label="Blocksender · mTLS PQ-Ready"    Icon={MtlsIcon}     onClick={() => setMobileOpen(false)} className="px-2 py-2" />
-              <MenuItem href={`${home}products/blindreveal-gov`} label="Blockcontrol · Governing"       Icon={GovIcon}      onClick={() => setMobileOpen(false)} className="px-2 py-2" />
+          <div
+            id="mob-products"
+            className={`overflow-hidden rounded-lg bg-slate-50 transition-[max-height] duration-300 ease-out ${mobProductsOpen ? 'max-h-96' : 'max-h-0'}`}
+          >
+            <div className="p-2 space-y-1">
+              <MenuItem href={`${home}products/signature-pq`}    label="Signature PQ-ready Connect"     Icon={SignatureIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`${home}products/blind-reveal`}    label="Blockaudit · Blind-Reveal"      Icon={ZKIcon}       onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`${home}products/audit`}           label="Blockchecker · Audit"            Icon={AuditIcon}    onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`${home}products/mtls-pq`}         label="Blocksender · mTLS PQ-Ready"     Icon={MtlsIcon}     onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`${home}products/blindreveal-gov`} label="Blockcontrol · Governing"        Icon={GovIcon}      onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
             </div>
-          )}
+          </div>
 
           {/* Contact */}
           <Link
@@ -333,9 +351,7 @@ export default function TopBar({ locale }: { locale: string }) {
                   key={code}
                   href={href}
                   prefetch={false}
-                  className={`min-w-[44px] rounded-md px-3 py-2 text-center text-sm ${
-                    active ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'
-                  }`}
+                  className={`min-w-[44px] rounded-md px-3 py-2 text-center text-sm ${active ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'}`}
                   aria-current={active ? 'page' : undefined}
                   onClick={() => setMobileOpen(false)}
                 >
