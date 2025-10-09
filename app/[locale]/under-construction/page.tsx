@@ -1,15 +1,30 @@
-// app/[locale]/under-construction/page.tsx
-import { Locale } from '../../../i18n/dictionaries'
-import UnderConstruction from '../../../components/UnderConstruction'
+// app/[locale]/page.tsx
+import { getDictionary, Locale } from '../../i18n/dictionaries'
+import Hero from '../../components/Hero'
+import FeatureChips from '../../components/FeatureChips'
+import Footer from '../../components/Footer'
 
-export const metadata = {
-  title: 'Under construction',
-}
+export default async function Page({ params }: { params: { locale: Locale } }) {
+  const dict = await getDictionary(params.locale)
 
-export default function Page({ params }: { params: { locale: Locale } }) {
   return (
-    <main className="px-6">
-      <UnderConstruction locale={params.locale} />
+    <main>
+      <Hero
+        title={dict.hero.title}
+        subtitle={dict.hero.subtitle}
+        emailPlaceholder={dict.hero.emailPlaceholder}
+        cta={dict.hero.cta}
+        disclaimer={dict.hero.disclaimer}
+      />
+
+      {/* ⬇️ Chips “auto por locale” → mandan a /{locale}/under-construction/ */}
+      <section className="mx-auto max-w-6xl px-6 pt-4 pb-10">
+        <FeatureChips locale={params.locale} />
+      </section>
+
+      {/* …resto de secciones… */}
+
+      <Footer locale={params.locale} />
     </main>
   )
 }
