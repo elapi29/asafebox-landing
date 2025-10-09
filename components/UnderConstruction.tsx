@@ -1,38 +1,30 @@
 // components/UnderConstruction.tsx
 import Link from 'next/link'
+import { withBase } from './lib/withBase'
 
-export default function UnderConstruction({
-  title,
-  backHref = '/',
-}: {
-  title: string
-  backHref?: string
-}) {
+export default function UnderConstruction({ locale = 'en' as const }) {
+  const home = `/${locale}/`
   return (
-    <main className="mx-auto max-w-3xl px-6 py-16">
-      <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-        <h1 className="text-3xl font-bold text-slate-900">{title}</h1>
-        <p className="mt-3 text-slate-600">
-          Estamos trabajando en esta sección. Vuelve pronto para ver la demo y
-          la documentación.
-        </p>
-
-        <div className="mt-8 flex items-center gap-3">
-          <Link
-            href={backHref}
-            prefetch={false}
-            className="rounded-xl bg-slate-900 px-5 py-2 text-white hover:bg-slate-800"
-          >
-            ← Volver
-          </Link>
-          <a
-            href={(process.env.NEXT_PUBLIC_BASE_PATH || '') + '/'}
-            className="rounded-xl border border-slate-200 px-5 py-2 hover:bg-slate-50"
-          >
-            Ir al inicio
-          </a>
-        </div>
+    <section className="mx-auto max-w-2xl px-6 py-20 text-center">
+      <h1 className="text-3xl font-bold">Under construction</h1>
+      <p className="mt-3 text-slate-600">
+        We’re crafting this page. Meanwhile, reach out and we’ll share a demo.
+      </p>
+      <div className="mt-8 flex items-center justify-center gap-3">
+        <Link
+          href={withBase(home)}
+          prefetch={false}
+          className="rounded-xl bg-slate-900 px-6 py-3 text-white hover:bg-slate-800"
+        >
+          ← Back to home
+        </Link>
+        <a
+          href="#contact"
+          className="rounded-xl border border-slate-300 px-6 py-3 text-slate-800 hover:bg-slate-50"
+        >
+          Contact
+        </a>
       </div>
-    </main>
+    </section>
   )
 }

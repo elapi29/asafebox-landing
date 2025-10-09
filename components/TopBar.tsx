@@ -223,11 +223,18 @@ export default function TopBar({ locale }: { locale: string }) {
             </button>
             {openProducts && (
               <div role="menu" className="absolute right-0 mt-2 w-80 rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
-                <MenuItem href={`${home}products/signature-pq`}    label="Signature PQ-ready Connect"    Icon={SignatureIcon} />
+                {/*<MenuItem href={`${home}products/signature-pq`}    label="Signature PQ-ready Connect"    Icon={SignatureIcon} />
                 <MenuItem href={`${home}products/blind-reveal`}    label="Blockaudit · Blind-Reveal"     Icon={ZKIcon} />
                 <MenuItem href={`${home}products/audit`}           label="Blockchecker · Audit"           Icon={AuditIcon} />
                 <MenuItem href={`${home}products/mtls-pq`}         label="Blocksender · mTLS PQ-Ready"    Icon={MtlsIcon} />
-                <MenuItem href={`${home}products/blindreveal-gov`} label="Blockcontrol · Governing"       Icon={GovIcon} />
+                <MenuItem href={`${home}products/blindreveal-gov`} label="Blockcontrol · Governing"       Icon={GovIcon} /> */}
+                // dentro del dropdown de Products (desktop)
+                <MenuItem href={`${home}under-construction/`} label="Signature PQ-ready Connect" Icon={SignatureIcon} />
+                <MenuItem href={`${home}under-construction/`} label="Blockaudit · Blind-Reveal"  Icon={ZKIcon} />
+                <MenuItem href={`${home}under-construction/`} label="Blockchecker · Audit"      Icon={AuditIcon} />
+                <MenuItem href={`${home}under-construction/`} label="Blocksender · mTLS PQ-Ready" Icon={MtlsIcon} />
+                <MenuItem href={`${home}under-construction/`} label="Blockcontrol · Governing"   Icon={GovIcon} />
+
               </div>
             )}
           </div>
@@ -318,11 +325,19 @@ export default function TopBar({ locale }: { locale: string }) {
             className={`overflow-hidden rounded-lg bg-slate-50 transition-[max-height] duration-300 ease-out ${mobProductsOpen ? 'max-h-96' : 'max-h-0'}`}
           >
             <div className="p-2 space-y-1">
-              <MenuItem href={`${home}products/signature-pq`}    label="Signature PQ-ready Connect"     Icon={SignatureIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              
+              {/*<MenuItem href={`${home}products/signature-pq`}    label="Signature PQ-ready Connect"     Icon={SignatureIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
               <MenuItem href={`${home}products/blind-reveal`}    label="Blockaudit · Blind-Reveal"      Icon={ZKIcon}       onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
               <MenuItem href={`${home}products/audit`}           label="Blockchecker · Audit"            Icon={AuditIcon}    onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
               <MenuItem href={`${home}products/mtls-pq`}         label="Blocksender · mTLS PQ-Ready"     Icon={MtlsIcon}     onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={`${home}products/blindreveal-gov`} label="Blockcontrol · Governing"        Icon={GovIcon}      onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`${home}products/blindreveal-gov`} label="Blockcontrol · Governing"        Icon={GovIcon}      onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />*/}
+
+              <MenuItem href={`${home}under-construction/`} label="Signature PQ-ready Connect" Icon={SignatureIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`${home}under-construction/`} label="Blockaudit · Blind-Reveal"  Icon={ZKIcon}       onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`${home}under-construction/`} label="Blockchecker · Audit"       Icon={AuditIcon}    onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`${home}under-construction/`} label="Blocksender · mTLS PQ-Ready" Icon={MtlsIcon}    onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`${home}under-construction/`} label="Blockcontrol · Governing"   Icon={GovIcon}      onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+
             </div>
           </div>
 

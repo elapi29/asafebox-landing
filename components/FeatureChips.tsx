@@ -21,13 +21,21 @@ export default function FeatureChips({
   if (!items || items.length === 0) {
     const loc = (locale || 'en') as Locale
     const chips = [
-      { label: 'Signature PQ-ready', href: withBase(`/${loc}/products/signature-pq/`) },
+      {/*{ label: 'Signature PQ-ready', href: withBase(`/${loc}/products/signature-pq/`) },
       { label: 'Blind-Reveal',       href: withBase(`/${loc}/products/blind-reveal/`) },
       { label: 'Audit',              href: withBase(`/${loc}/products/audit/`) },
       { label: 'mTLS PQ-Ready',      href: withBase(`/${loc}/products/mtls-pq/`) },
-      { label: 'Governing',          href: withBase(`/${loc}/products/blindreveal-gov/`) },
-    ]
+      { label: 'Governing',          href: withBase(`/${loc}/products/blindreveal-gov/`) }, */}
 
+      // dentro del modo auto por locale:
+      { label: 'Signature PQ-ready', href: withBase(`/${loc}/under-construction/`) },
+      { label: 'Blind-Reveal',       href: withBase(`/${loc}/under-construction/`) },
+      { label: 'Audit',              href: withBase(`/${loc}/under-construction/`) },
+      { label: 'mTLS PQ-Ready',      href: withBase(`/${loc}/under-construction/`) },
+      { label: 'Governing',          href: withBase(`/${loc}/under-construction/`) },
+      ]
+
+ 
     return (
       <div className="mt-6 flex flex-wrap gap-4">
         {chips.map(c => (
