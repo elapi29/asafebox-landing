@@ -139,13 +139,13 @@ export default function IntroductionPage({ params }: { params: { locale: Locale 
         </a>
       </section>
 
-      {/* Diagramas / leyendas (opcional, deja valor visual) */}
+      {/* Diagramas / leyendas (opcional, deja valor visual) 
       <section id="diagrams" className="mx-auto max-w-6xl pb-14">
         <SystemLegend />
         <div className="mt-6">
           <GatewayLegend />
         </div>
-      </section>
+      </section>*/}
 
       <Footer locale={params.locale} />
     </main>
