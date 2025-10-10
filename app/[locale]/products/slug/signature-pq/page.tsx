@@ -1,7 +1,7 @@
 // app/[locale]/products/slug/signature-pq/page.tsx
 import Link from 'next/link'
 import Footer from '../../../../../components/Footer'
-import SignaturePQDiagram from '../../../../../components/SignaturePQDiagram'  // ← NUEVO
+import SignaturePQDiagram from '../../../../../components/SignaturePQDiagram'
 
 type Locale = 'es' | 'en' | 'de'
 
@@ -38,9 +38,12 @@ export default function SignaturePQPage({ params }: { params: { locale: Locale }
         </div>
       </section>
 
-      {/* Diagrama */}
+      {/* Diagrama (responsive y legible) */}
       <section className="mx-auto max-w-6xl pb-10">
-        <SignaturePQDiagram className="w-full" />
+        <SignaturePQDiagram
+          size="md"  /* sm | md | lg */
+          className="mx-auto w-full md:scale-100 scale-[0.95] origin-top"
+        />
       </section>
 
       {/* CTA secundaria */}
