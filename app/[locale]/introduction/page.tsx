@@ -127,7 +127,7 @@ export default function IntroductionPage({ params }: { params: { locale: Locale 
           <Card title="Audit Connect" body="Hash-linked logs and integrity seals for mass verification." />
         </div>
         <div className="mt-6 flex flex-wrap gap-3">
-          <Btn href={`/${locale}/under-construction/`}>Signature PQ-ready</Btn>
+          <Btn href={`/${locale}/products/slug/signature-pq/`}>Signature PQ-ready</Btn>
           <Btn href={`/${locale}/under-construction/`}>Blind-Reveal</Btn>
           <Btn href={`/${locale}/under-construction/`}>Audit</Btn>
           <Btn href={`/${locale}/under-construction/`}>mTLS PQ-Ready</Btn>

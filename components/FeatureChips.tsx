@@ -21,7 +21,7 @@ export default function FeatureChips({
   if (!items || items.length === 0) {
     const loc = (locale || 'en') as Locale;
     const chips = [
-      { label: 'Signature PQ-ready', href: `/${loc}/under-construction/` },
+      { label: 'Signature PQ-ready', href: `/${loc}/products/slug/signature-pq/` },
       { label: 'Blind-Reveal',       href: `/${loc}/under-construction/` },
       { label: 'Audit',              href: `/${loc}/under-construction/` },
       { label: 'mTLS PQ-Ready',      href: `/${loc}/under-construction/` },
