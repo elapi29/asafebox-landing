@@ -20,11 +20,10 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
           <EmailCapture
             placeholder={dict.hero.emailPlaceholder}
             cta={dict.hero.cta}
-            successPath="/thanks/"   // tu componente arma el _next con basePath
+            successPath="/thanks/"   // el componente arma _next con basePath
           />
         </div>
 
-        {/* disclaimer bajo el form (opcional) */}
         {dict.hero.disclaimer && (
           <p className="mt-2 text-xs text-slate-500">{dict.hero.disclaimer}</p>
         )}

@@ -4,7 +4,7 @@ import { withBase } from './lib/withBase';
 
 export default function Footer({ locale }: { locale: 'es' | 'en' | 'de' }) {
   const home = `/${locale}/`;
-  const logo = withBase('/brand/asafebox-wordmark.png'); // ✅ existe en /public/brand/
+  const logo = withBase('/brand/asafebox-wordmark.png'); // asset en /public/brand/
 
   return (
     <footer className="border-t border-slate-200 py-10">

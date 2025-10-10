@@ -121,8 +121,8 @@ function MenuItem({
 }
 
 export default function TopBar({ locale }: { locale: string }) {
-  const home = `/${locale}/`;                              // ← Link maneja basePath
-  const logo = withBase('/brand/asafebox-logo.svg');       // ← assets sí con withBase
+  const home = `/${locale}/`;                              // Link maneja basePath
+  const logo = withBase('/brand/asafebox-logo.svg');       // assets sí con withBase
 
   const [openProducts, setOpenProducts] = useState(false);
   const [openIntro, setOpenIntro] = useState(false);
@@ -159,7 +159,7 @@ export default function TopBar({ locale }: { locale: string }) {
     setMobileOpen(false);
   };
 
-  const uc = `/${locale}/under-construction/`;            // ← sin withBase
+  const uc = `/${locale}/under-construction/`;            // sin withBase
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
@@ -184,7 +184,8 @@ export default function TopBar({ locale }: { locale: string }) {
               onClick={() => { setOpenIntro(v => !v); setOpenProducts(false); }}
               className="inline-flex items-center gap-1 rounded-md px-2 py-1 hover:bg-slate-100"
               aria-haspopup="menu"
-              aria-expanded={openIntro}>
+              aria-expanded={openIntro}
+            >
               Introduction
               <ChevronDown />
             </button>
@@ -207,7 +208,8 @@ export default function TopBar({ locale }: { locale: string }) {
               onClick={() => { setOpenProducts(v => !v); setOpenIntro(false); }}
               className="inline-flex items-center gap-1 rounded-md px-2 py-1 hover:bg-slate-100"
               aria-haspopup="menu"
-              aria-expanded={openProducts}>
+              aria-expanded={openProducts}
+            >
               Products
               <ChevronDown />
             </button>
@@ -222,7 +224,7 @@ export default function TopBar({ locale }: { locale: string }) {
             )}
           </div>
 
-          <Link href={uc} className="hover:underline" prefetch={false}>
+          <Link href={`${home}#contact`} className="hover:underline" prefetch={false}>
             Contact
           </Link>
 
@@ -234,10 +236,11 @@ export default function TopBar({ locale }: { locale: string }) {
               return (
                 <Link
                   key={code}
-                  href={href}   // ← sin withBase
+                  href={href}   // sin withBase
                   prefetch={false}
                   className={`rounded-md px-2 py-1 ${active ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'}`}
-                  aria-current={active ? 'page' : undefined}>
+                  aria-current={active ? 'page' : undefined}
+                >
                   {code.toUpperCase()}
                 </Link>
               );
@@ -251,7 +254,8 @@ export default function TopBar({ locale }: { locale: string }) {
           className="inline-flex items-center rounded-md p-2 text-slate-700 hover:bg-slate-100 md:hidden"
           onClick={() => setMobileOpen(v => !v)}
           aria-label="Open menu"
-          aria-expanded={mobileOpen}>
+          aria-expanded={mobileOpen}
+        >
           {mobileOpen ? <CloseIcon /> : <BurgerIcon />}
         </button>
       </div>
@@ -265,7 +269,8 @@ export default function TopBar({ locale }: { locale: string }) {
             onClick={() => setMobIntroOpen(v => !v)}
             className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-[15px] font-medium hover:bg-slate-50"
             aria-controls="mob-intro"
-            aria-expanded={mobIntroOpen}>
+            aria-expanded={mobIntroOpen}
+          >
             <span className="flex items-center gap-2">
               <HowIcon className="h-[18px] w-[18px] shrink-0" />
               Introduction
@@ -289,7 +294,8 @@ export default function TopBar({ locale }: { locale: string }) {
             onClick={() => setMobProductsOpen(v => !v)}
             className="mt-1 flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-[15px] font-medium hover:bg-slate-50"
             aria-controls="mob-products"
-            aria-expanded={mobProductsOpen}>
+            aria-expanded={mobProductsOpen}
+          >
             <span className="flex items-center gap-2">
               <SignatureIcon className="h-[18px] w-[18px] shrink-0" />
               Products
@@ -323,11 +329,12 @@ export default function TopBar({ locale }: { locale: string }) {
               return (
                 <Link
                   key={code}
-                  href={href}  // ← sin withBase
+                  href={href}  // sin withBase
                   prefetch={false}
                   className={`min-w-[44px] rounded-md px-3 py-2 text-center text-sm ${active ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100'}`}
                   aria-current={active ? 'page' : undefined}
-                  onClick={() => setMobileOpen(false)}>
+                  onClick={() => setMobileOpen(false)}
+                >
                   {code.toUpperCase()}
                 </Link>
               );
