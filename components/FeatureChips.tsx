@@ -1,55 +1,54 @@
-import Link from 'next/link'
-import { withBase } from './lib/withBase' // solo para assets si hiciera falta
+// components/FeatureChips.tsx
+import Link from 'next/link';
 
-type Locale = 'es' | 'en' | 'de'
-type ChipInput = string | { label: string; href?: string }
+type Locale = 'es' | 'en' | 'de';
+type ChipInput = string | { label: string; href?: string };
 
 export default function FeatureChips({
   locale,
   items,
   compact = false,
 }: {
-  locale?: Locale
-  items?: ChipInput[]
-  compact?: boolean
+  locale?: Locale;
+  items?: ChipInput[];
+  compact?: boolean;
 }) {
   const pill = `rounded-2xl bg-slate-900 text-white hover:bg-slate-800 ${
     compact ? 'px-4 py-2 text-sm' : 'px-6 py-3'
-  }`
+  }`;
 
-  // AUTO por locale → under-construction
+  // Modo A (auto): chips que van a under-construction por ahora
   if (!items || items.length === 0) {
-    const loc = (locale || 'en') as Locale
-    const uc = `/${loc}/under-construction/`  // ← sin withBase
+    const loc = (locale || 'en') as Locale;
     const chips = [
-      { label: 'Signature PQ-ready', href: uc },
-      { label: 'Blind-Reveal',       href: uc },
-      { label: 'Audit',              href: uc },
-      { label: 'mTLS PQ-Ready',      href: uc },
-      { label: 'Governing',          href: uc },
-    ]
+      { label: 'Signature PQ-ready', href: `/${loc}/under-construction/` },
+      { label: 'Blind-Reveal',       href: `/${loc}/under-construction/` },
+      { label: 'Audit',              href: `/${loc}/under-construction/` },
+      { label: 'mTLS PQ-Ready',      href: `/${loc}/under-construction/` },
+      { label: 'Governing',          href: `/${loc}/under-construction/` },
+    ];
+
     return (
       <div className="mt-6 flex flex-wrap gap-4">
         {chips.map((c) => (
-          <Link key={c.label} href={c.href} prefetch={false} className={pill}>
+          <Link key={c.label} href={c.href!} prefetch={false} className={pill}>
             {c.label}
           </Link>
         ))}
       </div>
-    )
+    );
   }
 
-  // CUSTOM
+  // Modo B (custom): respeta lo que venga
   const norm = items.map((it) =>
     typeof it === 'string' ? { label: it } : { label: it.label, href: it.href }
-  )
+  );
 
   return (
     <div className="mt-6 flex flex-wrap gap-4">
-      {norm.map((c) => {
-        const href = c.href // si es interno, Next Link ya agrega basePath
-        return href ? (
-          <Link key={c.label} href={href} prefetch={false} className={pill}>
+      {norm.map((c) =>
+        c.href ? (
+          <Link key={c.label} href={c.href} prefetch={false} className={pill}>
             {c.label}
           </Link>
         ) : (
@@ -57,7 +56,7 @@ export default function FeatureChips({
             {c.label}
           </span>
         )
-      })}
+      )}
     </div>
-  )
+  );
 }
