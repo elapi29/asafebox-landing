@@ -22,7 +22,7 @@ export default function BriefingPage({ params }: { params: { locale: Locale } })
           </div>
         </div>
 
-        <section className="mb-10">
+       {/* <section className="mb-10">
           <h2 className="mb-3 text-xl font-bold">Gateway-Verify — códigos y acciones</h2>
           <p className="mb-4 text-slate-600">Semántica de respuestas y efectos (freeze / log).</p>
           <GatewayLegend />
@@ -31,7 +31,7 @@ export default function BriefingPage({ params }: { params: { locale: Locale } })
         <section>
           <h2 className="mb-3 text-xl font-bold">Lógica del sistema (pasillo)</h2>
           <p className="mb-4 text-slate-600">Bloques y responsabilidades.</p>
-          <SystemLegend />
+          <SystemLegend /> */}
         </section>
       </div>
     </main>
