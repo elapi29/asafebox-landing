@@ -88,7 +88,7 @@ export default function IntroductionPage({ params }: { params: { locale: Locale 
 
       {/* C. For Small Businesses */}
       <section id="small-business" className="mx-auto max-w-6xl py-10">
-        <h2 className="text-2xl font-semibold">For Small Businesses</h2>
+        <h2 className="text-2xl font-semibold">For Businesses</h2>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-slate-700">
           <li>Verify documents with a QR in seconds (sales, invoices, PoS slips).</li>
           <li>Onboard clients with sealed, auditable KYC without exposing raw PII.</li>
