@@ -1,135 +1,147 @@
 'use client';
 
+type Size = 'sm' | 'md' | 'lg';
+
 type Props = {
   title?: string;
   subtitle?: string;
-  topLabels?: [string, string, string];
-  chips?: string[];                 // hasta 4 (se acomodan en 2 filas)
+  chips?: string[];            // 4 items máx
   bottomLabel?: string;
+  showActors?: boolean;        // nuevos flags
+  size?: Size;                 // 'sm'|'md'|'lg'
   className?: string;
-  size?: 'sm' | 'md' | 'lg';        // controla tipografías y paddings
 };
 
 export default function SignaturePQDiagram({
   title = 'In aSafeBox® — Signature PQ-ready Connect',
   subtitle = 'Transporte seguro • Controles de contenido • Evidencia inmutable',
-  topLabels = ['Backoffice', 'Mobile / Web', 'Partners'],
   chips = ['Canal autenticado', 'Controles previos a firmar', 'Evidencia auditable', 'Ruta híbrida a PQ'],
   bottomLabel = 'Evidencia / Ledger (on-prem / cloud / chain)',
+  showActors = false,
+  size = 'lg',
   className = '',
-  size = 'md',
 }: Props) {
-  // Paleta (logo): naranja → fucsia → violeta
-  const A = '#FF7A00';   // naranja
-  const B = '#FF3D6E';   // fucsia
-  const C = '#7C3AED';   // violeta
-  const CHIP_BG = '#F1F5FF';
-  const DARK = '#0f172a';
-  const MUTED = '#475569';
+  // paleta alineada al logo (naranja→rosa→violeta)
+  const G1 = '#FF7A18';
+  const G2 = '#FF2D55';
+  const G3 = '#8A2BE2';
 
-  // Escalas según size
+  // escala por tamaño
   const S = {
-    sm: { h1: 30, h2: 18, muted: 14, chip: 15, label: 14, small: 13, boxH: 180, chipW: 240, chipH: 42, gapX: 210 },
-    md: { h1: 34, h2: 20, muted: 15, chip: 16, label: 15, small: 14, boxH: 190, chipW: 260, chipH: 46, gapX: 230 },
-    lg: { h1: 40, h2: 22, muted: 16, chip: 17, label: 16, small: 15, boxH: 200, chipW: 280, chipH: 48, gapX: 250 },
+    sm: { title: 28, sub: 15, chip: 18, boxH: 300, chipH: 48, rx: 28, gapY: 18 },
+    md: { title: 34, sub: 16, chip: 19, boxH: 340, chipH: 56, rx: 32, gapY: 20 },
+    lg: { title: 38, sub: 18, chip: 20, boxH: 380, chipH: 64, rx: 36, gapY: 22 },
   }[size];
 
-  // chips en 2 filas (2 + 2) para que no colisionen
-  const row1 = chips.slice(0, 2);
-  const row2 = chips.slice(2, 4);
+  // layout base
+  const VBW = 1200;
+  const VBH = 720;
+  const marginX = 120;
+  const boxW = VBW - marginX * 2;
+  const boxX = marginX;
+  const boxY = showActors ? 220 : 160;      // si no hay actores, subimos la caja
+  const boxH = S.boxH;
+
+  // chips (2x2)
+  const chipW = (boxW - 140) / 2;            // 2 columnas con padding interno
+  const chipH = S.chipH;
+  const chipRX = chipH / 2;
+  const row1Y = boxY + 130;
+  const row2Y = row1Y + chipH + 26;
+
+  // tipografías embebidas (para SVG)
+  const css = `
+    .t-title { font: 700 ${S.title}px/1.25 Inter, ui-sans-serif, system-ui; fill: #fff }
+    .t-sub   { font: 600 ${S.sub}px/1.35 Inter, ui-sans-serif, system-ui; fill: #E6ECFF; opacity:.95 }
+    .t-chip  { font: 700 ${S.chip}px/1 Inter, ui-sans-serif, system-ui; fill: #0f172a }
+    .t-pill  { font: 600 ${S.chip - 2}px/1.2 Inter, ui-sans-serif, system-ui; fill: #0f172a }
+    .t-actor { font: 600 16px/1 Inter, ui-sans-serif, system-ui; fill: #0f172a }
+    .shadow  { filter: drop-shadow(0 18px 28px rgba(16,24,40,.16)) }
+  `;
 
   return (
-    <div className={className}>
-      <svg
-        viewBox="0 0 1200 760"
-        className="w-full h-auto"
-        role="img"
-        aria-label="Diagrama Signature PQ-ready Connect"
-        preserveAspectRatio="xMidYMid meet"
-      >
+    <div className={className} aria-hidden>
+      <svg viewBox={`0 0 ${VBW} ${VBH}`} className="w-full h-auto" role="img" aria-label="Signature PQ-ready diagram">
         <defs>
-          <linearGradient id="brandGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%"  stopColor={A}/>
-            <stop offset="50%" stopColor={B}/>
-            <stop offset="100%" stopColor={C}/>
+          <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%"  stopColor={G1}/>
+            <stop offset="55%" stopColor={G2}/>
+            <stop offset="100%" stopColor={G3}/>
           </linearGradient>
-          <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="10" stdDeviation="16" floodOpacity="0.16" />
-          </filter>
-          <style>{`
-            .t-h1   { font: 700 ${S.h1}px/1.25 Inter, ui-sans-serif, system-ui; fill:${DARK} }
-            .t-h2   { font: 700 ${S.h2}px/1.25 Inter, ui-sans-serif, system-ui; fill:#fff }
-            .t-muted{ font: 500 ${S.muted}px/1.35 Inter, ui-sans-serif, system-ui; fill:${MUTED} }
-            .t-chip { font: 700 ${S.chip}px/1 Inter, ui-sans-serif, system-ui;  fill:${DARK} }
-            .t-lbl  { font: 600 ${S.label}px/1 Inter, ui-sans-serif, system-ui; fill:${DARK} }
-            .t-sm   { font: 500 ${S.small}px/1 Inter, ui-sans-serif, system-ui; fill:#E8ECFF }
-          `}</style>
+          <style>{css}</style>
         </defs>
 
-        {/* Subtítulo arriba */}
-        <text x="600" y="60" textAnchor="middle" className="t-muted">{subtitle}</text>
-
-        {/* Actores */}
-        {topLabels.map((lbl, i) => {
-          const x = 260 + i * 340; // 260, 600, 940
-          return (
-            <g key={lbl}>
-              <rect x={x - 52} y={100} width="104" height="104" rx="26" fill="url(#brandGrad)" />
-              {/* ícono simple */}
-              <circle cx={x} cy={152} r="17" fill="#111827" />
-              <circle cx={x} cy={152} r="9"  fill="#fff" />
-              <text x={x} y={238} textAnchor="middle" className="t-lbl">{lbl}</text>
-
-              {/* flecha hacia la caja */}
-              <path d={`M ${x} 260 L ${x} 300`} stroke={B} strokeWidth="6" fill="none" />
-              <polygon points={`${x-10},300 ${x+10},300 ${x},320`} fill={B} />
-            </g>
-          );
-        })}
+        {/* Actores opcionales */}
+        {showActors && (
+          <>
+            {['Backoffice','Mobile / Web','Partners'].map((label, i) => {
+              const x = 300 + i * 300;
+              return (
+                <g key={label}>
+                  <rect x={x-44} y={80} width="88" height="88" rx="22" fill="url(#brand)" className="shadow"/>
+                  <circle cx={x} cy={124} r="16" fill="#fff"/>
+                  <rect x={x-10} y={114} width="20" height="20" rx="6" fill="#0E1A2F"/>
+                  <text x={x} y={192} textAnchor="middle" className="t-actor">{label}</text>
+                  <path d={`M ${x} 206 L ${x} ${boxY-16}`} stroke="#2151F5" strokeWidth="5" fill="none"/>
+                  <polygon points={`${x-10},${boxY-16} ${x+10},${boxY-16} ${x},${boxY}`} fill="#2151F5"/>
+                </g>
+              );
+            })}
+          </>
+        )}
 
         {/* Caja principal */}
-        <g filter="url(#softShadow)">
-          <rect x="180" y="320" width="840" height={S.boxH} rx="42" fill="url(#brandGrad)" />
-          <text x="600" y="375" textAnchor="middle" className="t-h2">
-            {title}
+        <g className="shadow">
+          <rect x={boxX} y={boxY} width={boxW} height={boxH} rx={S.rx} fill="url(#brand)"/>
+        </g>
+
+        {/* Título y subtítulo */}
+        <text x={VBW/2} y={boxY + 60} textAnchor="middle" className="t-title">{title}</text>
+        <text x={VBW/2} y={boxY + 92} textAnchor="middle" className="t-sub">{subtitle}</text>
+
+        {/* Chips (fila 1) */}
+        <g>
+          {/* Izq */}
+          <rect x={boxX + 70} y={row1Y} width={chipW} height={chipH} rx={chipRX} fill="#fff"/>
+          <text x={boxX + 70 + chipW/2} y={row1Y + chipH/2 + (S.chip/3)} textAnchor="middle" className="t-chip">
+            {chips[0] || ''}
           </text>
-
-          {/* Chips fila 1 */}
-          {row1.map((c, i) => {
-            const cx = 390 + i * (S.gapX + S.chipW/2); // centrados
-            const y  = 410;
-            return (
-              <g key={`r1-${c}`}>
-                <rect x={cx - S.chipW/2} y={y} width={S.chipW} height={S.chipH} rx={S.chipH/2} fill="#fff" opacity="0.96" />
-                <text x={cx} y={y + S.chipH*0.68} textAnchor="middle" className="t-chip">{c}</text>
-              </g>
-            );
-          })}
-          {/* Chips fila 2 */}
-          {row2.map((c, i) => {
-            const cx = 390 + i * (S.gapX + S.chipW/2);
-            const y  = 410 + S.chipH + 16;
-            return (
-              <g key={`r2-${c}`}>
-                <rect x={cx - S.chipW/2} y={y} width={S.chipW} height={S.chipH} rx={S.chipH/2} fill="#fff" opacity="0.96" />
-                <text x={cx} y={y + S.chipH*0.68} textAnchor="middle" className="t-chip">{c}</text>
-              </g>
-            );
-          })}
-
-          {/* leyenda pequeña */}
-          <text x="600" y={320 + S.boxH - 22} textAnchor="middle" className="t-sm">
-            Firma sólo lo que pasa los controles · Preparado para modo híbrido post-cuántico
+          {/* Der */}
+          <rect x={boxX + 70 + chipW + 70} y={row1Y} width={chipW} height={chipH} rx={chipRX} fill="#fff"/>
+          <text x={boxX + 70 + chipW + 70 + chipW/2} y={row1Y + chipH/2 + (S.chip/3)} textAnchor="middle" className="t-chip">
+            {chips[1] || ''}
           </text>
         </g>
 
-        {/* Salida hacia evidencia */}
-        <path d="M600 520 L600 560" stroke={B} strokeWidth="6" fill="none" />
-        <polygon points="590,560 610,560 600,580" fill={B} />
-        <g filter="url(#softShadow)">
-          <rect x="510" y="590" width="380" height="64" rx="18" fill="#fff" />
-          <rect x="510" y="590" width="380" height="64" rx="18" fill="none" stroke="#E2E8F0" />
-          <text x="700" y="631" textAnchor="middle" className="t-lbl">{bottomLabel}</text>
+        {/* Chips (fila 2) */}
+        <g>
+          {/* Izq */}
+          <rect x={boxX + 70} y={row2Y} width={chipW} height={chipH} rx={chipRX} fill="#fff"/>
+          <text x={boxX + 70 + chipW/2} y={row2Y + chipH/2 + (S.chip/3)} textAnchor="middle" className="t-chip">
+            {chips[2] || ''}
+          </text>
+          {/* Der */}
+          <rect x={boxX + 70 + chipW + 70} y={row2Y} width={chipW} height={chipH} rx={chipRX} fill="#fff"/>
+          <text x={boxX + 70 + chipW + 70 + chipW/2} y={row2Y + chipH/2 + (S.chip/3)} textAnchor="middle" className="t-chip">
+            {chips[3] || ''}
+          </text>
+        </g>
+
+        {/* Línea “mini” dentro de la caja (ahora con mayor separación) */}
+        <text x={VBW/2} y={row2Y + chipH + S.gapY + 22} textAnchor="middle" className="t-sub">
+          Firma sólo lo que pasa los controles • Preparado para modo híbrido post-cuántico
+        </text>
+
+        {/* Flecha hacia la evidencia */}
+        <path d={`M ${VBW/2} ${boxY + boxH} L ${VBW/2} ${boxY + boxH + 44}`} stroke="#2151F5" strokeWidth="6" fill="none"/>
+        <polygon points={`${VBW/2-12},${boxY + boxH + 44} ${VBW/2+12},${boxY + boxH + 44} ${VBW/2},${boxY + boxH + 68}`} fill="#2151F5"/>
+
+        {/* Pill de evidencia */}
+        <g className="shadow">
+          <rect x={VBW/2 - 300} y={boxY + boxH + 84} width="600" height={chipH} rx={chipRX} fill="#fff"/>
+          <text x={VBW/2} y={boxY + boxH + 84 + chipH/2 + (S.chip/3)} textAnchor="middle" className="t-pill">
+            {bottomLabel}
+          </text>
         </g>
       </svg>
     </div>

@@ -41,8 +41,9 @@ export default function SignaturePQPage({ params }: { params: { locale: Locale }
       {/* Diagrama (responsive y legible) */}
       <section className="mx-auto max-w-6xl pb-10">
         <SignaturePQDiagram
-          size="md"  /* sm | md | lg */
-          className="mx-auto w-full md:scale-100 scale-[0.95] origin-top"
+          size="lg"
+          showActors={false}
+          className="mx-auto w-full"
         />
       </section>
 
