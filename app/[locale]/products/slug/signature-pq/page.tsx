@@ -1,7 +1,7 @@
 // app/[locale]/products/slug/signature-pq/page.tsx
 import Link from 'next/link'
 import Footer from '../../../../../components/Footer'
-import SignaturePQDiagram from '../../../../../components/illos/SignaturePQDiagram'
+import SignaturePQDiagram from '../../../../../components/SignaturePQDiagram'  // ← NUEVO
 
 type Locale = 'es' | 'en' | 'de'
 
