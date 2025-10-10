@@ -304,7 +304,7 @@ export default function TopBar({ locale }: { locale: string }) {
           </button>
           <div id="mob-products" className={`overflow-hidden rounded-lg bg-slate-50 transition-[max-height] duration-300 ease-out ${mobProductsOpen ? 'max-h-96' : 'max-h-0'}`}>
             <div className="p-2 space-y-1">
-              <MenuItem href={uc} label="Signature PQ-ready Connect" Icon={SignatureIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`/${locale}/products/slug/signature-pq/`} label="Signature PQ-ready Connect" Icon={SignatureIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
               <MenuItem href={uc} label="Blockaudit · Blind-Reveal"  Icon={ZKIcon}       onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
               <MenuItem href={uc} label="Blockchecker · Audit"       Icon={AuditIcon}    onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
               <MenuItem href={uc} label="Blocksender · mTLS PQ-Ready" Icon={MtlsIcon}    onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
