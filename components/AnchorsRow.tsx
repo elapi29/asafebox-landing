@@ -1,21 +1,36 @@
 // components/AnchorsRow.tsx
-type Anchor = { key: string; label: string; href: string }
+import Link from 'next/link';
 
-export default function AnchorsRow({ items }: { items: Anchor[] }) {
+export default function AnchorsRow({ locale = 'en' }: { locale?: 'es' | 'en' | 'de' }) {
+  const home = `/${locale}/`;
+
   return (
-    <nav aria-label="Sections" className="w-full overflow-x-auto">
-      <ul className="mx-auto flex w-full max-w-6xl gap-2 px-1 py-2">
-        {items.map((a) => (
-          <li key={a.key}>
-            <a
-              href={a.href}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50"
-            >
-              {a.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  )
+    <div className="flex flex-wrap gap-3">
+      {/* Ejemplos de anchors que ya tengas */}
+      <Link
+        href={`${home}introduction/#what-is`}
+        prefetch={false}
+        className="rounded-xl border border-slate-200 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50"
+      >
+        What is In aSafeBox®
+      </Link>
+
+      <Link
+        href={`${home}introduction/#how-it-works`}
+        prefetch={false}
+        className="rounded-xl border border-slate-200 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50"
+      >
+        How it works
+      </Link>
+
+      {/* Briefing → ahora va al Home */}
+      <Link
+        href={home} // 👈 redirige a la homepage del locale
+        prefetch={false}
+        className="rounded-xl bg-slate-900 px-4 py-2 text-sm text-white hover:bg-slate-800"
+      >
+        Briefing
+      </Link>
+    </div>
+  );
 }
