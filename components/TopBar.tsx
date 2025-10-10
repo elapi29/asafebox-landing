@@ -215,7 +215,7 @@ export default function TopBar({ locale }: { locale: string }) {
             </button>
             {openProducts && (
               <div role="menu" className="absolute right-0 mt-2 w-80 rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
-                <MenuItem href={uc} label="Signature PQ-ready Connect" Icon={SignatureIcon} onClick={closeAllMenus}/>
+                <MenuItem href={`/${locale}/products/slug/signature-pq/`} label="Signature PQ-ready Connect" Icon={SignatureIcon} onClick={closeAllMenus}/>
                 <MenuItem href={uc} label="Blockaudit · Blind-Reveal"  Icon={ZKIcon}       onClick={closeAllMenus}/>
                 <MenuItem href={uc} label="Blockchecker · Audit"       Icon={AuditIcon}    onClick={closeAllMenus}/>
                 <MenuItem href={uc} label="Blocksender · mTLS PQ-Ready" Icon={MtlsIcon}    onClick={closeAllMenus}/>

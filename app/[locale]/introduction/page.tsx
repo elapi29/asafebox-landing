@@ -4,6 +4,8 @@ import type { Locale } from '../../../i18n/dictionaries'
 import Illustration from '../../../components/Illustration'
 import BlindRevealIllo from '../../../components/illos/BlindRevealIllo'
 import Footer from '../../../components/Footer'
+// import SignaturePQDiagram from '@/components/illos/SignaturePQDiagram';
+
 
 export default function IntroductionPage({ params }: { params: { locale: Locale } }) {
   const { locale } = params
