@@ -216,8 +216,8 @@ export default function TopBar({ locale }: { locale: string }) {
             {openProducts && (
               <div role="menu" className="absolute right-0 mt-2 w-80 rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
                 <MenuItem href={`/${locale}/products/slug/signature-pq/`} label="Signature PQ-ready Connect" Icon={SignatureIcon} onClick={closeAllMenus}/>
-                <MenuItem href={uc} label="Blockaudit · Blind-Reveal"  Icon={ZKIcon}       onClick={closeAllMenus}/>
-                <MenuItem href={uc} label="Blockchecker · Audit"       Icon={AuditIcon}    onClick={closeAllMenus}/>
+                <MenuItem href={uc} label="Blockinspection · Blind-Reveal"  Icon={ZKIcon}       onClick={closeAllMenus}/>
+                <MenuItem href={uc} label="Blockchecker · Massive Audit"       Icon={AuditIcon}    onClick={closeAllMenus}/>
                 <MenuItem href={uc} label="Blocksender · mTLS PQ-Ready" Icon={MtlsIcon}    onClick={closeAllMenus}/>
                 <MenuItem href={uc} label="Blockcontrol · Governing"   Icon={GovIcon}      onClick={closeAllMenus}/>
               </div>
@@ -305,8 +305,8 @@ export default function TopBar({ locale }: { locale: string }) {
           <div id="mob-products" className={`overflow-hidden rounded-lg bg-slate-50 transition-[max-height] duration-300 ease-out ${mobProductsOpen ? 'max-h-96' : 'max-h-0'}`}>
             <div className="p-2 space-y-1">
               <MenuItem href={`/${locale}/products/slug/signature-pq/`} label="Signature PQ-ready Connect" Icon={SignatureIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={uc} label="Blockaudit · Blind-Reveal"  Icon={ZKIcon}       onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={uc} label="Blockchecker · Audit"       Icon={AuditIcon}    onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={uc} label="Blockinspection · Blind-Reveal"  Icon={ZKIcon}       onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={uc} label="Blockchecker · Massive Audit"       Icon={AuditIcon}    onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
               <MenuItem href={uc} label="Blocksender · mTLS PQ-Ready" Icon={MtlsIcon}    onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
               <MenuItem href={uc} label="Blockcontrol · Governing"   Icon={GovIcon}      onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
             </div>
