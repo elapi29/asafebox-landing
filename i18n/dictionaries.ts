@@ -178,8 +178,8 @@ const es: Dict = {
       { value: '< 10s', label: 'para verificar con QR' },
       { value: 'minutos', label: 'auditorías de seguros y controles' },
     ],
-    qrLabel: 'Verificación de ejemplo',
-    qrUrl: 'https://elapi29.github.io/asafebox-landing/verify/example?code=DEMO-QR-001',
+    qrLabel: 'Verificación de ejemplo', //qrUrl: 'https://elapi29.github.io/asafebox-landing/verify/example?code=DEMO-QR-001',
+    qrUrl: 'https://elapi29.github.io/asafebox-landing/es/verify/example/',
     diagramCaption:
       'Cadena de valor con eventos encadenados y verificación rápida en el punto de venta (sin exponer datos sensibles).',
     diagram: {
@@ -293,7 +293,7 @@ const en: Dict = {
       { value: 'minutes', label: 'for insurance & compliance audits' },
     ],
     qrLabel: 'Sample verification',
-    qrUrl: 'https://elapi29.github.io/asafebox-landing/verify/example?code=DEMO-QR-001',
+    qrUrl: 'https://elapi29.github.io/asafebox-landing/en/verify/example/', //qrUrl: 'https://elapi29.github.io/asafebox-landing/verify/example?code=DEMO-QR-001',
     diagramCaption:
       'Value chain with chained events and fast verification at the point of sale (no sensitive data exposed).',
     diagram: {
@@ -410,8 +410,8 @@ const de: Dict = {
       { value: '< 10s', label: 'für die QR-Prüfung' },
       { value: 'Minuten', label: 'für Versicherungs- & Compliance-Audits' },
     ],
-    qrLabel: 'Beispiel-Verifizierung',
-    qrUrl: '/verify/example?code=DEMO-QR-001',
+    qrLabel: 'Beispiel-Verifizierung', //qrUrl: '/verify/example?code=DEMO-QR-001',
+    qrUrl: 'https://elapi29.github.io/asafebox-landing/de/verify/example/',
     diagramCaption:
       'Wertschöpfungskette mit verketteten Ereignissen und schneller Prüfung am POS (ohne sensible Daten offenzulegen).',
     diagram: {
