@@ -5,7 +5,7 @@ import QrDemo from '../../../../components/QrDemo'
 import type { Locale } from '../../../../i18n/dictionaries'
 import { getDictionary } from '../../../../i18n/dictionaries'
 
-import LanguageSwitcher from '../../../../components/LanguageSwitcher'
+{/*import LanguageSwitcher from '../../../../components/LanguageSwitcher'*/}
 import Footer from '../../../../components/Footer'   // ⬅️ agrega esta línea
 
 
@@ -86,9 +86,15 @@ export default async function JewelryPage({ params }: { params: { locale: Locale
       </section>
 
       {/* QR */}
-      <section id="qr" className="mx-auto mt-10 max-w-5xl">
+      {/* <section id="qr" className="mx-auto mt-10 max-w-5xl">
         <h2 className="mb-4 text-xl font-semibold">{J.qrLabel}</h2>
         <QrDemo value={J.qrUrl} label={J.qrLabel} />
+      </section> */}
+      <section id="qr" className="mx-auto mt-10 max-w-5xl">
+        <h2 className="mb-4 text-xl font-semibold">{J.qrLabel}</h2>
+
+        {/* En vez de usar J.qrUrl (estático), armamos el path con el locale actual */}
+        <QrDemo value={`/${params.locale}/verify/demo/`} label={J.qrLabel} />
       </section>
 
       {/* DIAGRAMA */}
