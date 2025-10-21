@@ -2,8 +2,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
-import { withBase } from '../../../../components/lib/withBase' // ruta relativa desde app/[locale]/verify/
+import { withBase } from '../../../../components/lib/withBase' // ← 4 niveles
 
 type Locale = 'es' | 'en' | 'de'
 
@@ -24,7 +23,6 @@ async function sha256(file: File): Promise<string> {
 }
 
 function absoluteUrl(path: string) {
-  // withBase te da /asafebox-landing/... en GH Pages; acá le agregamos origin
   if (typeof window === 'undefined') return path
   const p = withBase(path)
   return `${location.origin}${p}`
@@ -32,8 +30,14 @@ function absoluteUrl(path: string) {
 
 export default function VerifyExamplePage({ params }: { params: { locale: Locale } }) {
   const { locale } = params
-  const sp = useSearchParams()
-  const token = sp.get('token') || ''
+
+  // 🔄 Reemplazo de useSearchParams: leo el token desde window.location
+  const [token, setToken] = useState<string>('')
+
+  useEffect(() => {
+    const t = new URLSearchParams(window.location.search).get('token') || ''
+    setToken(t)
+  }, [])
 
   // ——————————————————————————————————————————————————————————
   // MODO RECEPTOR (viene con ?token=...)
@@ -41,8 +45,7 @@ export default function VerifyExamplePage({ params }: { params: { locale: Locale
   const view = useMemo(() => {
     if (!token) return null
     try {
-      const obj = b64.dec(token)
-      return obj
+      return b64.dec(token)
     } catch {
       return { error: 'Invalid token' }
     }
@@ -52,7 +55,6 @@ export default function VerifyExamplePage({ params }: { params: { locale: Locale
   const [unlocked, setUnlocked] = useState(false)
 
   useEffect(() => {
-    // Si el token indica que no hay password, se desbloquea solo
     if (view && (view as any)?.protect?.mode !== 'password') setUnlocked(true)
   }, [view])
 
@@ -70,7 +72,7 @@ export default function VerifyExamplePage({ params }: { params: { locale: Locale
   const [shareUrl, setShareUrl] = useState<string>('')
 
   async function onCreateEvent() {
-    if (!file) return alert('Subí un archivo (PDF/JPG/PNG).')
+    if (!file) return alert(locale === 'es' ? 'Subí un archivo (PDF/JPG/PNG).' : 'Upload a file (PDF/JPG/PNG).')
     const hash = await sha256(file)
     const now = new Date().toISOString()
 
@@ -78,33 +80,23 @@ export default function VerifyExamplePage({ params }: { params: { locale: Locale
       kind: 'sale_event_demo',
       i18n: locale,
       issuer,
-      recipient,           // email o teléfono que el cliente ponga
+      recipient,
       amount,
       note,
-      file: {
-        name: file.name,
-        size: file.size,
-        type: file.type || 'application/octet-stream',
-        sha256: hash,
-      },
+      file: { name: file.name, size: file.size, type: file.type || 'application/octet-stream', sha256: hash },
       timestamp: now,
-      protect: passRequired
-        ? { mode: 'password', hint: 'ask the seller', kdf: 'demo', salt: 'demo' }
-        : { mode: 'none' },
-      // En real: acá firmaría el backend / HSM; en demo guardamos en localStorage
+      protect: passRequired ? { mode: 'password', hint: 'ask the seller', kdf: 'demo', salt: 'demo' } : { mode: 'none' },
     }
 
-    // Guardamos en localStorage por si refrescan (no es seguridad, es demo UX)
     try { localStorage.setItem('asafebox-demo-event', JSON.stringify(event)) } catch {}
 
-    const token = b64.enc(event)
-    const url = absoluteUrl(`/${locale}/verify/example/?token=${encodeURIComponent(token)}`)
+    const t = b64.enc(event)
+    const url = absoluteUrl(`/${locale}/verify/example/?token=${encodeURIComponent(t)}`)
     setShareUrl(url)
   }
 
   function onReveal() {
     if ((view as any)?.protect?.mode === 'password') {
-      // Validación demo: password exacta = "demo" o la que el emisor eligió (si lo incluyeras)
       if (revealPass.trim() === 'demo') setUnlocked(true)
       else alert(locale === 'es' ? 'Password inválido' : 'Invalid password')
     } else {
@@ -118,9 +110,7 @@ export default function VerifyExamplePage({ params }: { params: { locale: Locale
   return (
     <main className="mx-auto max-w-3xl px-6 py-10">
       <h1 className="text-2xl font-bold text-slate-900">
-        {T('QR Demo — Verify & Send',
-           'Demo QR — Verificar & Enviar',
-           'QR Demo — Prüfen & Senden')}
+        {T('QR Demo — Verify & Send','Demo QR — Verificar & Enviar','QR Demo — Prüfen & Senden')}
       </h1>
 
       {!token && (
@@ -163,10 +153,7 @@ export default function VerifyExamplePage({ params }: { params: { locale: Locale
           </div>
 
           <div className="pt-2">
-            <button
-              onClick={onCreateEvent}
-              className="rounded-xl bg-slate-900 px-5 py-3 text-white hover:bg-slate-800"
-            >
+            <button onClick={onCreateEvent} className="rounded-xl bg-slate-900 px-5 py-3 text-white hover:bg-slate-800">
               {T('Generate verification link','Generar enlace verificable')}
             </button>
           </div>
@@ -199,10 +186,14 @@ export default function VerifyExamplePage({ params }: { params: { locale: Locale
 
               {(view as any).protect?.mode === 'password' && !unlocked && (
                 <div className="rounded-xl bg-amber-50 p-3">
-                  <div className="font-medium text-amber-900">{T('This event has private fields. Enter the password to reveal.','Este evento tiene campos privados. Ingresá el password para revelar.')}</div>
+                  <div className="font-medium text-amber-900">
+                    {T('This event has private fields. Enter the password to reveal.','Este evento tiene campos privados. Ingresá el password para revelar.')}
+                  </div>
                   <div className="mt-2 flex gap-2">
                     <input value={revealPass} onChange={e => setRevealPass(e.target.value)} className="w-64 rounded-lg border border-amber-300 px-3 py-2" placeholder="demo" />
-                    <button onClick={onReveal} className="rounded-lg bg-slate-900 px-4 py-2 text-white hover:bg-slate-800">{T('Reveal','Revelar')}</button>
+                    <button onClick={() => { if (revealPass.trim() === 'demo') setUnlocked(true) }} className="rounded-lg bg-slate-900 px-4 py-2 text-white hover:bg-slate-800">
+                      {T('Reveal','Revelar')}
+                    </button>
                   </div>
                 </div>
               )}
@@ -222,3 +213,4 @@ function Info({ label, value, mono = false }: { label: string; value: string; mo
     </div>
   )
 }
+
