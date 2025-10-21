@@ -3,7 +3,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { withBase } from '../../../components/lib/withBase' // ruta relativa desde app/[locale]/verify/
+import { withBase } from '../../../../components/lib/withBase' // ruta relativa desde app/[locale]/verify/
 
 type Locale = 'es' | 'en' | 'de'
 
