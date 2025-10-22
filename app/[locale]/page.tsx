@@ -46,6 +46,7 @@ export default async function Page({ params }: { params: { locale: Locale } }) {
           title={dict.privacy.title}
           body={dict.privacy.body}
           cta={dict.privacy.cta}
+          href={`/${params.locale}/verify/demo/`}   // ← ahora el botón va a la demo
         />
       </section>
 
