@@ -1,4 +1,3 @@
-// i18n/dictionaries.ts
 export type Locale = 'es' | 'en' | 'de'
 
 export type Dict = {
@@ -85,40 +84,41 @@ const es: Dict = {
   meta: {
     siteName: 'aSAFEBOX® — Emprendimiento Seguro',
     description:
-      'Capa de integridad digital para transacciones y contratos: evidencia inmutable, privacidad con Blind-Reveal y auditoría en minutos.',
+      'Capa de integridad digital para transacciones y contratos: evidencia inmutable, privacidad y auditoría en minutos.',
   },
   hero: {
     title: 'aSAFEBOX® — Emprendimiento Seguro',
     subtitle:
-      'Sellamos cada operación con evidencia criptográfica: lo que se firmó es lo que se ejecutó. Privacidad total con Blind-Reveal y pruebas ZK. Auditorías en minutos y preparación post-cuántica.',
+      // public-safe: sin ZK / PQ en el hero público
+      'Sellamos cada operación con evidencia privada y verificable en segundos — sin exponer datos sensibles. Auditorías en minutos.',
     emailPlaceholder: 'tu@email.com',
     cta: 'Quiero saber más',
     disclaimer: 'Sin spam. Te enviaremos solo novedades clave.',
   },
   howItWorks: {
     title: 'Cómo funciona',
-    subtitle: 'Del encadenamiento inmutable a la identidad cegada, bajo transporte PQ-ready.',
+    subtitle: 'Del encadenamiento inmutable a la identidad cegada, con verificación privada.',
   },
   illustration: {
-    transport: 'Capa de Seguridad de Transporte Post-Quantum-Ready',
+    transport: 'Capa de Seguridad de Transporte',
     sender: 'Emisor',
     ledger: 'Ledger Inmutable',
     blindId: 'Identidad Cegada',
     receiver: 'Receptor',
-    caption: 'Transporte autenticado (mTLS PQ-ready), evidencia inmutable y privacidad por diseño.',
+    caption: 'Transporte autenticado, evidencia inmutable y privacidad por diseño.',
   },
   evidence: {
     title: 'Evidencia inmutable',
     body:
-      'Cada paso (transacción, firma, KYC) queda sellado con un Ledger Inmutable y pruebas ZK. El encadenamiento permite detectar cualquier manipulación incluso meses o años más tarde, manteniendo auditabilidad con impacto mínimo en la operación.',
-    bullets: ['Transporte PQ-ready (mTLS)', 'Ledger inmutable (encadenamiento)', 'Control extremo a extremo'],
+      'Cada paso (transacción, firma, KYC) queda sellado y encadenado. La verificación detecta cualquier cambio incluso meses después, manteniendo auditoría con impacto mínimo en la operación.',
+    bullets: ['Transporte autenticado', 'Ledger inmutable (encadenamiento)', 'Control extremo a extremo'],
     sealTitle: 'Sello de Integridad Encadenado',
-    sealBody: 'Un “sello” criptográfico por evento; los sellos se encadenan en un libro de evidencias.',
+    sealBody: 'Un “sello” por evento; los sellos se encadenan en un libro de evidencias.',
   },
   privacy: {
     title: 'Privacidad con Blind-Reveal',
     body:
-      'Demostramos validez sin exponer datos sensibles a contrapartes ni auditores. Las partes verifican la consistencia de la operación con pruebas criptográficas, preservando la identidad del cliente y minimizando supuestos de confianza.',
+      'Demostramos validez sin exponer datos sensibles a contrapartes ni auditores. Las partes verifican consistencia con pruebas criptográficas, preservando identidad y minimizando supuestos de confianza.',
     cta: 'Learn how it works',
   },
   features: {
@@ -173,12 +173,13 @@ const es: Dict = {
     ],
     originBlock:
       '¿Ya tenés trazabilidad de origen? Perfecto. aSAFEBOX® añade la prueba de la operación final (punto de venta): boleta, certificado y pago quedan sellados y verificables en segundos. Resultado: menos disputas, menos fraude documental y auditorías más rápidas.',
+    // public-safe KPIs
     kpis: [
-      { value: '−40%', label: 'reclamos documentales' },
       { value: '< 10s', label: 'para verificar con QR' },
       { value: 'minutos', label: 'auditorías de seguros y controles' },
+      { value: 'objetivo', label: 'reducir reclamos en piloto' },
     ],
-    qrLabel: 'Verificación de ejemplo', //qrUrl: 'https://elapi29.github.io/asafebox-landing/verify/example?code=DEMO-QR-001',
+    qrLabel: 'Verificación de ejemplo',
     qrUrl: 'https://elapi29.github.io/asafebox-landing/es/verify/example/',
     diagramCaption:
       'Cadena de valor con eventos encadenados y verificación rápida en el punto de venta (sin exponer datos sensibles).',
@@ -198,7 +199,7 @@ const es: Dict = {
       lock3: 'Íntegro',
       lock4: 'Transferible',
       lock5: 'Verificable en segundos (QR)',
-      verifyPosLabel: 'verify_log • 05 (POS)',
+      verifyPosLabel: 'evento • 05 (POS)',
     },
   },
 }
@@ -207,40 +208,41 @@ const en: Dict = {
   meta: {
     siteName: 'aSAFEBOX® — Secure Ventures',
     description:
-      'Digital integrity layer for transactions and contracts: tamper-proof evidence, Blind-Reveal privacy and audits in minutes.',
+      'Digital integrity layer for transactions and contracts: tamper-proof evidence, privacy and audits in minutes.',
   },
   hero: {
     title: 'aSAFEBOX® — Secure Ventures',
     subtitle:
-      'We seal every operation with cryptographic evidence: what was signed is exactly what gets executed. Full privacy with Blind-Reveal and ZK proofs. Audits in minutes, post-quantum ready.',
+      // public-safe
+      'We seal each operation with private, verifiable evidence in seconds — without exposing sensitive data. Audits in minutes.',
     emailPlaceholder: 'you@example.com',
     cta: 'Keep me posted',
     disclaimer: 'No spam. Only key updates.',
   },
   howItWorks: {
     title: 'How it works',
-    subtitle: 'From an immutable chain to a blinded identity, all under a PQ-ready transport.',
+    subtitle: 'From a chained ledger to blinded identity, with private verification.',
   },
   illustration: {
-    transport: 'Post-Quantum-Ready Transport Security',
+    transport: 'Transport Security Layer',
     sender: 'Sender',
     ledger: 'Immutable Ledger',
     blindId: 'Blinded Identity',
     receiver: 'Receiver',
-    caption: 'Authenticated transport (PQ mTLS), tamper-proof evidence and privacy by design.',
+    caption: 'Authenticated transport, tamper-evident records and privacy by design.',
   },
   evidence: {
     title: 'Immutable evidence',
     body:
-      'Each step (transaction, signature, KYC) is sealed into an Immutable Ledger with ZK proofs. Chaining makes any manipulation detectable even months or years later, keeping operations auditable with minimal overhead.',
-    bullets: ['PQ-ready transport (mTLS)', 'Immutable chained ledger', 'End-to-end control'],
+      'Each step (transaction, signature, KYC) is sealed and chained. Verification detects any change, even months later, keeping audits fast with minimal overhead.',
+    bullets: ['Authenticated transport', 'Immutable chained ledger', 'End-to-end control'],
     sealTitle: 'Chained Integrity Seal',
-    sealBody: 'A cryptographic “seal” per event; seals are chained into an evidence book.',
+    sealBody: 'One cryptographic seal per event; seals are chained into an evidence book.',
   },
   privacy: {
     title: 'Privacy with Blind-Reveal',
     body:
-      'We prove validity without exposing sensitive data to counterparties or auditors. Parties verify consistency with cryptographic proofs while preserving customer identity and minimizing trust assumptions.',
+      'We prove validity without exposing sensitive data. Parties verify consistency with cryptographic checks while preserving identity and minimizing trust assumptions.',
     cta: 'Learn how it works',
   },
   features: { immutableEvidence: 'Immutable evidence', privacyBR: 'Privacy with Blind-Reveal', auditReady: 'Audit-ready', pqcReady: 'PQC-ready' },
@@ -288,12 +290,12 @@ const en: Dict = {
     originBlock:
       'Already have provenance? Great. aSAFEBOX® adds proof of the final operation (point of sale): receipt, certificate and payment become sealed and verifiable in seconds. Result: fewer disputes, less document fraud and faster audits.',
     kpis: [
-      { value: '−40%', label: 'document-related claims' },
       { value: '< 10s', label: 'to verify via QR' },
       { value: 'minutes', label: 'for insurance & compliance audits' },
+      { value: 'goal', label: 'reduce claims in pilot' },
     ],
     qrLabel: 'Sample verification',
-    qrUrl: 'https://elapi29.github.io/asafebox-landing/en/verify/example/', //qrUrl: 'https://elapi29.github.io/asafebox-landing/verify/example?code=DEMO-QR-001',
+    qrUrl: 'https://elapi29.github.io/asafebox-landing/en/verify/example/',
     diagramCaption:
       'Value chain with chained events and fast verification at the point of sale (no sensitive data exposed).',
     diagram: {
@@ -312,7 +314,7 @@ const en: Dict = {
       lock3: 'Tamper-evident',
       lock4: 'Transferable',
       lock5: 'QR verification in seconds',
-      verifyPosLabel: 'verify_log • 05 (POS)',
+      verifyPosLabel: 'event • 05 (POS)',
     },
   },
 }
@@ -321,12 +323,13 @@ const de: Dict = {
   meta: {
     siteName: 'aSAFEBOX® — Sicheres Vorhaben',
     description:
-      'Digitale Integritätsschicht für Transaktionen und Verträge: fälschungssichere Evidenz, Blind-Reveal-Privatsphäre und Audits in Minuten.',
+      'Digitale Integritätsschicht für Transaktionen und Verträge: fälschungssichere Evidenz, Privatsphäre und Audits in Minuten.',
   },
   hero: {
     title: 'aSAFEBOX® — Sicheres Vorhaben',
     subtitle:
-      'Wir versiegeln jede Operation mit kryptografischer Evidenz: Was unterschrieben wurde, ist exakt das, was ausgeführt wird. Volle Privatsphäre mit Blind-Reveal und ZK-Beweisen. Audits in Minuten, post-quanten-bereit.',
+      // public-safe
+      'Wir versiegeln jede Operation mit privater, in Sekunden prüfbarer Evidenz — ohne sensible Daten offenzulegen. Audits in Minuten.',
     emailPlaceholder: 'du@beispiel.de',
     cta: 'Ich möchte Updates',
     disclaimer: 'Kein Spam. Nur wichtige Neuigkeiten.',
@@ -334,28 +337,28 @@ const de: Dict = {
   howItWorks: {
     title: 'So funktioniert es',
     subtitle:
-      'Von einer unveränderlichen Kette bis zur geblendeten Identität – alles über einen PQ-fähigen Transport.',
+      'Von einer verketteten Evidenz bis zur geblendeten Identität — mit privater Verifizierung.',
   },
   illustration: {
-    transport: 'Post-Quantum-fähige Transportsicherheit',
+    transport: 'Transportsicherheits-Schicht',
     sender: 'Sender',
     ledger: 'Unveränderliches Ledger',
     blindId: 'Geblendete Identität',
     receiver: 'Empfänger',
-    caption: 'Authentifizierter Transport (PQ-mTLS), fälschungssichere Evidenz und Privacy by Design.',
+    caption: 'Authentifizierter Transport, fälschungssichere Evidenz und Privacy by Design.',
   },
   evidence: {
     title: 'Unveränderliche Evidenz',
     body:
-      'Jeder Schritt (Transaktion, Signatur, KYC) wird in ein unveränderliches Ledger mit ZK-Beweisen versiegelt. Durch das Verketteten ist jede Manipulation auch nach Monaten/Jahren nachweisbar – mit minimalem Betriebsaufwand.',
-    bullets: ['PQ-fähiger Transport (mTLS)', 'Unveränderliches, verkettetes Ledger', 'End-to-End-Kontrolle'],
+      'Jeder Schritt (Transaktion, Signatur, KYC) wird versiegelt und verkettet. Die Prüfung erkennt Änderungen auch nach Monaten — mit minimalem Betriebsaufwand.',
+    bullets: ['Authentifizierter Transport', 'Unveränderliches, verkettetes Ledger', 'End-to-End-Kontrolle'],
     sealTitle: 'Verkettetes Integritätssiegel',
     sealBody: 'Ein kryptografisches „Siegel“ pro Ereignis; die Siegel werden zu einem Evidenzbuch verkettet.',
   },
   privacy: {
     title: 'Privatsphäre mit Blind-Reveal',
     body:
-      'Wir belegen Gültigkeit, ohne sensible Daten gegenüber Gegenparteien oder Prüfern offenzulegen. Parteien prüfen die Konsistenz per kryptografischer Beweise, wahren die Kundenidentität und minimieren Vertrauenserfordernisse.',
+      'Wir belegen Gültigkeit, ohne sensible Daten offenzulegen. Parteien prüfen die Konsistenz per kryptografischer Checks und wahren die Identität.',
     cta: 'So funktioniert es',
   },
   features: { immutableEvidence: 'Unveränderliche Evidenz', privacyBR: 'Privatsphäre mit Blind-Reveal', auditReady: 'Audit-bereit', pqcReady: 'PQC-bereit' },
@@ -406,11 +409,11 @@ const de: Dict = {
     originBlock:
       'Sie haben bereits Herkunftsnachweise? Perfekt. aSAFEBOX® ergänzt den Nachweis des finalen Vorgangs (Point of Sale): Beleg, Zertifikat und Zahlung werden in Sekunden versiegelt und verifizierbar. Ergebnis: weniger Streitfälle, weniger Dokumentenbetrug und schnellere Audits.',
     kpis: [
-      { value: '−40%', label: 'dokumentbezogene Reklamationen' },
       { value: '< 10s', label: 'für die QR-Prüfung' },
       { value: 'Minuten', label: 'für Versicherungs- & Compliance-Audits' },
+      { value: 'Ziel', label: 'Reklamationen im Piloten senken' },
     ],
-    qrLabel: 'Beispiel-Verifizierung', //qrUrl: '/verify/example?code=DEMO-QR-001',
+    qrLabel: 'Beispiel-Verifizierung',
     qrUrl: 'https://elapi29.github.io/asafebox-landing/de/verify/example/',
     diagramCaption:
       'Wertschöpfungskette mit verketteten Ereignissen und schneller Prüfung am POS (ohne sensible Daten offenzulegen).',
@@ -430,7 +433,7 @@ const de: Dict = {
       lock3: 'Unverfälschbar',
       lock4: 'Übertragbar',
       lock5: 'QR-Prüfung in Sekunden',
-      verifyPosLabel: 'verify_log • 05 (POS)',
+      verifyPosLabel: 'Ereignis • 05 (POS)',
     },
   },
 }

@@ -36,4 +36,3 @@ export default function QrDemo({ value, label }: Props) {
     </div>
   );
 }
-

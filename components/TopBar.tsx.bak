@@ -71,7 +71,7 @@ export default function TopBar({ locale }: { locale: string }) {
                 role="menu"
                 className="absolute right-0 mt-2 w-80 rounded-xl border border-slate-200 bg-white p-2 shadow-lg"
               >
-                <MenuItem href={`${home}products/signature-pq`}   label="Signature PQ-ready Connect" />
+                <MenuItem href={`${home}products/signature-pq`}    label="Signature PQ-ready Connect" />
                 <MenuItem href={`${home}products/blind-reveal`}    label="Blind-Reveal Connect" />
                 <MenuItem href={`${home}products/audit`}           label="Audit Connect" />
                 <MenuItem href={`${home}products/mtls-pq`}         label="mTLS PQ-Ready" />

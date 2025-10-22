@@ -1,13 +1,9 @@
-// app/[locale]/industries/jewelry/page.tsx
 import AnchorsRow from '../../../../components/AnchorsRow'
 import FeatureChips from '../../../../components/FeatureChips'
 import QrDemo from '../../../../components/QrDemo'
 import type { Locale } from '../../../../i18n/dictionaries'
 import { getDictionary } from '../../../../i18n/dictionaries'
-
-{/*import LanguageSwitcher from '../../../../components/LanguageSwitcher'*/}
-import Footer from '../../../../components/Footer'   // ⬅️ agrega esta línea
-
+import Footer from '../../../../components/Footer'
 
 export default async function JewelryPage({ params }: { params: { locale: Locale } }) {
   const dict = await getDictionary(params.locale)
@@ -20,7 +16,6 @@ export default async function JewelryPage({ params }: { params: { locale: Locale
     { key: 'qr', label: 'QR / Verify', href: '#qr' },
   ]
 
-  // Chips específicos de la industria (no repetimos los features globales)
   const chips =
     params.locale === 'es'
       ? ['Boleta/Certificado enlazados (POS)', 'Verificación privada (QR)', 'Evidencia lista para seguros', 'Papel / efectivo / mixto']
@@ -86,18 +81,12 @@ export default async function JewelryPage({ params }: { params: { locale: Locale
       </section>
 
       {/* QR */}
-      {/* <section id="qr" className="mx-auto mt-10 max-w-5xl">
-        <h2 className="mb-4 text-xl font-semibold">{J.qrLabel}</h2>
-        <QrDemo value={J.qrUrl} label={J.qrLabel} />
-      </section> */}
       <section id="qr" className="mx-auto mt-10 max-w-5xl">
         <h2 className="mb-4 text-xl font-semibold">{J.qrLabel}</h2>
-
-        {/* En vez de usar J.qrUrl (estático), armamos el path con el locale actual */}
         <QrDemo value={`/${params.locale}/verify/demo/`} label={J.qrLabel} />
       </section>
 
-      {/* DIAGRAMA */}
+      {/* DIAGRAMA (terminología pública: “evento” en lugar de “verify_log”) */}
       <section className="mx-auto mt-10 max-w-6xl">
         <figure className="mx-auto max-w-5xl">
           <svg viewBox="0 0 1080 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label={J.diagramCaption}>
@@ -137,18 +126,18 @@ export default async function JewelryPage({ params }: { params: { locale: Locale
             <text x="960" y="66" textAnchor="middle" className="title">{J.diagram.posTitle}</text>
             <text x="960" y="86" textAnchor="middle" className="note">{J.diagram.posNote}</text>
 
-            {/* verify_log pills */}
+            {/* evento pills (antes: verify_log) */}
             <rect x="70"  y="150" width="120" height="30" rx="16" className="pill"/>
-            <text x="130" y="170" textAnchor="middle" className="pilltxt">verify_log • 01</text>
+            <text x="130" y="170" textAnchor="middle" className="pilltxt">evento • 01</text>
 
             <rect x="280" y="150" width="120" height="30" rx="16" className="pill"/>
-            <text x="340" y="170" textAnchor="middle" className="pilltxt">verify_log • 02</text>
+            <text x="340" y="170" textAnchor="middle" className="pilltxt">evento • 02</text>
 
             <rect x="490" y="150" width="120" height="30" rx="16" className="pill"/>
-            <text x="550" y="170" textAnchor="middle" className="pilltxt">verify_log • 03</text>
+            <text x="550" y="170" textAnchor="middle" className="pilltxt">evento • 03</text>
 
             <rect x="700" y="150" width="120" height="30" rx="16" className="pill"/>
-            <text x="760" y="170" textAnchor="middle" className="pilltxt">verify_log • 04</text>
+            <text x="760" y="170" textAnchor="middle" className="pilltxt">evento • 04</text>
 
             <rect x="910" y="150" width="140" height="30" rx="16" className="pill"/>
             <text x="980" y="170" textAnchor="middle" className="pilltxt">{J.diagram.verifyPosLabel}</text>
@@ -175,8 +164,21 @@ export default async function JewelryPage({ params }: { params: { locale: Locale
         </figure>
       </section>
 
-      <Footer locale={params.locale} />
+      {/* Nota pública para RFP/Compliance */}
+      <section className="mx-auto mt-10 max-w-5xl">
+        <p className="text-sm text-slate-500">
+          Política de Evidencia y Privacidad disponible bajo NDA. Solicite el whitepaper técnico y el modelo de amenazas.
+        </p>
+      </section>
 
+      <section className="mx-auto mt-10 max-w-5xl">
+        <p className="text-sm text-slate-500">
+          Política de Evidencia y Privacidad disponible bajo NDA. Solicite el whitepaper técnico y el modelo de amenazas.
+        </p>
+      </section>
+
+
+      <Footer locale={params.locale} />
     </main>
   )
 }
