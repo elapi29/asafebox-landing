@@ -1,5 +1,5 @@
 import type { Locale } from '../../../../../i18n/dictionaries'
-import Footer from '../../../../../components/Footer'
+import Footer from '../../../../components/Footer'
 import Link from 'next/link'
 
 export default function PublicIntegrityPage({ params }: { params: { locale: Locale } }) {
