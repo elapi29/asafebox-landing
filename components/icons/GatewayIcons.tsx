@@ -33,7 +33,7 @@ export const HandStop = ({ className = '' }) => (
 );
 
 export const HashX = ({ className = '' }) => (
-  <svg viewBox="0 0 24 24" className={className} aria-label="HMAC mismatch">
+  <svg viewBox="0 0 24 24" className={className} aria-label="Integrity token mismatch">
     <path d="M9 3L7 21M17 3l-2 18M4 8h16M3 16h18" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
     <path d="M8 12l8 0" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
     <path d="M9 21l6-6M15 21l-6-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>

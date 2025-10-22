@@ -86,7 +86,7 @@ export default async function JewelryPage({ params }: { params: { locale: Locale
         <QrDemo value={`/${params.locale}/verify/demo/`} label={J.qrLabel} />
       </section>
 
-      {/* DIAGRAMA (terminología pública: “evento” en lugar de “verify_log”) */}
+      {/* DIAGRAMA (terminología pública: “evento” en lugar de “evento”) */}
       <section className="mx-auto mt-10 max-w-6xl">
         <figure className="mx-auto max-w-5xl">
           <svg viewBox="0 0 1080 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label={J.diagramCaption}>
@@ -126,7 +126,7 @@ export default async function JewelryPage({ params }: { params: { locale: Locale
             <text x="960" y="66" textAnchor="middle" className="title">{J.diagram.posTitle}</text>
             <text x="960" y="86" textAnchor="middle" className="note">{J.diagram.posNote}</text>
 
-            {/* evento pills (antes: verify_log) */}
+            {/* evento pills (antes: evento) */}
             <rect x="70"  y="150" width="120" height="30" rx="16" className="pill"/>
             <text x="130" y="170" textAnchor="middle" className="pilltxt">evento • 01</text>
 

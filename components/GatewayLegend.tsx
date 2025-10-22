@@ -32,7 +32,7 @@ export default function GatewayLegend() {
     { icon: <WarnIcon className="w-5 h-5" />, code: '400', label: 'Bad req', note: 'Headers/JSON inválidos.' },
     { icon: <WarnIcon className="w-5 h-5" />, code: '401', label: 'Clock',   note: 'Timestamp fuera de ventana.' },
     { icon: <WarnIcon className="w-5 h-5" />, code: '403', label: 'Unknown', note: 'Cliente no permitido.' },
-    { icon: <StopIcon className="w-5 h-5" />, code: '409', label: 'HMAC',    note: 'No coincide; freeze + log.' },
+    { icon: <StopIcon className="w-5 h-5" />, code: '409', label: 'Token de integridad',    note: 'No coincide; freeze + log.' },
   ];
 
   return (

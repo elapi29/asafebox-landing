@@ -48,7 +48,7 @@ export default function IntroductionPage({ params }: { params: { locale: Locale 
           />
           <Card
             title="Blockchecker"
-            body="Content integrity: HMAC/nonce and zero-knowledge checks to reject tampering or replay."
+            body="Content integrity: integrity token/random vector and zero-knowledge checks to reject tampering or replay."
           />
           <Card
             title="Blockgoverning & Blockauditory"

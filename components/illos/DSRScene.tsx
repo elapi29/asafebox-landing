@@ -5,7 +5,7 @@ export default function DSRScene({ className = '' }: { className?: string }) {
       viewBox="0 0 980 420"
       className={className}
       role="img"
-      aria-label="DSR stack: Sender → mTLS → Verify Log → Blind-Reveal → Receiver"
+      aria-label="DSR stack: Sender → mTLS → Eventos → Blind-Reveal → Receiver"
     >
       <defs>
         <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
@@ -50,7 +50,7 @@ export default function DSRScene({ className = '' }: { className?: string }) {
         <text x="0" y="86" textAnchor="middle" fontFamily="Inter, ui-sans-serif" fontSize="12" fill="#0B3BDA">mTLS</text>
       </g>
 
-      {/* Verify Log */}
+      {/* Eventos */}
       <g transform="translate(540,180)">
         <rect x="-110" y="-70" width="220" height="140" rx="18" fill="#FFF5E6" stroke="#0B3BDA" strokeWidth="2"/>
         <rect x="-110" y="-70" width="220" height="140" rx="18" fill="none" stroke="#0B3BDA" strokeOpacity=".3" strokeWidth="2" transform="translate(6,6)"/>
@@ -59,7 +59,7 @@ export default function DSRScene({ className = '' }: { className?: string }) {
           <path d="M-24 -6 h48M-24 2 h34"/>
           <path d="M-34 -6 l-6 6 -3 -3"/>
         </g>
-        <text x="0" y="86" textAnchor="middle" fontFamily="Inter, ui-sans-serif" fontSize="12" fill="#0B3BDA">Verify Log</text>
+        <text x="0" y="86" textAnchor="middle" fontFamily="Inter, ui-sans-serif" fontSize="12" fill="#0B3BDA">Eventos</text>
       </g>
 
       {/* Blind-Reveal */}

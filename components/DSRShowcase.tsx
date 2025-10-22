@@ -10,7 +10,7 @@ export default function DSRShowcase() {
             Transport + Evidence + Privacy (PQ-ready)
           </h2>
           <p className="mt-4 text-slate-700">
-            Authenticated transport (mTLS), immutable Verify Log and Blind-Reveal checks.
+            Authenticated transport (mTLS), immutable Eventos and Blind-Reveal checks.
             Tamper-evident by design, private by default, audit-ready.
           </p>
           <ul className="mt-4 space-y-1 text-slate-700">

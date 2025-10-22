@@ -53,7 +53,7 @@ export default function StackScene({ className = '' }: Props) {
       {/* Tiles apilados */}
       <g filter="url(#soft)">
         <Tile x={60} y={100} w={560} h={70} title="Transport Security (PQ mTLS)" note="Authenticated channel" />
-        <Tile x={60} y={190} w={560} h={70} title="Verify Log (append-only)" note="Chained integrity seals" />
+        <Tile x={60} y={190} w={560} h={70} title="Eventos (append-only)" note="Chained integrity seals" />
         <Tile x={60} y={280} w={560} h={70} title="Blind-Reveal (ZK proofs)" note="Validity without exposing data" />
       </g>
     </svg>

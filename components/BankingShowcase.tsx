@@ -16,7 +16,7 @@ type Card = {
 export default function BankingShowcase() {
   const cards: Card[] = [
     { Cmp: IntegritySealIllo, title: 'Sello de integridad', desc: 'Pila de huellas protegida por un sello maestro.' },
-    { Cmp: L2AnchoringIllo,  title: 'Verify Log → L2',       desc: 'Append-only y anclaje económico en L2.' },
+    { Cmp: L2AnchoringIllo,  title: 'Eventos → L2',       desc: 'Append-only y anclaje económico en L2.' },
     { Cmp: BlindRevealIllo,  title: 'Privacidad (ZK)',       desc: 'Validez sin revelar el dato.' },
     { Cmp: MetadataIllo,     title: 'Metadata pública',      desc: 'Tokens/políticas visibles; dato protegido.' },
   ]

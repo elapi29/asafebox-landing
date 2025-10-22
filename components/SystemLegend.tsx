@@ -8,7 +8,7 @@ export default function SystemLegend() {
     {
       icon: <BoxIcon className="w-5 h-5" />,
       title: 'Gateway-Verify',
-      desc: 'Portero digital: HMAC/ZK, timestamp y nonce. 4xx + freeze si falla.',
+      desc: 'Portero digital: ZK, timestamp y vector aleatorio. 4xx + freeze si falla.',
     },
     {
       icon: <HsmIcon className="w-5 h-5" />,

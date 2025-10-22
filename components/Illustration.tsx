@@ -32,7 +32,7 @@ export default function Illustration({
         {[
           { x: 120, title: sender, sub: '' },
           { x: 360, title: 'mTLS', sub: '' },
-          { x: 600, title: 'Verify Log', sub: ledger },
+          { x: 600, title: 'Eventos', sub: ledger },
           { x: 840, title: 'Blind-Reveal', sub: blindId },
           { x: 1080, title: receiver, sub: '' },
         ].map((b, i) => (
