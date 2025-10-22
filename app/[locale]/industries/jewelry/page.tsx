@@ -171,13 +171,6 @@ export default async function JewelryPage({ params }: { params: { locale: Locale
         </p>
       </section>
 
-      <section className="mx-auto mt-10 max-w-5xl">
-        <p className="text-sm text-slate-500">
-          Política de Evidencia y Privacidad disponible bajo NDA. Solicite el whitepaper técnico y el modelo de amenazas.
-        </p>
-      </section>
-
-
       <Footer locale={params.locale} />
     </main>
   )
