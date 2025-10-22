@@ -147,16 +147,16 @@ export default function JewelrySection({
 
             {/* evento pills */}
             <rect x="70"  y="150" width="120" height="30" rx="16" className="pill"/>
-            <text x="130" y="170" textAnchor="middle" className="pilltxt">evento • 01</text>
+            <text x="130" y="170" textAnchor="middle" className="pilltxt">{diagram.verifyPosLabel}</text>
 
             <rect x="280" y="150" width="120" height="30" rx="16" className="pill"/>
-            <text x="340" y="170" textAnchor="middle" className="pilltxt">evento • 02</text>
+            <text x="340" y="170" textAnchor="middle" className="pilltxt">{diagram.verifyPosLabel}</text>
 
             <rect x="490" y="150" width="120" height="30" rx="16" className="pill"/>
-            <text x="550" y="170" textAnchor="middle" className="pilltxt">evento • 03</text>
+            <text x="550" y="170" textAnchor="middle" className="pilltxt">{diagram.verifyPosLabel}</text>
 
             <rect x="700" y="150" width="120" height="30" rx="16" className="pill"/>
-            <text x="760" y="170" textAnchor="middle" className="pilltxt">evento • 04</text>
+            <text x="760" y="170" textAnchor="middle" className="pilltxt">{diagram.verifyPosLabel}</text>
 
             <rect x="910" y="150" width="140" height="30" rx="16" className="pill"/>
             <text x="980" y="170" textAnchor="middle" className="pilltxt">{diagram.verifyPosLabel}</text>
