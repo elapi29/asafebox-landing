@@ -1,4 +1,3 @@
-// components/JewelrySection.tsx
 import QrDemo from './QrDemo'
 
 type DiagramTexts = {
@@ -17,7 +16,7 @@ type DiagramTexts = {
   lock3: string
   lock4: string
   lock5: string
-  verifyPosLabel: string
+  verifyPosLabel: string // se usa para la píldora 05
 }
 
 type Props = {
@@ -34,6 +33,7 @@ type Props = {
   qrUrl: string
   diagramCaption: string
   diagram: DiagramTexts
+  evWord?: string // ← NUEVO: 'evento' | 'event' | 'Ereignis'
 }
 
 export default function JewelrySection({
@@ -50,6 +50,7 @@ export default function JewelrySection({
   qrUrl,
   diagramCaption,
   diagram,
+  evWord = 'evento',
 }: Props) {
   return (
     <section id="joyeria-asafebox" className="py-12 text-slate-900">
@@ -145,18 +146,18 @@ export default function JewelrySection({
             <text x="960" y="66" textAnchor="middle" className="title">{diagram.posTitle}</text>
             <text x="960" y="86" textAnchor="middle" className="note">{diagram.posNote}</text>
 
-            {/* evento pills */}
+            {/* Evento pills */}
             <rect x="70"  y="150" width="120" height="30" rx="16" className="pill"/>
-            <text x="130" y="170" textAnchor="middle" className="pilltxt">{diagram.verifyPosLabel}</text>
+            <text x="130" y="170" textAnchor="middle" className="pilltxt">{`${evWord} • 01`}</text>
 
             <rect x="280" y="150" width="120" height="30" rx="16" className="pill"/>
-            <text x="340" y="170" textAnchor="middle" className="pilltxt">{diagram.verifyPosLabel}</text>
+            <text x="340" y="170" textAnchor="middle" className="pilltxt">{`${evWord} • 02`}</text>
 
             <rect x="490" y="150" width="120" height="30" rx="16" className="pill"/>
-            <text x="550" y="170" textAnchor="middle" className="pilltxt">{diagram.verifyPosLabel}</text>
+            <text x="550" y="170" textAnchor="middle" className="pilltxt">{`${evWord} • 03`}</text>
 
             <rect x="700" y="150" width="120" height="30" rx="16" className="pill"/>
-            <text x="760" y="170" textAnchor="middle" className="pilltxt">{diagram.verifyPosLabel}</text>
+            <text x="760" y="170" textAnchor="middle" className="pilltxt">{`${evWord} • 04`}</text>
 
             <rect x="910" y="150" width="140" height="30" rx="16" className="pill"/>
             <text x="980" y="170" textAnchor="middle" className="pilltxt">{diagram.verifyPosLabel}</text>

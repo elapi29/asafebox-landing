@@ -315,7 +315,7 @@ const en: Dict = {
       lock4: 'Transferable',
       lock5: 'QR verification in seconds',
       verifyPosLabel: 'event • 05 (POS)',
-    },
+    }
   },
 }
 
