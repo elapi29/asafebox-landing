@@ -45,7 +45,7 @@ export default function SignaturePQDiagram({
   const boxH = S.boxH;
 
   // chips (2x2)
-  const chipW = (boxW - 140) / 2; // 2 columnas con padding interno
+  const chipW = (boxW - 210) / 2; // 2 columnas con padding interno
   const chipH = S.chipH;
   const chipRX = chipH / 2;
   const row1Y = boxY + 130;
