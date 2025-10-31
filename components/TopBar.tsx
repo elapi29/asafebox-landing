@@ -195,7 +195,7 @@ export default function TopBar({ locale }: { locale: string }) {
                 <MenuItem href={`${home}introduction/#how-it-works`}   label="B. How it works"          Icon={HowIcon} onClick={closeAllMenus}/>
                 <MenuItem href={`${home}introduction/#small-business`} label="C. For Businesses"        Icon={SMBIcon} onClick={closeAllMenus}/>
                 <MenuItem href={`${home}introduction/#institutions`}   label="D. For Institutions"      Icon={InstIcon} onClick={closeAllMenus}/>
-                <MenuItem href={`${home}verify/demo/`}                 label="E. Developers"            Icon={DevIcon} onClick={closeAllMenus}/>
+                <MenuItem href={`${home}introduction/#developers`}     label="E. Developers"            Icon={DevIcon} onClick={closeAllMenus}/>
                 <MenuItem href={`${home}introduction/#white-paper`}    label="F. White Paper"           Icon={PaperIcon} onClick={closeAllMenus}/>
               </div>
             )}
@@ -283,7 +283,7 @@ export default function TopBar({ locale }: { locale: string }) {
               <MenuItem href={`${home}introduction/#how-it-works`}   label="B. How it works"          Icon={HowIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
               <MenuItem href={`${home}introduction/#small-business`} label="C. For Businesses"        Icon={SMBIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
               <MenuItem href={`${home}introduction/#institutions`}   label="D. For Institutions"      Icon={InstIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
-              <MenuItem href={`${home}verify/demo/`}                 label="E. Developers"            Icon={DevIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
+              <MenuItem href={`${home}introduction/#developers`}     label="E. Developers"            Icon={DevIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
               <MenuItem href={`${home}introduction/#white-paper`}    label="F. White Paper"           Icon={PaperIcon} onClick={() => setMobileOpen(false)} className="px-2 py-1.5" />
             </div>
           </div>
