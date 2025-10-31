@@ -1,5 +1,7 @@
 'use client';
 
+import React from 'react';
+
 type Size = 'sm' | 'md' | 'lg';
 
 type Props = {
@@ -10,6 +12,8 @@ type Props = {
   showActors?: boolean;        // nuevos flags
   size?: Size;                 // 'sm'|'md'|'lg'
   className?: string;
+  // NUEVO: permitir ocultar el título grande dentro del SVG
+  showTitle?: boolean;
 };
 
 export default function SignaturePQDiagram({
@@ -20,6 +24,7 @@ export default function SignaturePQDiagram({
   showActors = false,
   size = 'lg',
   className = '',
+  showTitle = true,            // ← por defecto se muestra
 }: Props) {
   // paleta alineada al logo (naranja→rosa→violeta)
   const G1 = '#FF7A18';
@@ -95,9 +100,18 @@ export default function SignaturePQDiagram({
           <rect x={boxX} y={boxY} width={boxW} height={boxH} rx={S.rx} fill="url(#brand)"/>
         </g>
 
-        {/* Título y subtítulo */}
-        <text x={VBW/2} y={boxY + 60} textAnchor="middle" className="t-title">{title}</text>
-        <text x={VBW/2} y={boxY + 92} textAnchor="middle" className="t-sub">{subtitle}</text>
+        {/* Título y subtítulo (el título puede ocultarse con showTitle) */}
+        {showTitle && (
+          <text x={VBW/2} y={boxY + 60} textAnchor="middle" className="t-title">{title}</text>
+        )}
+        <text
+          x={VBW/2}
+          y={boxY + (showTitle ? 92 : 70)}  // si no hay título, subimos el subtítulo
+          textAnchor="middle"
+          className="t-sub"
+        >
+          {subtitle}
+        </text>
 
         {/* Chips (fila 1) */}
         <g>
@@ -127,7 +141,7 @@ export default function SignaturePQDiagram({
           </text>
         </g>
 
-        {/* Línea “mini” dentro de la caja (ahora con mayor separación) */}
+        {/* Línea “mini” dentro de la caja */}
         <text x={VBW/2} y={row2Y + chipH + S.gapY + 22} textAnchor="middle" className="t-sub">
           Firma sólo lo que pasa los controles • Preparado para modo híbrido post-cuántico
         </text>

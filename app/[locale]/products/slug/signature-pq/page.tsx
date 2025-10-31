@@ -1,13 +1,13 @@
-// app/[locale]/products/slug/signature-pq/page.tsx
-import Link from 'next/link'
-import Footer from '../../../../../components/Footer'
-import SignaturePQDiagram from '../../../../../components/SignaturePQDiagram'
+import React from 'react';
+import Link from 'next/link';
+import Footer from '../../../../../components/Footer';
+import SignaturePQDiagram from '../../../../../components/SignaturePQDiagram';
 
-type Locale = 'es' | 'en' | 'de'
+type Locale = 'es' | 'en' | 'de';
 
 export default function SignaturePQPage({ params }: { params: { locale: Locale } }) {
-  const { locale } = params
-  const home = `/${locale}/`
+  const { locale } = params;
+  const home = `/${locale}/`;
 
   return (
     <main className="px-6">
@@ -43,7 +43,7 @@ export default function SignaturePQPage({ params }: { params: { locale: Locale }
         <SignaturePQDiagram
           size="lg"
           showActors={false}
-          showTitle={false}           {/* 👈 quita el duplicado */}
+          showTitle={false}
           className="mx-auto w-full"
         />
       </section>
@@ -61,5 +61,5 @@ export default function SignaturePQPage({ params }: { params: { locale: Locale }
 
       <Footer locale={locale} />
     </main>
-  )
+  );
 }
