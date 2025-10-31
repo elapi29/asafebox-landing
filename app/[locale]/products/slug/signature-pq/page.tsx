@@ -44,7 +44,7 @@ export default function SignaturePQPage({ params }: { params: { locale: Locale }
           size="lg"
           showActors={false}
           showTitle={false}
-          className="mx-auto w-full"
+          className="mx-auto w-full max-w-[1100px]"   // ← antes: "mx-auto w-full"
         />
       </section>
 
