@@ -128,7 +128,7 @@ export default function IntroductionPage({ params }: { params: { locale: Locale 
         </div>
         <div className="mt-6 flex flex-wrap gap-3">
           <Btn href={`/${locale}/products/slug/signature-pq/`}>Signature PQ-ready</Btn>
-          <Btn href={`/${locale}/under-construction/`}>Blind-Reveal</Btn>
+          <Btn href={`/${locale}/verify/demo/`}>Blind-Reveal</Btn> 
           <Btn href={`/${locale}/under-construction/`}>Audit</Btn>
           <Btn href={`/${locale}/under-construction/`}>mTLS PQ-Ready</Btn>
           <Btn href={`/${locale}/under-construction/`}>Governing</Btn>
