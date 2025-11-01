@@ -4,8 +4,7 @@ import type { Locale } from '../../../i18n/dictionaries'
 import Illustration from '../../../components/Illustration'
 import BlindRevealIllo from '../../../components/illos/BlindRevealIllo'
 import Footer from '../../../components/Footer'
-import SignaturePQDiagram from '../../../components/SignaturePQDiagram'  // (lo podés usar más abajo si querés)
-import SystemLegend from '../../../components/SystemLegend'              // ← IMPORT NECESARIO
+import SignaturePQDiagram from '../../../components/SignaturePQDiagram'  // disponible si lo querés usar
 
 export default function IntroductionPage({ params }: { params: { locale: Locale } }) {
   const { locale } = params
@@ -64,7 +63,7 @@ export default function IntroductionPage({ params }: { params: { locale: Locale 
           From an immutable chain of evidence to a blinded identity — all under a post-quantum-ready transport.
         </p>
 
-        {/* Vista general (sender → ledger → blind identity → receiver) */}
+        {/* Vista general */}
         <div className="mt-8">
           <Illustration
             transportLabel="Post-Quantum-Ready Transport Security"
@@ -135,34 +134,20 @@ export default function IntroductionPage({ params }: { params: { locale: Locale 
         </div>
       </section>
 
-      {/* F. White Paper */}
+      {/* F. White Paper (sin sección extra) */}
       <section id="white-paper" className="mx-auto max-w-6xl py-10">
         <h2 className="text-2xl font-semibold">White Paper</h2>
         <p className="mt-2 text-slate-700">
           Dive deeper into the design goals, threat models, and formal guarantees behind In aSafeBox®.
         </p>
         <Link
-          href={`/${locale}/introduction/#edge-smart-contract`}
+          href={`/${locale}/under-construction/`}
           prefetch={false}
           className="mt-4 inline-block rounded-xl bg-slate-900 px-5 py-3 text-white shadow hover:bg-slate-800"
         >
           Download White Paper (PDF)
         </Link>
-      </section>
-
-      {/* G. Edge-Smart-Contract (destino del botón) */}
-      <section id="edge-smart-contract" className="mx-auto max-w-6xl py-10 scroll-mt-24">
-        <h2 className="text-2xl font-semibold">Edge-Smart-Contract (4xx)</h2>
-        <p className="mt-2 text-slate-700">
-          Lightweight controls at the edge to enforce policy <strong>before</strong> signing/accepting.
-          2xx only when all checks pass.
-        </p>
-
-        <div className="mt-6">
-          <SystemLegend locale={locale} />
-        </div>
-
-        <p className="mt-6 text-sm text-slate-500">
+        <p className="mt-4 text-sm text-slate-500">
           {
             locale === 'es'
               ? 'Política de Evidencia y Privacidad disponible bajo NDA. Solicite el whitepaper técnico y el modelo de amenazas.'
