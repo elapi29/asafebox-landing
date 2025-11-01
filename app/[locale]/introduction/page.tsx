@@ -134,35 +134,24 @@ export default function IntroductionPage({ params }: { params: { locale: Locale 
         </div>
       </section>
 
-      {/* F. White Paper (sin sección extra) */}
-      <section id="white-paper" className="mx-auto max-w-6xl py-10">
-        <h2 className="text-2xl font-semibold">White Paper</h2>
+      {/* F. White Paper */}
+        <section id="white-paper" className="mx-auto max-w-6xl py-10">
+          <h2 className="text-2xl font-semibold">White Paper</h2>
         <p className="mt-2 text-slate-700">
-          Dive deeper into the design goals, threat models, and formal guarantees behind In aSafeBox®.
+        Dive deeper into the design goals, threat models, and formal guarantees behind In aSafeBox®.
         </p>
         <Link
-          href={`/${locale}/under-construction/`}
-          prefetch={false}
-          className="mt-4 inline-block rounded-xl bg-slate-900 px-5 py-3 text-white shadow hover:bg-slate-800"
-        >
+            href={`/${locale}/edge-smart-contract/`}   // ← ahora navega a la página nueva
+            prefetch={false}
+            className="mt-4 inline-block rounded-xl bg-slate-900 px-5 py-3 text-white shadow hover:bg-slate-800"
+         >
           Download White Paper (PDF)
         </Link>
-        <p className="mt-4 text-sm text-slate-500">
-          {
-            locale === 'es'
-              ? 'Política de Evidencia y Privacidad disponible bajo NDA. Solicite el whitepaper técnico y el modelo de amenazas.'
-              : locale === 'de'
-              ? 'Evidenz- und Datenschutzrichtlinie unter NDA verfügbar. Fordern Sie das technische Whitepaper und das Bedrohungsmodell an.'
-              : 'Evidence & Privacy Policy available under NDA. Request the technical whitepaper and threat model.'
-          }
-        </p>
       </section>
-
       <Footer locale={locale} />
     </main>
   )
 }
-
 function Card({ title, body }: { title: string; body: string }) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-4">
