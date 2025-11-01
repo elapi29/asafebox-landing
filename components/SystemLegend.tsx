@@ -4,7 +4,7 @@ import { BoxIcon, HsmIcon, LedgerIcon } from './SystemIcons'
 type Locale = 'es' | 'en' | 'de'
 type Block = { icon: JSX.Element; title: string; desc: string }
 
-const L = {
+const L: Record<Locale, { cards: Block[] }> = {
   es: {
     cards: [
       {
@@ -22,7 +22,7 @@ const L = {
         title: 'Ledger / CTE',
         desc: 'Segunda firma, freeze loop y estado final (SoftFreeze → Settled).',
       },
-    ] as Block[],
+    ],
   },
   en: {
     cards: [
@@ -41,7 +41,7 @@ const L = {
         title: 'Ledger / CTE',
         desc: 'Second signature, freeze loop and final state (SoftFreeze → Settled).',
       },
-    ] as Block[],
+    ],
   },
   de: {
     cards: [
@@ -60,7 +60,7 @@ const L = {
         title: 'Ledger / CTE',
         desc: 'Zweite Signatur, Freeze-Schleife und Endstatus (SoftFreeze → Settled).',
       },
-    ] as Block[],
+    ],
   },
 }
 

@@ -4,8 +4,8 @@ import type { Locale } from '../../../i18n/dictionaries'
 import Illustration from '../../../components/Illustration'
 import BlindRevealIllo from '../../../components/illos/BlindRevealIllo'
 import Footer from '../../../components/Footer'
-import SignaturePQDiagram from '../../../components/SignaturePQDiagram'  // ← NUEVO
-
+import SignaturePQDiagram from '../../../components/SignaturePQDiagram'  // (lo podés usar más abajo si querés)
+import SystemLegend from '../../../components/SystemLegend'              // ← IMPORT NECESARIO
 
 export default function IntroductionPage({ params }: { params: { locale: Locale } }) {
   const { locale } = params
@@ -128,7 +128,7 @@ export default function IntroductionPage({ params }: { params: { locale: Locale 
         </div>
         <div className="mt-6 flex flex-wrap gap-3">
           <Btn href={`/${locale}/products/slug/signature-pq/`}>Signature PQ-ready</Btn>
-          <Btn href={`/${locale}/verify/demo/`}>Blind-Reveal</Btn> 
+          <Btn href={`/${locale}/verify/demo/`}>Blind-Reveal</Btn>
           <Btn href={`/${locale}/under-construction/`}>Audit</Btn>
           <Btn href={`/${locale}/under-construction/`}>mTLS PQ-Ready</Btn>
           <Btn href={`/${locale}/under-construction/`}>Governing</Btn>
@@ -141,12 +141,36 @@ export default function IntroductionPage({ params }: { params: { locale: Locale 
         <p className="mt-2 text-slate-700">
           Dive deeper into the design goals, threat models, and formal guarantees behind In aSafeBox®.
         </p>
-        <a
-          href="#"
+        <Link
+          href={`/${locale}/introduction/#edge-smart-contract`}
+          prefetch={false}
           className="mt-4 inline-block rounded-xl bg-slate-900 px-5 py-3 text-white shadow hover:bg-slate-800"
         >
           Download White Paper (PDF)
-        </a>
+        </Link>
+      </section>
+
+      {/* G. Edge-Smart-Contract (destino del botón) */}
+      <section id="edge-smart-contract" className="mx-auto max-w-6xl py-10 scroll-mt-24">
+        <h2 className="text-2xl font-semibold">Edge-Smart-Contract (4xx)</h2>
+        <p className="mt-2 text-slate-700">
+          Lightweight controls at the edge to enforce policy <strong>before</strong> signing/accepting.
+          2xx only when all checks pass.
+        </p>
+
+        <div className="mt-6">
+          <SystemLegend locale={locale} />
+        </div>
+
+        <p className="mt-6 text-sm text-slate-500">
+          {
+            locale === 'es'
+              ? 'Política de Evidencia y Privacidad disponible bajo NDA. Solicite el whitepaper técnico y el modelo de amenazas.'
+              : locale === 'de'
+              ? 'Evidenz- und Datenschutzrichtlinie unter NDA verfügbar. Fordern Sie das technische Whitepaper und das Bedrohungsmodell an.'
+              : 'Evidence & Privacy Policy available under NDA. Request the technical whitepaper and threat model.'
+          }
+        </p>
       </section>
 
       <Footer locale={locale} />
