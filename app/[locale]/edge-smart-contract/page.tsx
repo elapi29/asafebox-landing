@@ -1,7 +1,8 @@
-// app/[locale]/edge-smart-contract/page.tsx
-import type { Locale } from '../../../../i18n/dictionaries'
-import Footer from '../../../../components/Footer'
-import SystemLegend from '../../../../components/SystemLegend'
+/// app/[locale]/edge-smart-contract/page.tsx
+import type { Locale } from '../../../i18n/dictionaries'
+import Link from 'next/link'
+import SystemLegend from '../../../components/SystemLegend'
+import Footer from '../../../components/Footer'
 
 export default function EdgeSmartContractPage({ params }: { params: { locale: Locale } }) {
   const { locale } = params
@@ -12,26 +13,44 @@ export default function EdgeSmartContractPage({ params }: { params: { locale: Lo
         <h1 className="text-3xl font-bold">Edge-Smart-Contract (4xx)</h1>
         <p className="mt-3 max-w-3xl text-slate-700">
           {locale === 'es'
-            ? 'Contrato ligero en el borde que hace cumplir canonicidad, autenticación, frescura y anti-replay antes de aceptar/firmar. Llamados válidos pasan; los fallidos devuelven un 4xx con motivo, y la negativa queda sellada para auditoría. Cada decisión se registra de forma autenticada y el cierre de período queda firmado para verificación independiente.'
+            ? 'Controles ligeros en el borde para hacer cumplir políticas antes de firmar/aceptar. Responde 2xx sólo si todos los chequeos pasan; de lo contrario 4xx + freeze.'
             : locale === 'de'
-            ? 'Leichter Ingress-Vertrag am Edge, der Kanonisierung, Authentifizierung, Frische und Anti-Replay durchsetzt, bevor akzeptiert/signiert wird. Gültige Aufrufe passieren; fehlerhafte liefern einen 4xx-Grund, die Ablehnung wird revisionssicher versiegelt. Jede Entscheidung ist authentifiziert protokolliert; Periodenabschlüsse sind signiert und extern prüfbar.'
-            : 'A lightweight ingress contract at the edge enforcing canonicalization, authentication, freshness and anti-replay before accept/sign. Good calls pass; failing ones return a reason-coded 4xx, and refusals are sealed for audit. Each decision is authenticated per-line, with signed period closures for third-party verification.'}
+            ? 'Leichtgewichtige Edge-Kontrollen zur Durchsetzung von Richtlinien vor dem Signieren/Akzeptieren. 2xx nur bei Erfolg; sonst 4xx + Freeze.'
+            : 'Lightweight edge controls to enforce policy before signing/accepting. Return 2xx only when all checks pass; otherwise 4xx + freeze.'}
         </p>
 
-        <div className="mt-8">
+        <div className="mt-6">
           <SystemLegend locale={locale} />
         </div>
 
-        <p className="mt-8 rounded-lg bg-indigo-50 p-4 text-sm text-slate-700">
+        <p className="mt-6 text-sm text-slate-500">
           {locale === 'es'
             ? 'Política de Evidencia y Privacidad disponible bajo NDA. Solicite el whitepaper técnico y el modelo de amenazas.'
             : locale === 'de'
             ? 'Evidenz- und Datenschutzrichtlinie unter NDA verfügbar. Fordern Sie das technische Whitepaper und das Bedrohungsmodell an.'
             : 'Evidence & Privacy Policy available under NDA. Request the technical whitepaper and threat model.'}
         </p>
+
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link
+            href={`/${locale}/verify/demo/`}
+            prefetch={false}
+            className="rounded-xl bg-slate-900 px-5 py-3 text-white shadow hover:bg-slate-800"
+          >
+            {locale === 'es' ? 'Ver demo Blind-Reveal' : locale === 'de' ? 'Blind-Reveal-Demo ansehen' : 'See Blind-Reveal demo'}
+          </Link>
+          <Link
+            href={`/${locale}/introduction/`}
+            prefetch={false}
+            className="rounded-xl border border-slate-300 px-5 py-3 text-slate-800 hover:bg-slate-50"
+          >
+            {locale === 'es' ? 'Introducción' : locale === 'de' ? 'Einführung' : 'Introduction'}
+          </Link>
+        </div>
       </section>
 
       <Footer locale={locale} />
     </main>
   )
 }
+
