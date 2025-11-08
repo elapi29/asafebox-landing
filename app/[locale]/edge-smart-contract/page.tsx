@@ -1,7 +1,7 @@
-/// app/[locale]/edge-smart-contract/page.tsx
 import type { Locale } from '../../../i18n/dictionaries'
 import Link from 'next/link'
 import SystemLegend from '../../../components/SystemLegend'
+import FreezeVerifyDiagram from '../../../components/FreezeVerifyDiagram'
 import Footer from '../../../components/Footer'
 
 export default function EdgeSmartContractPage({ params }: { params: { locale: Locale } }) {
@@ -19,7 +19,13 @@ export default function EdgeSmartContractPage({ params }: { params: { locale: Lo
             : 'Lightweight edge controls to enforce policy before signing/accepting. Return 2xx only when all checks pass; otherwise 4xx + freeze.'}
         </p>
 
-        <div className="mt-6">
+        {/* Diagrama de métricas (centrado y responsivo) */}
+        <div className="mx-auto mt-8 max-w-5xl">
+          <FreezeVerifyDiagram />
+        </div>
+
+        {/* Leyenda de sistema */}
+        <div className="mx-auto mt-8 max-w-6xl">
           <SystemLegend locale={locale} />
         </div>
 
@@ -53,4 +59,3 @@ export default function EdgeSmartContractPage({ params }: { params: { locale: Lo
     </main>
   )
 }
-
