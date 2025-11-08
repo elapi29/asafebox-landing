@@ -1,13 +1,12 @@
-import React from 'react';
-import Link from 'next/link';
-import Footer from '../../../../../components/Footer';
-import SignaturePQDiagram from '../../../../../components/SignaturePQDiagram';
+import Link from 'next/link'
+import Footer from '../../../../../components/Footer'
+import SignaturePQDiagram from '../../../../../components/SignaturePQDiagram'
 
-type Locale = 'es' | 'en' | 'de';
+type Locale = 'es' | 'en' | 'de'
 
 export default function SignaturePQPage({ params }: { params: { locale: Locale } }) {
-  const { locale } = params;
-  const home = `/${locale}/`;
+  const { locale } = params
+  const home = `/${locale}/`
 
   return (
     <main className="px-6">
@@ -38,28 +37,31 @@ export default function SignaturePQPage({ params }: { params: { locale: Locale }
         </div>
       </section>
 
-      {/* Diagrama (centrado y sin título interno) */}
+      {/* Diagrama (responsive y legible) */}
       <section className="mx-auto max-w-6xl pb-10">
         <SignaturePQDiagram
           size="lg"
           showActors={false}
+          className="mx-auto w-full"
           showTitle={false}
-          className="mx-auto w-full max-w-[1100px]"   // ← antes: "mx-auto w-full"
         />
       </section>
 
       {/* CTA secundaria */}
       <section className="mx-auto max-w-6xl pb-14">
-        <p className="text-slate-600">¿Querés los fundamentos formales y el modelo de amenazas?</p>
-        <a
-          href="#"
+        <p className="text-slate-600">
+          ¿Querés los fundamentos formales y el modelo de amenazas?
+        </p>
+        <Link
+          href={`${home}edge-smart-contract/`}
+          prefetch={false}
           className="mt-3 inline-block rounded-xl bg-slate-900 px-5 py-3 text-white shadow hover:bg-slate-800"
         >
-          Whitepaper (PDF)
-        </a>
+          Whitepaper (Edge-Smart-Contract 4xx)
+        </Link>
       </section>
 
       <Footer locale={locale} />
     </main>
-  );
+  )
 }
